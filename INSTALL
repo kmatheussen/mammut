@@ -1,0 +1,19 @@
+
+
+FAST INSTALL
+	cd src
+	make
+	make install
+
+
+
+REQUIRED LIBRARIES
+	libjack
+	libjuce
+	libsamplerate
+	libsndfile
+	libvorbisfile
+
+
+-Kjetil M. / last updated 15.2.2007
+

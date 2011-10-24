@@ -1,0 +1,141 @@
+
+
+0.59 -> 0.60
+-Updated source to work with Juce 1.44.
+-Fixed a couple of ugly bugs in the progress bar code.
+-Set moving camera to be off by default. Moving camera seems to stall mammut using newer juce's. :-(
+
+
+0.58 -> 0.59
+-Fixed a couple of more int->uint32 time variable cases. Hopefully, the animation
+ stuff shouldn't stall the machine anymore.
+
+
+0.57 -> 0.58
+-Added workaround for rare sound corruption bug.
+-Added the "Redo it!" buttons. (The same as pressing "Undo" + "Do it!")
+-If playing while pressing a "Do it!" or "Redo it!" button, continue playing after
+ processing as well.
+-Added the "Random Phases" toggle button in the "Multiply Phase" dialog. Checking
+ this button will freeze the sound. Thanks to Tim Blechman for the idea.
+-Fixed looping which wasn't turned off if using a different sampling rate.
+-Added "make install" and "make uninstall"
+-Fixed animation bug. (should allways be shown now)
+
+
+0.22 -> 0.57
+-Ported from gtk1 to juce.
+-Various bells and whistles
+-Binaries for windows and mac
+-Various other things
+
+0.21 -> 0.22
+-Added patch and instructions from Owen Green on how to make mammut compile on
+ OSX. Thanks!
+
+0.20 -> 0.21
+-Set realtime priority for the player thread to ensure clickless playing.
+-Fixed some trouble when exiting.
+
+0.19 -> 0.20
+-Fixed a bug in the Makefile caused by a fix in the previous release.
+
+0.18 -> 0.19
+-Fixed some bugs in the Makefile.
+
+0.17 -> 0.18
+-Fixed a (horrible) bug that caused mammut to crash on newer linux
+ distributions.
+-Simplified the install process a lot. pygtk1, libglade and sndlib
+ is now included in the distribution and is/can be installed
+ automatically if needed.
+-Added undo for load&multiply
+
+0.16 -> 0.17
+-Removed the sndlib binary.
+-Initialize sound at startup, so that mammut appears in jack patch bays.
+-Added a point in the INSTALL file about how to configure mammut to
+ find the pygtk1 files.
+-Added a note in the INSTALL file about that sndlib for some reason
+ does not work with delta cards when using the alsa driver. The oss
+ driver (under alsa emulation), and the jack driver works just fine.
+
+
+0.15 -> 0.16
+-Tiny source cleanup.
+-Upgraded the included sndlib binary for i386 to latest version. This
+ one includes jack-support.
+
+
+New in V0.14 -> 0.15
+-Removed the synth transform. It was not supposed to be there and had no
+ function.
+-Fixed the wobble transform. Segfaulted with mono-files. (Bug found
+ by Dave Phillips)
+
+
+New in V0.13 -> 0.14
+-Fixed the rest of the transforms to support more than two soundchannels.
+-Removed the settings->undo menu item, which didnt have any function.
+-Updated the version number in the about dialog from 0.12 to 0.14
+-Wrote unlimited number of channels instead of four(?) channels in the
+ usage message.
+-Neither the Cancel nor OK button in the "Amplitude->Phase" transform dialog
+ did work. Fixed.
+-Removed lots of debug printings.
+-Playing without having a file caused a segfault. (fixed)
+
+
+New in V0.12 -> 0.13
+-Updated the version number in the about dialog from 0.10 to 0.12
+-Neither the Cancel nor OK button in the "Split real/imag" transform dialog
+ did work. Fixed.
+-Unneded references to libaudiofile headers removed. libaudiofile is not
+ used in mammut.
+-libsnd linking was screwed up in the Makefile in the V0.12 release. Fixed
+-Playing without having a file caused a segfault. (not fixed)
+-Added sndlib.a and sndlib.h to the distribution. Static oss/linux compiled.
+ (sndlib.a seems to be a bit troublesome to compile up sometimes.) (same as
+  in ceres)
+-Added note about a common problem regarding pygtk in the INSTALL file
+ that usually makes ceres crash. (same as in ceres)
+-Most of the transforms didnt support more than two channels (stereo).
+ Now most of the transforms do, but still not all.
+
+
+New in V0.11 -> 0.12
+-The "Number of partials" slider in the Synth transform dialog did
+ not work and gave a lot of errors. Fixed.
+-Neither the Cancel nor OK button in the "Keep the peaks" transform dialog
+ did work. Fixed.
+
+
+New in V0.10 -> 0.11
+-Added compile-option for where to place temporary files.
+ Undo/redo probably did not work in V0.10 unless you had
+ a directory named /lyd/local/tmp. Oops.
+-Fixed a mysterious bug that caused loading of files look
+ strange and the sound to be played automaticly.
+-Added support for libsndfile V1. (V0 is still supported too.)
+
+
+New in V0.08 -> 0.10
+
+-Using gtk instead of motif. The reason is cleaner code
+ because of better python-support, and more portable.
+-Buttons in the main-window.
+-Support for 16,24 and 32 bits soundfiles, not only 16 bits.
+-Support for float and double soundfiles.
+-Fixed filenamebugs in combsplit and reimsplit
+-Replaced libaudiofile with libsndfile.
+-Removed soundfile length limitation.
+-Removed some warnings.
+-Playing internally from program using sndlib.
+-Added undo/redo. (currently hardcoded to 300000 levels)
+
+
+
+
+
+
+

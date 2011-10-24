@@ -1,0 +1,38 @@
+samplerate.lo samplerate.o: samplerate.c \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/_mingw.h \
+  /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stddef.h \
+  /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/sys/types.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdlib.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/string.h \
+  config.h samplerate.h common.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdint.h \
+  float_cast.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/math.h
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/_mingw.h:
+
+/usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stddef.h:
+
+/usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/sys/types.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdlib.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/string.h:
+
+config.h:
+
+samplerate.h:
+
+common.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdint.h:
+
+float_cast.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/math.h:

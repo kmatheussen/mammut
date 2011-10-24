@@ -1,0 +1,117 @@
+<@ kategori1="produsert" @>
+
+<p class="header">
+<span class="mainHeader">Mammut help</span>
+
+<HR>
+<H3>Introduction</H3><P>
+Mammut will FFT your sound in one single gigantic analysis (no windows). These spectral data, where the development in time is incorporated in mysterious ways, may then be transformed by different algorithms prior to resynthesis. An interesting aspect of Mammut is its completely non-intuitive sound transformation approach.
+<P>
+Open the program, and the following screen will appear.  If you would like to have a startup-sound, image and animation, you can turn these on in the Misc-panel, under Prefs. The following text goes through the different paves of the window.
+<P>
+
+<HR><span class="subHeader">1. Load and analyze</span><p>
+<B>Browse</B>: Click "browse" to get a dialogue that will allow you to navigate the file system on your computer.  Select a sound.  Mammut accepts files in any format, any sampling rate, and any number of channels. A spectrogram is then drawn.
+<P>
+The sound will then be zero-padded at the end, to achieve an FFT size that is a power of 2. The analysis will be stored in memory.
+<p>
+<B>Duration Doubling</B>: You may select a number of duration doublings in order to zero-pad your sound to progressively higher powers of 2. This may be useful to increase the duration of silence at the end of a sound. Some transforms may insert interesting sound in this region. You will have to run a new analysis after this value has been changed. CAREFUL! A duration doubling of 3 means that your sound will get 8 times longer. Processing time will increase even more.
+<P>
+If you are unhappy with any of your choices in the processing, you can start over by reloading your sound.
+<P>
+After loading a sound, you may use any of the transformations listed below.
+<P>
+<HR><span class="subHeader">2. Play</span>
+<P>
+<B>Start</B> starts playback of the sound. A resyntehsis is performed first.<BR>
+<B>Stop</B> stops playback<BR>
+The <B>progress bar</B> can also be used to set playing position.
+The <B>normalize</B> button also works during playback.
+<P>
+<HR><span class="subHeader">3. Undo/Redo</span>
+<P>
+By clicking any of the arrows or the slider, you can go back and forth in the processing steps you have done, and restart from any of them.
+<P>
+<HR><span class="subHeader">4. Load and Multiply</span>.
+These functions are used for different kinds of spectral multiplication (cross-synthesis). First, load the longest sound in "Load & <B>Analyze</B>" .  Then, load the shorter sound in "Load & <B>Multiply</B>".
+<P>
+You can choose between four different multiplication algorithms:
+<P>
+<UL>
+<LI><B>Convolve</B>: Will complex-multiply with the spectrum of the reversed sound. Use this for standard, high-quality convolution with eg. a room response.<BR>
+<LI><B>Correlate</B>: Will simply complex-multiply two spectra, giving the correlation.<BR>
+<LI><B>Fun</B>: Simple complex multiplication, with intended programming "errors" (sign reversals and coefficient swaps).<BR>
+<LI><B>A^B</B>: Raise spectrum A to the power of spectrum B.
+</UL>
+<BR>
+<P>
+<HR><span class="subHeader">5. Misc</span>
+<P>
+<B>Prefs</B> lets you choose whether or not to have a Startup sound, background picture, Animation, Moving Camera, and loop playback.<br>
+<br>
+ Note that Mammut FFT by nature creates sounds which are perfectly loopable, so it makes sense to have the loop button enabled.<br>
+<br> 
+Audio settings lets you contol where the output from your computer is routed, sample rate, and audio buffer size. To avoid clicks when looping and to lower cpu consumption during playback, you shuld try to match the playback sample rate with the sample rate of your sound files.
+<P>
+<HR><span class="subHeader">6. Save</span>
+<P>
+<B>Save</B> opens up a normal dialog for saving your files.  You can opt to normalize your file before saving. 
+Mammut saves using the same file format as your loaded file, unless you specify a postfix of either "aiff" or "wav", which mammut will obey.
+<P>
+<HR><span class="subHeader">7. Transforms</span>
+<P>
+<B>Stretch</B>: All frequencies will be raised to the power of the exponent you specify, and the frequency axis is then re-normalized. This is a non-linear stretching of the frequency axis. Values close to 1 (0.9-1.1) are recommended. This transform will produce dispersion effects, with frequency sweeps.
+<P>
+<B>Wobble</B>: This transform will alternately stretch and contract the frequency axis using a sinusoidal transfer function for the frequencies._The Frequency parameter controls the number of periods of the transfer function from 0 Hz to the Nyquist frequency, while Amplitude controls its amplitude (1 is the entire frequency axis).
+<P>
+<B>Multiply phase</B>: Multiply all phases with the value you specify. A value of -1 will reverse the sound.
+<P>
+<B>Derivate amp</B>: Replaces the amplitude spectrum with its derivative (slope). You may specify a gain factor.
+<P>
+<B>Filter</B>: Optimal bandstop filter. The ultimate in cut-off performance!
+<P>
+<B>Invert</B>: Splits the spectrum into regions with specified size, and turns each of these backwards. If you select a region size of 100%, the entire spectrum will be mirrored around its center. Also, the result is complex conjugated to avoid reversal of the sound.
+<P>
+<B>Threshold</B>: Removes all partials below a given amplitude threshold.
+<P>
+<B>Spectrum Shift</B>: Optimal spectrum shift, with no window artefacts. The frequency you specify (positive or negative) will be added to all frequency values, shifting the spectrum up or down.
+<P>
+<B>Block Swap</B>: Selects randomly positioned regions of the spectrum, and interchanges their halves. The Block size parameter sets the size of the blocks, given in percents of the whole frequency axis. This procedure is repeated a number of times, as specified, thus permutating the partials.
+<P>
+<B>Mirror</B>: Reflects the whole spectrum around the frequency you specify.
+<P>
+<B>Keep Peaks</B>:
+<P>
+<B>Amplitude->phase</B>: The phases of the partials are set to their respective amplitudes, after a specified gain multiplication. Rather useless.
+<P>
+<B>Gain</B>: A highly useful function, because many of the transforms will change the gain and the spectrum may have to be re-scaled manually.
+<P>
+<B>CombSplit</B>: 
+<P>
+<B>Split Real/imag</B>: 
+<P>
+<B>Stereo</B>: 
+<UL>
+<LI><B>Swap phases</B>: The phases, but not the amplitudes, are interchanged between the two channels.
+<LI><B>Crossover</B>: Swaps blocks between the two channels. The probability, for each frequency bin, that the program will switch between swapping and non-swapping mode as it runs through all the bins, must be specified. Small probability means that large blocks are swapped (or kept).
+</UL>
+<P>
+<B>Zoom</B>: Lets you get a closer look at the spectrogram, moving back and forth over the image.
+<P>
+<HR><span class="subHeader">8. Tricks</span>
+<P>
+Due to the zero padding, Mammut may produce soundfiles which have a long tail of silence or humming. You should cut this away in a sound editor.
+Mammut doesn't like sounds with DC or other subsonic components. Many transforms will move these frequencies up into the audible range, producing annoying tones. You may therefore want to remove all frequencies from say 0 to 60 Hz using the Filter function before other transforms are applied.
+<P>
+<HR><span class="subHeader">9. A final word</span>
+<P>
+The general idea (and the name "mammoth FFT") was conceived by the Swedish composer Paul Pignon many years ago.
+PLEASE NOTE: You must have a certain attitude when using this program. Use it experimentally, by ear. Do not try to understand what happens - even the programmer can't explain it in many cases.
+<P>
+<HR><span class="subHeader">10. Software</span>
+<P>
+The latest version of Mammut is available from <A HREF="http://www.notam.uio.no/arkiv/doc/mammut/">
+http://www.notam.uio.no/arkiv/doc/mammut/</A>
+<P>
+If you have any comments on Mammut, send an e-mail to: <a href="mailto:oyvindha_at_notam02.no">Øyvind Hammer</a> eller <a href="mailto:kjetism_at_notam02.no">Kjetil Matheussen</a> 
+

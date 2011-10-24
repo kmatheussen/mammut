@@ -1,0 +1,35 @@
+***************
+*** 762,767 ****
+      else if (buttonThatWasClicked == aboutbutton)
+      {
+          //[UserButtonCode_aboutbutton] -- add your button handler code here..
+        AlertWindow::showMessageBox(AlertWindow::InfoIcon,T("Mammut"),
+  				  T("V" VERSION ", Notam 1995-2007.\n"
+  				    "\n"
+--- 762,771 ----
+      else if (buttonThatWasClicked == aboutbutton)
+      {
+          //[UserButtonCode_aboutbutton] -- add your button handler code here..
++ #ifdef _MSC_VER
++ 		AlertWindow::showMessageBox(AlertWindow::InfoIcon,T("Mammut"),
++ 		  T("V beta, Notam 1995-2007.\n"));
++ #else
+        AlertWindow::showMessageBox(AlertWindow::InfoIcon,T("Mammut"),
+  				  T("V" VERSION ", Notam 1995-2007.\n"
+  				    "\n"
+***************
+*** 778,783 ****
+  				    "libsndfile and libvorbisfile.\n"
+  				    "\n"
+  				    "Send your comments to k.s.matheussen@notam02.no.\n"));
+          //[/UserButtonCode_aboutbutton]
+      }
+      else if (buttonThatWasClicked == prefsbutton)
+--- 782,788 ----
+  				    "libsndfile and libvorbisfile.\n"
+  				    "\n"
+  				    "Send your comments to k.s.matheussen@notam02.no.\n"));
++ #endif
+          //[/UserButtonCode_aboutbutton]
+      }
+      else if (buttonThatWasClicked == prefsbutton)

@@ -1,0 +1,14 @@
+
+
+The description from the orignal author, Øyvind Hammer:
+"Mammut will FFT your sound in one single gigantic analysis (no windows).
+These spectral data, where the development in time is incorporated in mysterious ways,
+may then be transformed by different algorithms prior to resynthesis.
+An interesting aspect of Mammut is its completely non-intuitive sound transformation approach."
+
+
+Homepage:
+http://archive.notam02.no/arkiv/doc/mammut/
+
+
+-Kjetil

@@ -1,0 +1,25 @@
+callback_test-util.o callback_test-util.o: util.c \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/_mingw.h \
+  /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stddef.h \
+  /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/sys/types.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdlib.h \
+  /usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/math.h \
+  util.h
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/_mingw.h:
+
+/usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stddef.h:
+
+/usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/sys/types.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdlib.h:
+
+/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/math.h:
+
+util.h:

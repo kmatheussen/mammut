@@ -1,0 +1,1339 @@
+/*
+  ==============================================================================
+
+  This is an automatically generated file created by the Jucer!
+
+  Creation date:  12 Feb 2007 2:52:19 am
+
+  Be careful when adding custom code to these files, as only the code within
+  the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
+  and re-saved.
+
+  ------------------------------------------------------------------------------
+
+  The Jucer is part of the JUCE library - "Jules' Utility Class Extensions"
+  Copyright 2004-6 by Raw Material Software ltd.
+
+  ==============================================================================
+*/
+
+//[Headers] You can add your own extra header files here...
+
+// TODO!
+/*
+ * jpgegify pictures. (less important)
+ * Cancel processing knapp.
+ */
+
+
+#include "mammut.h"
+#include "PictureHolder.h"
+#include "Interface.h"
+#include "juceplay.h"
+
+static int lastrepaint=0;
+
+
+extern void GUI_init(GraphComponent *das_graphcomponent,Interface *das_interface);
+
+class DasTabbedComponent  : public TabbedComponent
+
+{
+ public:
+  DasTabbedComponent(TabbedButtonBar::Orientation orientation)
+    : TabbedComponent(orientation)
+  {
+  }
+
+  // Overriding the paint method in TabbedComponent to prevent it from painting various things.
+  void paint (Graphics& g){
+  }
+};
+
+
+#define TabbedComponent DasTabbedComponent
+//[/Headers]
+
+#include "Interface.h"
+#include "Stretch.h"
+#include "Wobble.h"
+#include "MultiplyPhase.h"
+#include "DerivativeAmp.h"
+#include "Filter.h"
+#include "Invert.h"
+#include "Threshold.h"
+#include "SpectrumShift.h"
+#include "BlockSwap.h"
+#include "Mirror.h"
+#include "KeepPeaks.h"
+#include "AmplitudeToPhase.h"
+#include "Gain.h"
+#include "CombSplit.h"
+#include "SplitRealImag.h"
+#include "Stereo.h"
+#include "Zoom.h"
+
+
+
+//==============================================================================
+Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
+    : Component (T("Interface")),
+      groupComponent5 (0),
+      groupComponent4 (0),
+      groupComponent3 (0),
+      groupComponent1 (0),
+      groupComponent (0),
+      stopbutton (0),
+      tabbedComponent (0),
+      undoredoinc (0),
+      undoredoslider (0),
+      label (0),
+      groupComponent2 (0),
+      correlatebutton (0),
+      funbutton (0),
+      abbutton (0),
+      hyperlinkButton (0),
+      savebutton (0),
+      playbutton (0),
+      loadbrowse (0),
+      loadmulbrowse (0),
+      loadcomboBox (0),
+      reload (0),
+      convolvebutton (0),
+      reloadmul (0),
+      loadmulcomboBox (0),
+      phaseampbutton (0),
+      durationdoublingslider (0),
+      infotext (0),
+      playposslider (0),
+      normalizebutton (0),
+      saveasbutton (0),
+      aboutbutton (0),
+      prefsbutton (0)
+{
+    addAndMakeVisible (groupComponent5 = new GroupComponent (T("new group"),
+                                                             T("Misc")));
+    groupComponent5->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
+
+    addAndMakeVisible (groupComponent4 = new GroupComponent (T("new group"),
+                                                             T("Save")));
+    groupComponent4->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
+
+    addAndMakeVisible (groupComponent3 = new GroupComponent (T("new group"),
+                                                             T("Play")));
+    groupComponent3->setColour (GroupComponent::outlineColourId, Colour (0xb2000000));
+    groupComponent3->setColour (GroupComponent::textColourId, Colours::black);
+
+    addAndMakeVisible (groupComponent1 = new GroupComponent (T("new group"),
+                                                             T("Load & Analyze")));
+    groupComponent1->setColour (GroupComponent::outlineColourId, Colour (0xb2000000));
+    groupComponent1->setColour (GroupComponent::textColourId, Colours::black);
+
+    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
+                                                            T("Undo/Redo")));
+    groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb2000000));
+
+    addAndMakeVisible (stopbutton = new TextButton (T("Play")));
+    stopbutton->setButtonText (T("Stop"));
+    stopbutton->addButtonListener (this);
+    stopbutton->setColour (TextButton::buttonColourId, Colour (0x5cabba2a));
+    stopbutton->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
+    stopbutton->setColour (TextButton::textColourId, Colours::black);
+
+    addAndMakeVisible (tabbedComponent = new TabbedComponent (TabbedButtonBar::TabsAtTop));
+    tabbedComponent->setTabBarDepth (20);
+    tabbedComponent->addTab (T("Stretch"), Colour (0x3bf8f4c6), new Stretch(), true);
+    tabbedComponent->addTab (T("Wobble"), Colour (0x95e0cce6), new Wobble(), true);
+    tabbedComponent->addTab (T("Multiply Phase"), Colour (0x6aa9e2d8), new MultiplyPhase(), true);
+    tabbedComponent->addTab (T("Derivate Amp"), Colour (0x65fb95ca), new DerivativeAmp(), true);
+    tabbedComponent->addTab (T("Filter"), Colour (0xb2e6c3c3), new Filter(), true);
+    tabbedComponent->addTab (T("Invert"), Colour (0x617ae7e4), new Invert(), true);
+    tabbedComponent->addTab (T("Threshold"), Colour (0x70f7f1f7), new Threshold(), true);
+    tabbedComponent->addTab (T("Spectrum Shift"), Colour (0x7dc5e3f9), new SpectrumShift(), true);
+    tabbedComponent->addTab (T("Block Swap"), Colour (0x499affee), new BlockSwap(), true);
+    tabbedComponent->addTab (T("Mirror"), Colour (0x91d9daff), new Mirror(), true);
+    tabbedComponent->addTab (T("Keep Peaks"), Colour (0x84f7e1e1), new KeepPeaks(), true);
+    tabbedComponent->addTab (T("Amplitude->Phase"), Colour (0x82e5f8e3), new AmplitudeToPhase(), true);
+    tabbedComponent->addTab (T("Gain"), Colour (0x6ef1f2d1), new Gain(), true);
+    tabbedComponent->addTab (T("CombSplit"), Colour (0x7bc4ffef), new CombSplit(), true);
+    tabbedComponent->addTab (T("Split Real/Imag"), Colour (0x98d6d5ea), new SplitRealImag(), true);
+    tabbedComponent->addTab (T("Stereo"), Colour (0xa3d3d3d3), new Stereo(), true);
+    tabbedComponent->addTab (T("Zoom"), Colour (0xb0f5f5dc), new Zoom(), true);
+    tabbedComponent->setCurrentTabIndex (0);
+
+    addAndMakeVisible (undoredoinc = new Slider (T("new slider")));
+    undoredoinc->setRange (0, 0, 1);
+    undoredoinc->setSliderStyle (Slider::IncDecButtons);
+    undoredoinc->setTextBoxStyle (Slider::NoTextBox, true, 80, 20);
+    undoredoinc->setColour (Slider::backgroundColourId, Colour (0x0));
+    undoredoinc->setColour (Slider::thumbColourId, Colours::black);
+    undoredoinc->setColour (Slider::trackColourId, Colour (0x79000000));
+    undoredoinc->setColour (Slider::textBoxTextColourId, Colours::black);
+    undoredoinc->setColour (Slider::textBoxBackgroundColourId, Colours::white);
+    undoredoinc->setColour (Slider::textBoxHighlightColourId, Colour (0x401a1aa8));
+    undoredoinc->addListener (this);
+
+    addAndMakeVisible (undoredoslider = new Slider (T("new slider")));
+    undoredoslider->setRange (0, 0, 1);
+    undoredoslider->setSliderStyle (Slider::LinearBar);
+    undoredoslider->setTextBoxStyle (Slider::TextBoxAbove, true, 80, 20);
+    undoredoslider->setColour (Slider::backgroundColourId, Colour (0x5ce5f4f5));
+    undoredoslider->setColour (Slider::thumbColourId, Colour (0x5c8d8f92));
+    undoredoslider->setColour (Slider::textBoxBackgroundColourId, Colours::white);
+    undoredoslider->addListener (this);
+
+    addAndMakeVisible (label = new Label (T("new label"),
+                                          T("Duration Doubling")));
+    label->setFont (Font (15.0000f, Font::plain));
+    label->setJustificationType (Justification::centredLeft);
+    label->setEditable (false, false, false);
+    label->setColour (Label::backgroundColourId, Colour (0x0));
+    label->setColour (Label::textColourId, Colours::black);
+    label->setColour (Label::outlineColourId, Colour (0x0));
+    label->setColour (TextEditor::textColourId, Colours::black);
+    label->setColour (TextEditor::backgroundColourId, Colour (0x0));
+
+    addAndMakeVisible (groupComponent2 = new GroupComponent (T("new group"),
+                                                             T("Load & Multiply")));
+    groupComponent2->setColour (GroupComponent::outlineColourId, Colour (0xb4000000));
+
+    addAndMakeVisible (correlatebutton = new TextButton (T("new button")));
+    correlatebutton->setTooltip (T("Correlate. Will simply complex-multiply two spectra, giving the correlation."));
+    correlatebutton->setButtonText (T("Correlate"));
+    correlatebutton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
+    correlatebutton->addButtonListener (this);
+    correlatebutton->setColour (TextButton::buttonColourId, Colour (0x88b26134));
+    correlatebutton->setColour (TextButton::buttonOnColourId, Colour (0x371ed220));
+
+    addAndMakeVisible (funbutton = new TextButton (T("new button")));
+    funbutton->setTooltip (T("Fun. Simple complex multiplication, with intended programming \"errors\" (sign reversals and coefficient swaps)."));
+    funbutton->setButtonText (T("Fun"));
+    funbutton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
+    funbutton->addButtonListener (this);
+    funbutton->setColour (TextButton::buttonColourId, Colour (0x8ab26134));
+    funbutton->setColour (TextButton::buttonOnColourId, Colour (0x3b6eff44));
+
+    addAndMakeVisible (abbutton = new TextButton (T("new button")));
+    abbutton->setTooltip (T("A^B. Raise spectrum A to the power of spectrum B. Useless (?)"));
+    abbutton->setButtonText (T("A^B"));
+    abbutton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
+    abbutton->addButtonListener (this);
+    abbutton->setColour (TextButton::buttonColourId, Colour (0x8ab26135));
+    abbutton->setColour (TextButton::buttonOnColourId, Colour (0x3944ff64));
+
+    addAndMakeVisible (hyperlinkButton = new HyperlinkButton (T("http://www.notam02.no"),
+                                                              URL (T("http://www.notam02.no/notam02/prod-prg-mammuthelp.html"))));
+    hyperlinkButton->setTooltip (T("http://www.notam02.no/notam02/prod-prg-mammuthelp.html"));
+    hyperlinkButton->setColour (HyperlinkButton::textColourId, Colour (0x930004ff));
+
+    addAndMakeVisible (savebutton = new TextButton (T("new button")));
+    savebutton->setButtonText (T("Save"));
+    savebutton->addButtonListener (this);
+    savebutton->setColour (TextButton::buttonColourId, Colour (0x6ed58d00));
+
+    addAndMakeVisible (playbutton = new TextButton (T("Play")));
+    playbutton->setButtonText (T("Start"));
+    playbutton->addButtonListener (this);
+    playbutton->setColour (TextButton::buttonColourId, Colour (0x7da9a335));
+    playbutton->setColour (TextButton::textColourId, Colours::black);
+
+    addAndMakeVisible (loadbrowse = new TextButton (T("new button")));
+    loadbrowse->setButtonText (T("browse"));
+    loadbrowse->addButtonListener (this);
+    loadbrowse->setColour (TextButton::buttonColourId, Colour (0x469bd243));
+
+    addAndMakeVisible (loadmulbrowse = new TextButton (T("new button")));
+    loadmulbrowse->setButtonText (T("browse"));
+    loadmulbrowse->addButtonListener (this);
+    loadmulbrowse->setColour (TextButton::buttonColourId, Colour (0x449bd2d7));
+
+    addAndMakeVisible (loadcomboBox = new ComboBox (T("new combo box")));
+    loadcomboBox->setEditableText (true);
+    loadcomboBox->setJustificationType (Justification::centredLeft);
+    loadcomboBox->setTextWhenNothingSelected (T("(choose a soundfile)"));
+    loadcomboBox->setTextWhenNoChoicesAvailable (T("(choose a soundfile)"));
+    loadcomboBox->addListener (this);
+
+    addAndMakeVisible (reload = new TextButton (T("new button")));
+    reload->setButtonText (T("reload"));
+    reload->addButtonListener (this);
+    reload->setColour (TextButton::buttonColourId, Colour (0x449bd243));
+
+    addAndMakeVisible (convolvebutton = new TextButton (T("new button")));
+    convolvebutton->setTooltip (T("Will complex-multiply with the spectrum of the reversed sound. Use this for standard, high-quality convolution with eg. a room response."));
+    convolvebutton->setButtonText (T("Convolve"));
+    convolvebutton->setConnectedEdges (Button::ConnectedOnRight);
+    convolvebutton->addButtonListener (this);
+    convolvebutton->setColour (TextButton::buttonColourId, Colour (0x8aa64f15));
+    convolvebutton->setColour (TextButton::buttonOnColourId, Colour (0x3b66ff44));
+
+    addAndMakeVisible (reloadmul = new TextButton (T("new button")));
+    reloadmul->setButtonText (T("reload"));
+    reloadmul->addButtonListener (this);
+    reloadmul->setColour (TextButton::buttonColourId, Colour (0x449bd2d7));
+
+    addAndMakeVisible (loadmulcomboBox = new ComboBox (T("new combo box")));
+    loadmulcomboBox->setEditableText (true);
+    loadmulcomboBox->setJustificationType (Justification::centredLeft);
+    loadmulcomboBox->setTextWhenNothingSelected (T("(choose a soundfile)"));
+    loadmulcomboBox->setTextWhenNoChoicesAvailable (T("(choose a soundfile)"));
+    loadmulcomboBox->addListener (this);
+
+    addAndMakeVisible (phaseampbutton = new TextButton (T("new button")));
+    phaseampbutton->setButtonText (T("Phase/Amp"));
+    phaseampbutton->setConnectedEdges (Button::ConnectedOnLeft);
+    phaseampbutton->addButtonListener (this);
+    phaseampbutton->setColour (TextButton::buttonColourId, Colour (0x4bd8530a));
+    phaseampbutton->setColour (TextButton::buttonOnColourId, Colour (0x4284ff44));
+
+    addAndMakeVisible (durationdoublingslider = new Slider (T("new slider")));
+    durationdoublingslider->setRange (0, 4, 1);
+    durationdoublingslider->setSliderStyle (Slider::IncDecButtons);
+    durationdoublingslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
+    durationdoublingslider->setColour (Slider::backgroundColourId, Colour (0x0));
+    durationdoublingslider->setColour (Slider::thumbColourId, Colours::white);
+    durationdoublingslider->setColour (Slider::textBoxBackgroundColourId, Colour (0x37ffffff));
+    durationdoublingslider->setColour (Slider::textBoxHighlightColourId, Colour (0x40421bdc));
+    durationdoublingslider->addListener (this);
+
+    addAndMakeVisible (infotext = new Label (T("infotext"),
+                                             T("Start by loading and analyzing a soundfile")));
+    infotext->setFont (Font (55.9000f, Font::plain));
+    infotext->setJustificationType (Justification::centredLeft);
+    infotext->setEditable (false, false, false);
+    infotext->setColour (Label::backgroundColourId, Colour (0x0));
+    infotext->setColour (Label::textColourId, Colour (0x72000000));
+    infotext->setColour (Label::outlineColourId, Colour (0x0));
+    infotext->setColour (TextEditor::textColourId, Colours::black);
+    infotext->setColour (TextEditor::backgroundColourId, Colour (0x0));
+
+    addAndMakeVisible (playposslider = new Slider (T("playprogress")));
+    playposslider->setRange (0, 256, 1);
+    playposslider->setSliderStyle (Slider::LinearBar);
+    playposslider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    playposslider->setColour (Slider::backgroundColourId, Colour (0xffffff));
+    playposslider->setColour (Slider::thumbColourId, Colour (0x23ebed9d));
+    playposslider->setColour (Slider::trackColourId, Colour (0x58000000));
+    playposslider->setColour (Slider::textBoxBackgroundColourId, Colour (0x14ffffff));
+    playposslider->addListener (this);
+
+    addAndMakeVisible (normalizebutton = new ToggleButton (T("new toggle button")));
+    normalizebutton->setTooltip (T("Also works when playing"));
+    normalizebutton->setButtonText (T("normalize"));
+    normalizebutton->addButtonListener (this);
+
+    addAndMakeVisible (saveasbutton = new TextButton (T("new button")));
+    saveasbutton->setButtonText (T("Save As"));
+    saveasbutton->addButtonListener (this);
+    saveasbutton->setColour (TextButton::buttonColourId, Colour (0x6ac18400));
+
+    addAndMakeVisible (aboutbutton = new TextButton (T("aboutbutton")));
+    aboutbutton->setButtonText (T("About"));
+    aboutbutton->addButtonListener (this);
+    aboutbutton->setColour (TextButton::buttonColourId, Colour (0x1fbbbbff));
+    aboutbutton->setColour (TextButton::buttonOnColourId, Colour (0x86a15f5f));
+    aboutbutton->setColour (TextButton::textColourId, Colour (0xc4000000));
+
+    addAndMakeVisible (prefsbutton = new TextButton (T("prefsbutton")));
+    prefsbutton->setButtonText (T("Prefs"));
+    prefsbutton->addButtonListener (this);
+    prefsbutton->setColour (TextButton::buttonColourId, Colour (0x1fbbbbff));
+    prefsbutton->setColour (TextButton::buttonOnColourId, Colour (0x86a15f5f));
+    prefsbutton->setColour (TextButton::textColourId, Colour (0xc4000000));
+
+    setSize (900, 800);
+
+    //[Constructor] You can add your own custom stuff here..
+    /*************************************************************/
+
+    //addAndMakeVisible(graphcomponent=new GraphComponent(componentplace->getX(),componentplace->getY(),componentplace->getWidth(),componentplace->getHeight()));
+    addAndMakeVisible(graphcomponent=new GraphComponent(0,0,20,20));
+    graphcomponent->setName (T("gnew component"));
+    //componentplace->setVisible(false);
+
+
+    GUI_init(graphcomponent,this);
+    //graphcomponent->setBounds(0,0,650,550);
+    //graphcomponent->setTopRightPosition(0,0);
+
+    undolevel=0;
+    undocurrent=0;
+    filename=NULL;
+    mulfilename=NULL;
+    savefilename=NULL;
+
+    loadcomboBox->setColour(ComboBox::backgroundColourId,Colour    (0x47422222));//Colour (0x809bd243));
+    loadmulcomboBox->setColour(ComboBox::backgroundColourId,Colour (0x47422222));//Colour (0x809bd243));
+
+    //tabbedComponent->getTabContentComponent(0)->setSize(100,200);
+    //printf("%p\n",tabbedComponent->tabs);
+
+    tabbedComponent->getTabContentComponent(tabbedComponent->getNumTabs()-2)->setEnabled(samps_per_frame>=2?true:false);
+
+    tabbedComponent->setEnabled(false);
+    tabbedComponent->setOutline(Colour(0x00ddf1ee),0);
+    tabbedComponent->setIndent(0);
+
+    //->setClickingTogglesState (true);
+    convolvebutton->setClickingTogglesState (true);
+    correlatebutton->setClickingTogglesState (true);
+    funbutton->setClickingTogglesState (true);
+    abbutton->setClickingTogglesState (true);
+    phaseampbutton->setClickingTogglesState (true);
+
+    convolvebutton->setRadioGroupId (23456);
+    correlatebutton->setRadioGroupId (23456);
+    funbutton->setRadioGroupId (23456);
+    abbutton->setRadioGroupId (23456);
+    phaseampbutton->setRadioGroupId (23456);
+
+    convolvebutton->setToggleState(true,true);
+
+    filewasjustsaved=false;
+
+    savebutton->setEnabled(false);
+    saveasbutton->setEnabled(false);
+
+    prefscomponent=new Prefs();
+    juceplay_init(prefscomponent->propertiesfile);
+
+    pic_x=15;
+    pic_y=5;
+    pic_x2=872-15;
+    pic_y2=738-15;
+    internalCachedImage3=PictureHolder::getImage(0);
+
+
+#if 0
+    tempimage=internalCachedImage3->createCopy();
+    startThread();
+#endif
+
+    startTimer(50);
+	
+    this->commandLine=new String(commandLine.toUTF8());
+    this->mainwindow=mainwindow;
+    //loadFile((char*)commandLine.toUTF8());
+    //MC_loadAndAnalyze((char*)commandLine.toUTF8());
+
+
+    //setBufferedToImage(true);
+
+#if 0
+    zoomtoggle->toFront(true);
+    zoomleft->toFront(true);
+    zoomright->toFront(true);
+#endif
+    //[/Constructor]
+}
+
+Interface::~Interface()
+{
+    //[Destructor_pre]. You can add your own custom destruction code here..
+  printf("exitgakk0 %d\n",sizeof(float));
+  printf("exitgakk\n");
+    //[/Destructor_pre]
+
+    deleteAndZero (groupComponent5);
+    deleteAndZero (groupComponent4);
+    deleteAndZero (groupComponent3);
+    deleteAndZero (groupComponent1);
+    deleteAndZero (groupComponent);
+    deleteAndZero (stopbutton);
+    deleteAndZero (tabbedComponent);
+    deleteAndZero (undoredoinc);
+    deleteAndZero (undoredoslider);
+    deleteAndZero (label);
+    deleteAndZero (groupComponent2);
+    deleteAndZero (correlatebutton);
+    deleteAndZero (funbutton);
+    deleteAndZero (abbutton);
+    deleteAndZero (hyperlinkButton);
+    deleteAndZero (savebutton);
+    deleteAndZero (playbutton);
+    deleteAndZero (loadbrowse);
+    deleteAndZero (loadmulbrowse);
+    deleteAndZero (loadcomboBox);
+    deleteAndZero (reload);
+    deleteAndZero (convolvebutton);
+    deleteAndZero (reloadmul);
+    deleteAndZero (loadmulcomboBox);
+    deleteAndZero (phaseampbutton);
+    deleteAndZero (durationdoublingslider);
+    deleteAndZero (infotext);
+    deleteAndZero (playposslider);
+    deleteAndZero (normalizebutton);
+    deleteAndZero (saveasbutton);
+    deleteAndZero (aboutbutton);
+    deleteAndZero (prefsbutton);
+
+    //[Destructor]. You can add your own custom destruction code here..
+    //[/Destructor]
+}
+
+//==============================================================================
+void Interface::paint (Graphics& g)
+{
+    g.fillAll (Colour (0xffddf1ee));
+
+    g.setColour (Colours::black);
+    g.setFont (Font (15.0000f, Font::plain));
+    g.drawText (String::empty,
+                408, 312, 200, 30,
+                Justification::centred, true);
+
+    GradientBrush gradient_1 (Colours::red,
+                              50.0f, 50.0f,
+                              Colours::green,
+                              744.0f, 576.0f,
+                              false);
+    g.setBrush (&gradient_1);
+    g.fillRoundedRectangle (0.0f, 448.0f, 960.0f, 384.0f, 21.5000f);
+
+    GradientBrush gradient_2 (Colour (0x7bf98f33),
+                              664.0f, 40.0f,
+                              Colour (0xd78c8c8c),
+                              720.0f, 560.0f,
+                              false);
+    g.setBrush (&gradient_2);
+    g.fillRect (-8, -24, 976, 864);
+
+    GradientBrush gradient_3 (Colour (0x219d2323),
+                              16.0f, 736.0f,
+                              Colour (0x5f0f1615),
+                              696.0f, 752.0f,
+                              true);
+    g.setBrush (&gradient_3);
+    g.fillRoundedRectangle (0.0f, 584.0f, 960.0f, 304.0f, 21.5000f);
+
+    //[UserPaint] Add your own custom paint stuff here..
+#if 1
+    g.setImageResamplingQuality(Graphics::lowResamplingQuality);
+    if(prefs_picture==true){
+      g.setColour (Colours::black.withAlpha (0.2700f));
+      if(prefs_movingcamera==true){
+#if 0
+	g.drawImageAt(tempimage,0,0,false);
+#else
+	g.drawImage(internalCachedImage3,
+		    0, 0, 872, 738,
+		    pic_x,pic_y,pic_x2-pic_x,pic_y2-pic_y,
+		    false);
+#endif
+      }else{
+	g.drawImageAt(internalCachedImage3,0,0,false);
+      }
+    }
+    lastrepaint=Time::getMillisecondCounter();
+#endif
+#if 0
+    GradientBrush gb (Colour((juce::uint8)0xcd,(juce::uint8)0xd1,(juce::uint8)0xce,(juce::uint8)0xee),
+		      getWidth() * 0.3f, getHeight() * 0.3f,
+		      Colour((juce::uint8)0xc0,(juce::uint8)0xc8,(juce::uint8)0xde,(juce::uint8)0x5e),
+		      getWidth() * 0.91f, getHeight() * 0.7f,
+		      1);
+
+    g.setBrush (&gb);
+	    //            g.fillPath (shape, getTransform());
+    g.fillAll ();
+#endif
+    //graphcomponent->repaint();
+#if 0
+    zoomtoggle->toFront(true);
+    zoomleft->toFront(true);
+    zoomright->toFront(true);
+#endif
+    //[/UserPaint]
+}
+
+void Interface::resized()
+{
+    groupComponent5->setBounds (649, 587, 200, 64);
+    groupComponent4->setBounds (745, 651, 104, 80);
+    groupComponent3->setBounds (9, 587, 424, 64);
+    groupComponent1->setBounds (9, 651, 368, 80);
+    groupComponent->setBounds (433, 587, 216, 64);
+    stopbutton->setBounds (87, 604, 71, 40);
+    tabbedComponent->setBounds (7, 450, 848, 136);
+    undoredoinc->setBounds (449, 611, 56, 24);
+    undoredoslider->setBounds (513, 611, 120, 24);
+    label->setBounds (17, 667, 160, 24);
+    groupComponent2->setBounds (377, 651, 368, 80);
+    correlatebutton->setBounds (441, 667, 56, 24);
+    funbutton->setBounds (497, 667, 48, 24);
+    abbutton->setBounds (545, 667, 48, 24);
+    hyperlinkButton->setBounds (656, 624, 184, 22);
+    savebutton->setBounds (761, 667, 72, 20);
+    playbutton->setBounds (17, 603, 71, 40);
+    loadbrowse->setBounds (305, 699, 64, 24);
+    loadmulbrowse->setBounds (673, 699, 64, 24);
+    loadcomboBox->setBounds (17, 699, 280, 24);
+    reload->setBounds (305, 667, 64, 24);
+    convolvebutton->setBounds (385, 667, 56, 24);
+    reloadmul->setBounds (673, 667, 64, 24);
+    loadmulcomboBox->setBounds (385, 699, 280, 24);
+    phaseampbutton->setBounds (593, 667, 72, 24);
+    durationdoublingslider->setBounds (153, 667, 144, 24);
+    infotext->setBounds (32, 216, 800, 64);
+    playposslider->setBounds (168, 612, 256, 24);
+    normalizebutton->setBounds (760, 704, 72, 24);
+    saveasbutton->setBounds (761, 687, 71, 21);
+    aboutbutton->setBounds (664, 604, 80, 22);
+    prefsbutton->setBounds (752, 604, 80, 22);
+    //[UserResized] Add your own custom resize handling here..
+    //    if(graphcomponent)
+    // graphcomponent->setBounds(0,0,600,550);
+    //[/UserResized]
+}
+
+void Interface::buttonClicked (Button* buttonThatWasClicked)
+{
+    if (buttonThatWasClicked == stopbutton)
+    {
+        //[UserButtonCode_stopbutton] -- add your button handler code here..
+      MC_stop();
+        //[/UserButtonCode_stopbutton]
+    }
+    else if (buttonThatWasClicked == correlatebutton)
+    {
+        //[UserButtonCode_correlatebutton] -- add your button handler code here..
+      loadandmultiply_convolve=false;
+      loadandmultiply_correlate=true;
+      loadandmultiply_fun=false;
+      loadandmultiply_a_b=false;
+      loadandmultiply_phase_amp=false;
+
+        //[/UserButtonCode_correlatebutton]
+    }
+    else if (buttonThatWasClicked == funbutton)
+    {
+        //[UserButtonCode_funbutton] -- add your button handler code here..
+      loadandmultiply_convolve=false;
+      loadandmultiply_correlate=false;
+      loadandmultiply_fun=true;
+      loadandmultiply_a_b=false;
+      loadandmultiply_phase_amp=false;
+        //[/UserButtonCode_funbutton]
+    }
+    else if (buttonThatWasClicked == abbutton)
+    {
+        //[UserButtonCode_abbutton] -- add your button handler code here..
+      loadandmultiply_convolve=false;
+      loadandmultiply_correlate=false;
+      loadandmultiply_fun=false;
+      loadandmultiply_a_b=true;
+      loadandmultiply_phase_amp=false;
+        //[/UserButtonCode_abbutton]
+    }
+    else if (buttonThatWasClicked == savebutton)
+    {
+        //[UserButtonCode_savebutton] -- add your button handler code here..
+      if(savefilename==NULL)
+	buttonClicked(saveasbutton);
+      else
+	MC_synthAndSave(savefilename);
+        //[/UserButtonCode_savebutton]
+    }
+    else if (buttonThatWasClicked == playbutton)
+    {
+        //[UserButtonCode_playbutton] -- add your button handler code here..
+      MC_play();
+        //[/UserButtonCode_playbutton]
+    }
+    else if (buttonThatWasClicked == loadbrowse)
+    {
+        //[UserButtonCode_loadbrowse] -- add your button handler code here..
+      isprocessing=true;
+      FileChooser myChooser ("Please choose file to load and analyze...",
+			     File::nonexistent,
+			     String::empty);
+
+      if (myChooser.browseForFileToOpen())
+        {
+
+	  File mooseFile (myChooser.getResult());
+
+	  filename=(char*)mooseFile.getFullPathName().toUTF8();
+
+	  printf("Filename2: %s\n",filename);
+	  loadcomboBox->setText(mooseFile.getFullPathName(),false);
+
+	  //loadcomboBox->addItem(mooseFile.getFullPathName(),loadcomboBox->getNumItems()+1);
+
+        }
+
+      isprocessing=false;
+
+        //[/UserButtonCode_loadbrowse]
+    }
+    else if (buttonThatWasClicked == loadmulbrowse)
+    {
+        //[UserButtonCode_loadmulbrowse] -- add your button handler code here..
+      if(savebutton->isEnabled()==false)
+	return;
+      isprocessing=true;
+      FileChooser myChooser ("Please choose file to load and multiply...",
+			     File::nonexistent,
+			     String::empty);
+
+      if (myChooser.browseForFileToOpen())
+        {
+	  File mooseFile (myChooser.getResult());
+	  mulfilename=(char*)mooseFile.getFullPathName().toUTF8();
+	  printf("Mul Filename: %s\n",mulfilename);
+	  loadmulcomboBox->setText(mooseFile.getFullPathName(),false);
+	  //loadcomboBox->addItem(mooseFile.getFullPathName(),loadcomboBox->getNumItems()+1);
+
+        }
+      isprocessing=false;
+        //[/UserButtonCode_loadmulbrowse]
+    }
+    else if (buttonThatWasClicked == reload)
+    {
+        //[UserButtonCode_reload] -- add your button handler code here..
+      if(filename==NULL){
+	buttonClicked(loadbrowse);
+      }else{
+	savefilename=NULL;
+	loadFile((char*)loadcomboBox->getText().toUTF8());
+      }
+        //[/UserButtonCode_reload]
+    }
+    else if (buttonThatWasClicked == convolvebutton)
+    {
+        //[UserButtonCode_convolvebutton] -- add your button handler code here..
+      loadandmultiply_convolve=true;
+      loadandmultiply_correlate=false;
+      loadandmultiply_fun=false;
+      loadandmultiply_a_b=false;
+      loadandmultiply_phase_amp=false;
+        //[/UserButtonCode_convolvebutton]
+    }
+    else if (buttonThatWasClicked == reloadmul)
+    {
+        //[UserButtonCode_reloadmul] -- add your button handler code here..
+      if(savebutton->isEnabled()==true)
+	loadFileMul((char*)loadmulcomboBox->getText().toUTF8());
+        //[/UserButtonCode_reloadmul]
+    }
+    else if (buttonThatWasClicked == phaseampbutton)
+    {
+        //[UserButtonCode_phaseampbutton] -- add your button handler code here..
+      loadandmultiply_convolve=false;
+      loadandmultiply_correlate=false;
+      loadandmultiply_fun=true;
+      loadandmultiply_a_b=false;
+      loadandmultiply_phase_amp=true;
+        //[/UserButtonCode_phaseampbutton]
+    }
+    else if (buttonThatWasClicked == normalizebutton)
+    {
+        //[UserButtonCode_normalizebutton] -- add your button handler code here..
+      synthandsave_normalize_gain=normalizebutton->getToggleState();
+        //[/UserButtonCode_normalizebutton]
+    }
+    else if (buttonThatWasClicked == saveasbutton)
+    {
+        //[UserButtonCode_saveasbutton] -- add your button handler code here..
+      isprocessing=true;
+      FileChooser myChooser ("Please choose file to save...",
+			     File::nonexistent,
+			     String::empty);
+
+      if (myChooser.browseForFileToSave(true))
+        {
+	  File mooseFile (myChooser.getResult());
+	  savefilename=(char*)mooseFile.getFullPathName().toUTF8();
+	  printf("Filename: %s\n",savefilename);
+	  char *error=MC_synthAndSave(savefilename);
+	  if(error!=NULL){
+	    AlertWindow::showMessageBox (AlertWindow::WarningIcon,
+					 T("Mammut"),
+					 String(error) + T(" (") + String((const char*)savefilename) + T(")"));
+	  }else{
+	    filewasjustsaved=true;
+	    mainwindow->setName(mooseFile.getFullPathName());
+	    //loadcomboBox->setText(mooseFile.getFullPathName(),false);
+	  }
+        }
+      isprocessing=false;
+        //[/UserButtonCode_saveasbutton]
+    }
+    else if (buttonThatWasClicked == aboutbutton)
+    {
+        //[UserButtonCode_aboutbutton] -- add your button handler code here..
+      AlertWindow::showMessageBox(AlertWindow::InfoIcon,T("Mammut"),
+				  T("V" VERSION ", Notam 1995-2007.\n"
+				    "\n"
+				    "Mammut is a program for experimental\n"
+				    "audio processing, using mammut FFT.\n"
+				    "\n"
+				    "Signal processing programming by Oyvind Hammer.\n"
+				    "User interface programming by Kjetil Matheussen.\n"
+				    "\n"
+				    "Background picture painted by Zdenek Burian.\n"
+				    "Animation by Kjetil Matheussen.\n"
+				    "\n"
+				    "Mammut uses these libraries: libjack, libjuce, libsamplerate,\n"
+				    "libsndfile and libvorbisfile.\n"
+				    "\n"
+				    "Send your comments to k.s.matheussen@notam02.no.\n"));
+        //[/UserButtonCode_aboutbutton]
+    }
+    else if (buttonThatWasClicked == prefsbutton)
+    {
+        //[UserButtonCode_prefsbutton] -- add your button handler code here..
+      DialogWindow::showModalDialog("Preferences",prefscomponent,this,Colour((uint8)0,(uint8)0,(uint8)0,(uint8)0x00),true);
+        //[/UserButtonCode_prefsbutton]
+    }
+}
+
+void Interface::sliderValueChanged (Slider* sliderThatWasMoved)
+{
+    if (sliderThatWasMoved == undoredoinc)
+    {
+        //[UserSliderCode_undoredoinc] -- add your slider handling code here..
+      printf("Hepp, %d\n",(int)undoredoinc->getValue());
+      MC_stop();
+      while(undoredoinc->getValue()>undocurrent){
+	MC_redo();
+	undocurrent++;
+      }
+      while(undoredoinc->getValue()<undocurrent){
+	MC_undo();
+	undocurrent--;
+      }
+
+      undoredoslider->setValue(undocurrent);
+        //[/UserSliderCode_undoredoinc]
+    }
+    else if (sliderThatWasMoved == undoredoslider)
+    {
+        //[UserSliderCode_undoredoslider] -- add your slider handling code here..
+      MC_stop();
+      while(undoredoslider->getValue()>undocurrent){
+	MC_redo();
+	undocurrent++;
+      }
+      while(undoredoslider->getValue()<undocurrent){
+	MC_undo();
+	undocurrent--;
+      }
+
+      undoredoinc->setValue(undocurrent);
+
+        //[/UserSliderCode_undoredoslider]
+    }
+    else if (sliderThatWasMoved == durationdoublingslider)
+    {
+        //[UserSliderCode_durationdoublingslider] -- add your slider handling code here..
+      analysis_duration_doubling=(int)durationdoublingslider->getValue();
+      analysis_ok();
+        //[/UserSliderCode_durationdoublingslider]
+    }
+    else if (sliderThatWasMoved == playposslider)
+    {
+        //[UserSliderCode_playposslider] -- add your slider handling code here..
+      jp_playpos=(int)((playposslider->getValue()/256.0f)*N);
+        //[/UserSliderCode_playposslider]
+    }
+}
+
+void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
+{
+    if (comboBoxThatHasChanged == loadcomboBox)
+    {
+        //[UserComboBoxCode_loadcomboBox] -- add your combo box handling code here..
+      static char *lastvalid=NULL;
+
+      fprintf(stderr,"Agakk gakk0!\n");
+
+      if(lastvalid==NULL){
+	lastvalid=(char*)calloc(1,1024);
+	sprintf(lastvalid,"");
+      }
+
+      //printf("Gakk! %s %d\n",loadcomboBox->getText().toUTF8(),loadcomboBox->getSelectedId());
+      fprintf(stderr,"gakk gakk1!\n");
+      if(filewasjustsaved==false && loadFile((char*)loadcomboBox->getText().toUTF8())==false){
+	savefilename=NULL;
+	fprintf(stderr,"gakk gakk2!\n");
+	if(strcmp("",lastvalid))
+	  loadcomboBox->setText(lastvalid,true);
+	return;
+      }
+      fprintf(stderr,"gakk gakk3!\n");
+      filewasjustsaved=false;
+
+      if(loadcomboBox->getSelectedId()==0)
+	loadcomboBox->addItem(loadcomboBox->getText(),loadcomboBox->getNumItems()+1);
+
+      sprintf(lastvalid,loadcomboBox->getText().toUTF8());
+
+        //[/UserComboBoxCode_loadcomboBox]
+    }
+    else if (comboBoxThatHasChanged == loadmulcomboBox)
+    {
+        //[UserComboBoxCode_loadmulcomboBox] -- add your combo box handling code here..
+      static char *lastvalid=NULL;
+
+      if(lastvalid==NULL){
+	lastvalid=(char*)calloc(1,1024);
+	sprintf(lastvalid,"");
+      }
+
+      //printf("Gakk! %s %d\n",loadmulcomboBox->getText().toUTF8(),loadmulcomboBox->getSelectedId());
+
+      if(savebutton->isEnabled()==true){
+	char *error=loadFileMul((char*)loadmulcomboBox->getText().toUTF8());
+	if(error!=NULL){
+	  if(strcmp("",lastvalid))
+	    loadmulcomboBox->setText(lastvalid,true);
+	  return;
+	}
+      }else{
+	loadmulcomboBox->setText(String::empty);
+	return;
+      }
+
+      if(loadmulcomboBox->getSelectedId()==0)
+	loadmulcomboBox->addItem(loadmulcomboBox->getText(),loadmulcomboBox->getNumItems()+1);
+
+      sprintf(lastvalid,loadmulcomboBox->getText().toUTF8());
+
+        //[/UserComboBoxCode_loadmulcomboBox]
+    }
+}
+
+void Interface::keyPressed (const KeyPress& key)
+{
+    //[UserCode_keyPressed] -- Add your code here...
+#if 0
+  if key.string=="<": mammutc.MC_left();
+  if key.string==">": mammutc.MC_right();
+  if key.string=="+": mammutc.MC_zoom();
+  if key.string=="-": mammutc.MC_zoom();
+#endif
+  //printf("%d\n",key.getKeyCode());
+  if(key.isKeyCode(60)) MC_left();
+  if(key.isKeyCode(62)) MC_right();
+  if(key.isKeyCode('+')) MC_zoom();
+  if(key.isKeyCode('-')) MC_zoom();
+  if(key.isKeyCode(KeyPress::spaceKey)){
+    if(jp_isplaying)
+      stopbutton->triggerClick();
+    //      MC_stop();
+    else
+      playbutton->triggerClick();
+    //MC_play();
+  }
+    //[/UserCode_keyPressed]
+}
+
+
+
+//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+void Interface::addUndo(void){
+  undocurrent++;
+  undolevel=undocurrent;
+  undoredoinc->setRange(0,undolevel,1);
+  undoredoinc->setValue(undolevel);
+  undoredoslider->setRange(0,undolevel,1);
+  undoredoslider->setValue(undolevel);
+  printf("ai? %d %d %d\n",undolevel,(int)undoredoinc->getMaxValue(),(int)undoredoslider->getMaxValue());
+}
+
+char *Interface::loadFileMul(char *das_filename){
+  MC_stop();
+  char *error=MC_addUndo();
+  if(error!=NULL){
+    AlertWindow::showMessageBox (AlertWindow::WarningIcon,
+				 T("Mammut"),
+				 String((const char*)error) + T(" (") + loadmulcomboBox->getText() + T(")."));
+    return error;
+  }
+
+  error=load_and_multiply_ok(das_filename);
+  if(error==NULL){
+    graphcomponent->repaint();
+    GUI_addUndo();
+  }else{
+    AlertWindow::showMessageBox (AlertWindow::WarningIcon,
+				 T("Mammut"),
+				 String((const char*)error) + T(" (") + loadmulcomboBox->getText() + T(")."));
+    MC_undo();
+  }
+  return error;
+}
+
+bool Interface::loadFile(char *das_filename){
+  MC_stop();
+#if 0
+  filename="/hom/kjetism/uio/t.wav";
+  filename="/hom/kjetism/2_channel_short.wav";
+  filename="/hom/kjetism/temp/mus2860/loop4.wav";
+  filename="/hom/kjetism/ccrma_summer_concert/concert7.wav";
+  filename="/home/kjetil/prosjekt/capture/TO/jack_capture_3.wav";
+  filename="/home/kjetil/2_channel_short.wav";
+  filename="/hom/kjetism/2_channel_short.wav";
+  //      filename="/home/kjetil/Blub_mono.wav";
+#else
+  filename=strdup(das_filename);
+#endif
+  char *error=MC_loadAndAnalyze(filename);
+
+  if(error!=NULL){
+    AlertWindow::showMessageBox (AlertWindow::WarningIcon,
+				 T("Mammut"),
+				 String((const char*)error) + T(" (") + filename + T(")"));
+    return false;
+  }
+
+  mainwindow->setName(T("Mammut"));
+
+  MC_resetUndo();
+  tabbedComponent->getTabContentComponent(tabbedComponent->getNumTabs()-2)->setEnabled(samps_per_frame>=2?true:false);
+
+  if(samps_per_frame>0)
+    tabbedComponent->setEnabled(true);
+  graphcomponent->repaint();
+
+  savebutton->setEnabled(true);
+  saveasbutton->setEnabled(true);
+
+  infotext->setVisible(false);
+
+  return true;
+}
+
+#if 0
+void Interface::run(){
+  Graphics g(*tempimage);
+
+  setPriority(0);
+  setCurrentThreadPriority(10);
+
+  for(;;){
+      sleep(50);
+    for(int x=0;x<870;x+=10){
+
+      int dasx=pic_x+x*(pic_x2-pic_x)/87;
+      int dasx2=dasx+(pic_x2-pic_x)/87;
+
+      g.drawImage(internalCachedImage3,
+		  x, 0, x+10, 738,
+		  dasx,pic_y,dasx2,pic_y2-pic_y,
+		  false);
+    }
+
+    //printf("RUN is called!\n");
+  }
+}
+#endif
+
+void Interface::timerCallback(){
+  static bool wasplaying=false;
+  static Image *ims[3]={
+    PictureHolder::getImage(0),
+    PictureHolder::getImage(1),
+    PictureHolder::getImage(2)
+  };
+  static Random *random=new Random(Time::currentTimeMillis());
+
+#if 1
+  static bool havedoneinit=false;
+  if(havedoneinit==false && commandLine->length()>1){
+    havedoneinit=true;
+	if(commandLine->startsWithChar('-')==false){
+		loadcomboBox->setText(*commandLine,true);
+		loadFile((char*)commandLine->toUTF8());
+	}
+    printf("Im here\n");
+  }
+#endif
+
+  int time=Time::getMillisecondCounter();
+
+  // Don't want the animation-stuff to stall the computer.
+  if(time-lastrepaint<120){
+    return;
+  }
+
+  if(jp_isplaying){
+    double playpos=256.0;
+    playpos*=jp_playpos;
+    playpos/=N;
+    playposslider->setValue(playpos,false);
+    wasplaying=true;
+  }else if(wasplaying){
+    playposslider->setValue(0.0);
+    wasplaying=false;
+  }
+
+  bool mustpaint=false;
+
+
+  { // Make sure picture dissappears if clicking prefs/picture
+    static bool waspicture=false;
+    if(prefs_picture){
+      waspicture=true;
+    }else if(waspicture){
+      mustpaint=true;
+      waspicture=false;
+    }
+  }
+
+  {  // Make sure picture appears if clicking prefs/picture
+    static bool wasnotpicture=false;
+    if(!prefs_picture){
+      wasnotpicture=true;
+    }else if(wasnotpicture){
+      mustpaint=true;
+      wasnotpicture=false;
+    }
+  }
+
+  if(isprocessing==false && prefs_picture==true && prefs_movingcamera==true){
+    static int nexttime2=0;
+    if(time>=nexttime2){
+      static int addval_x=0;
+      addval_x+=random->nextInt(3)-1;
+      static int addval_y=0;
+      addval_y+=random->nextInt(3)-1;
+      static int addval_size=0;
+      addval_size+=random->nextInt(3)-1;
+
+#define MAXADDVAL 4
+#define CORVAL 2
+      if(addval_x>=MAXADDVAL)
+	addval_x=MAXADDVAL;
+      if(addval_x<=-MAXADDVAL)
+	addval_x=-MAXADDVAL;
+      if(addval_y>=MAXADDVAL)
+	addval_y=MAXADDVAL;
+      if(addval_y<=-MAXADDVAL)
+	addval_y=-MAXADDVAL;
+      if(addval_size>=MAXADDVAL)
+	addval_size=MAXADDVAL;
+      if(addval_size<=-MAXADDVAL)
+	addval_size=-MAXADDVAL;
+
+      //const int addval=random->nextInt(3)-1;
+      int newpic_x=pic_x+addval_x;
+      if(newpic_x<0){addval_size+=CORVAL;newpic_x=0;addval_x+=CORVAL;}
+      if(newpic_x>350){addval_size-=CORVAL;newpic_x=350;addval_x-=CORVAL;}
+      int newpic_y=pic_y+addval_y;
+      if(newpic_y<0){newpic_y=0;addval_y+=CORVAL;}
+      if(newpic_y>350){newpic_y=350;addval_y-=CORVAL;}
+      //int sizeadd=random->nextInt(2*addval+1)-addval;
+      int newpic_x2=pic_x+addval_size;
+      int newpic_y2=pic_y+addval_size;
+      if(newpic_x2>=872){newpic_x2-=addval_size;newpic_y2-=addval_size;}
+      if(newpic_y2>=738){newpic_x2-=addval_size;newpic_y2-=addval_size;}
+      if(newpic_x2<=400){newpic_x2+=addval_size;newpic_y2+=addval_size;}
+      if(newpic_y2<=400){newpic_x2+=addval_size;newpic_y2+=addval_size;}
+      if(newpic_x2<872
+	 && newpic_x2>400
+	 && newpic_y2<738
+	 && newpic_y2>400){
+	pic_x2=newpic_x2;
+	pic_y2=newpic_y2;
+      }else{
+	addval_size=0;
+      }
+      pic_x=newpic_x;
+      pic_y=newpic_y;
+
+      mustpaint=true;
+      nexttime2=time+50;
+    }
+  }
+
+
+  if(isprocessing==false && prefs_picture==true && prefs_animation==true){
+    static int nexttime=0;
+    if(time>=nexttime){
+      for(int i=0;i<1000;i++){
+	Image *newim=ims[random->nextInt(3)];
+	if(newim!=internalCachedImage3){
+	  internalCachedImage3=newim;
+	  mustpaint=true;
+	  break;
+	}
+      }
+      nexttime=time+300+random->nextInt(300);
+    }
+  }
+
+  if(mustpaint==true){
+      repaint();
+  }
+}
+
+
+
+
+//[/MiscUserCode]
+
+
+//==============================================================================
+#if 0
+/*  -- Jucer information section --
+
+    This is where the Jucer puts all of its metadata, so don't change anything in here!
+
+BEGIN_JUCER_METADATA
+
+<JUCER_COMPONENT documentType="Component" className="Interface" componentName="Interface"
+                 parentClasses="public Component, public Timer" constructorParams="DocumentWindow *mainwindow, const String&amp; commandLine"
+                 variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
+                 overlayOpacity="0.329999983" fixedSize="1" initialWidth="900"
+                 initialHeight="800">
+  <METHODS>
+    <METHOD name="keyPressed (const KeyPress&amp; key)"/>
+  </METHODS>
+  <BACKGROUND backgroundColour="ffddf1ee">
+    <TEXT pos="408 312 200 30" fill="solid: ff000000" hasStroke="0" text=""
+          fontname="Default font" fontsize="15" bold="0" italic="0" justification="36"/>
+    <ROUNDRECT pos="0 448 960 384" cornerSize="21.5" fill="linear: 50 50, 744 576, 0=ffff0000, 1=ff008000"
+               hasStroke="0"/>
+    <RECT pos="-8 -24 976 864" fill="linear: 664 40, 720 560, 0=7bf98f33, 1=d78c8c8c"
+          hasStroke="0"/>
+    <ROUNDRECT pos="0 584 960 304" cornerSize="21.5" fill=" radial: 16 736, 696 752, 0=219d2323, 1=5f0f1615"
+               hasStroke="0"/>
+  </BACKGROUND>
+  <GROUPCOMPONENT name="new group" memberName="groupComponent5" pos="649 587 200 64"
+                  outlinecol="b0000000" title="Misc"/>
+  <GROUPCOMPONENT name="new group" memberName="groupComponent4" pos="745 651 104 80"
+                  outlinecol="b0000000" title="Save"/>
+  <GROUPCOMPONENT name="new group" memberName="groupComponent3" pos="9 587 424 64"
+                  outlinecol="b2000000" textcol="ff000000" title="Play"/>
+  <GROUPCOMPONENT name="new group" memberName="groupComponent1" pos="9 651 368 80"
+                  outlinecol="b2000000" textcol="ff000000" title="Load &amp; Analyze"/>
+  <GROUPCOMPONENT name="new group" memberName="groupComponent" pos="433 587 216 64"
+                  outlinecol="b2000000" title="Undo/Redo"/>
+  <TEXTBUTTON name="Play" memberName="stopbutton" pos="87 604 71 40" bgColOff="5cabba2a"
+              bgColOn="ff4444ff" textCol="ff000000" buttonText="Stop" connectedEdges="0"
+              needsCallback="1"/>
+  <TABBEDCOMPONENT name="new tabbed component" memberName="tabbedComponent" pos="7 450 848 136"
+                   orientation="top" tabBarDepth="20" initialTab="0">
+    <TAB name="Stretch" colour="3bf8f4c6" useJucerComp="1" contentClassName="Tabtest"
+         constructorParams="" jucerComponentFile="Stretch.cpp"/>
+    <TAB name="Wobble" colour="95e0cce6" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="Wobble.cpp"/>
+    <TAB name="Multiply Phase" colour="6aa9e2d8" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="MultiplyPhase.cpp"/>
+    <TAB name="Derivate Amp" colour="65fb95ca" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="DerivativeAmp.cpp"/>
+    <TAB name="Filter" colour="b2e6c3c3" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="Filter.cpp"/>
+    <TAB name="Invert" colour="617ae7e4" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="Invert.cpp"/>
+    <TAB name="Threshold" colour="70f7f1f7" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="Threshold.cpp"/>
+    <TAB name="Spectrum Shift" colour="7dc5e3f9" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="SpectrumShift.cpp"/>
+    <TAB name="Block Swap" colour="499affee" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="BlockSwap.cpp"/>
+    <TAB name="Mirror" colour="91d9daff" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="Mirror.cpp"/>
+    <TAB name="Keep Peaks" colour="84f7e1e1" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="KeepPeaks.cpp"/>
+    <TAB name="Amplitude-&gt;Phase" colour="82e5f8e3" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="AmplitudeToPhase.cpp"/>
+    <TAB name="Gain" colour="6ef1f2d1" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="Gain.cpp"/>
+    <TAB name="CombSplit" colour="7bc4ffef" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="CombSplit.cpp"/>
+    <TAB name="Split Real/Imag" colour="98d6d5ea" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="SplitRealImag.cpp"/>
+    <TAB name="Stereo" colour="a3d3d3d3" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="Stereo.cpp"/>
+    <TAB name="Zoom" colour="b0f5f5dc" useJucerComp="1" contentClassName=""
+         constructorParams="" jucerComponentFile="Zoom.cpp"/>
+  </TABBEDCOMPONENT>
+  <SLIDER name="new slider" memberName="undoredoinc" pos="449 611 56 24"
+          bkgcol="0" thumbcol="ff000000" trackcol="79000000" textboxtext="ff000000"
+          textboxbkgd="ffffffff" textboxhighlight="401a1aa8" min="0" max="0"
+          int="1" style="IncDecButtons" textBoxPos="NoTextBox" textBoxEditable="0"
+          textBoxWidth="80" textBoxHeight="20"/>
+  <SLIDER name="new slider" memberName="undoredoslider" pos="513 611 120 24"
+          bkgcol="5ce5f4f5" thumbcol="5c8d8f92" textboxbkgd="ffffffff"
+          min="0" max="0" int="1" style="LinearBar" textBoxPos="TextBoxAbove"
+          textBoxEditable="0" textBoxWidth="80" textBoxHeight="20"/>
+  <LABEL name="new label" memberName="label" pos="17 667 160 24" bkgCol="0"
+         textCol="ff000000" outlineCol="0" edTextCol="ff000000" edBkgCol="0"
+         labelText="Duration Doubling" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <GROUPCOMPONENT name="new group" memberName="groupComponent2" pos="377 651 368 80"
+                  outlinecol="b4000000" title="Load &amp; Multiply"/>
+  <TEXTBUTTON name="new button" memberName="correlatebutton" pos="441 667 56 24"
+              tooltip="Correlate. Will simply complex-multiply two spectra, giving the correlation."
+              bgColOff="88b26134" bgColOn="371ed220" buttonText="Correlate"
+              connectedEdges="3" needsCallback="1"/>
+  <TEXTBUTTON name="new button" memberName="funbutton" pos="497 667 48 24"
+              tooltip="Fun. Simple complex multiplication, with intended programming &quot;errors&quot; (sign reversals and coefficient swaps)."
+              bgColOff="8ab26134" bgColOn="3b6eff44" buttonText="Fun" connectedEdges="3"
+              needsCallback="1"/>
+  <TEXTBUTTON name="new button" memberName="abbutton" pos="545 667 48 24" tooltip="A&#94;B. Raise spectrum A to the power of spectrum B. Useless (?)"
+              bgColOff="8ab26135" bgColOn="3944ff64" buttonText="A&#94;B" connectedEdges="3"
+              needsCallback="1"/>
+  <HYPERLINKBUTTON name="new hyperlink" memberName="hyperlinkButton" pos="656 624 184 22"
+                   tooltip="http://www.notam02.no/notam02/prod-prg-mammuthelp.html"
+                   textCol="930004ff" buttonText="http://www.notam02.no" connectedEdges="0"
+                   needsCallback="0" url="http://www.notam02.no/notam02/prod-prg-mammuthelp.html"/>
+  <TEXTBUTTON name="new button" memberName="savebutton" pos="761 667 72 20"
+              bgColOff="6ed58d00" buttonText="Save" connectedEdges="0" needsCallback="1"/>
+  <TEXTBUTTON name="Play" memberName="playbutton" pos="17 603 71 40" bgColOff="7da9a335"
+              textCol="ff000000" buttonText="Start" connectedEdges="0" needsCallback="1"/>
+  <TEXTBUTTON name="new button" memberName="loadbrowse" pos="305 699 64 24"
+              bgColOff="469bd243" buttonText="browse" connectedEdges="0" needsCallback="1"/>
+  <TEXTBUTTON name="new button" memberName="loadmulbrowse" pos="673 699 64 24"
+              bgColOff="449bd2d7" buttonText="browse" connectedEdges="0" needsCallback="1"/>
+  <COMBOBOX name="new combo box" memberName="loadcomboBox" pos="17 699 280 24"
+            editable="1" layout="33" items="" textWhenNonSelected="(choose a soundfile)"
+            textWhenNoItems="(choose a soundfile)"/>
+  <TEXTBUTTON name="new button" memberName="reload" pos="305 667 64 24" bgColOff="449bd243"
+              buttonText="reload" connectedEdges="0" needsCallback="1"/>
+  <TEXTBUTTON name="new button" memberName="convolvebutton" pos="385 667 56 24"
+              tooltip="Will complex-multiply with the spectrum of the reversed sound. Use this for standard, high-quality convolution with eg. a room response."
+              bgColOff="8aa64f15" bgColOn="3b66ff44" buttonText="Convolve"
+              connectedEdges="2" needsCallback="1"/>
+  <TEXTBUTTON name="new button" memberName="reloadmul" pos="673 667 64 24"
+              bgColOff="449bd2d7" buttonText="reload" connectedEdges="0" needsCallback="1"/>
+  <COMBOBOX name="new combo box" memberName="loadmulcomboBox" pos="385 699 280 24"
+            editable="1" layout="33" items="" textWhenNonSelected="(choose a soundfile)"
+            textWhenNoItems="(choose a soundfile)"/>
+  <TEXTBUTTON name="new button" memberName="phaseampbutton" pos="593 667 72 24"
+              bgColOff="4bd8530a" bgColOn="4284ff44" buttonText="Phase/Amp"
+              connectedEdges="1" needsCallback="1"/>
+  <SLIDER name="new slider" memberName="durationdoublingslider" pos="153 667 144 24"
+          bkgcol="0" thumbcol="ffffffff" textboxbkgd="37ffffff" textboxhighlight="40421bdc"
+          min="0" max="4" int="1" style="IncDecButtons" textBoxPos="TextBoxLeft"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20"/>
+  <LABEL name="infotext" memberName="infotext" pos="32 216 800 64" bkgCol="0"
+         textCol="72000000" outlineCol="0" edTextCol="ff000000" edBkgCol="0"
+         labelText="Start by loading and analyzing a soundfile" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="55.9" bold="0" italic="0" justification="33"/>
+  <SLIDER name="playprogress" memberName="playposslider" pos="168 612 256 24"
+          bkgcol="ffffff" thumbcol="23ebed9d" trackcol="58000000" textboxbkgd="14ffffff"
+          min="0" max="256" int="1" style="LinearBar" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20"/>
+  <TOGGLEBUTTON name="new toggle button" memberName="normalizebutton" pos="760 704 72 24"
+                tooltip="Also works when playing" buttonText="normalize" connectedEdges="0"
+                needsCallback="1" state="0"/>
+  <TEXTBUTTON name="new button" memberName="saveasbutton" pos="761 687 71 21"
+              bgColOff="6ac18400" buttonText="Save As" connectedEdges="0" needsCallback="1"/>
+  <TEXTBUTTON name="aboutbutton" memberName="aboutbutton" pos="664 604 80 22"
+              bgColOff="1fbbbbff" bgColOn="86a15f5f" textCol="c4000000" buttonText="About"
+              connectedEdges="0" needsCallback="1"/>
+  <TEXTBUTTON name="prefsbutton" memberName="prefsbutton" pos="752 604 80 22"
+              bgColOff="1fbbbbff" bgColOn="86a15f5f" textCol="c4000000" buttonText="Prefs"
+              connectedEdges="0" needsCallback="1"/>
+</JUCER_COMPONENT>
+
+END_JUCER_METADATA
+*/
+#endif

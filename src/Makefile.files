@@ -1,0 +1,162 @@
+
+T=transform/
+
+
+
+
+OBJS=globals.o load.o fft.o t_stretch.o t_wobble.o t_sshift.o t_phadd.o t_pderiv.o t_filter.o t_invert.o t_threshold.o t_peaks.o t_blockmov.o analysett.o t_gain.o t_combsplit.o save.o t_reimsplit.o t_mirror.o t_ampphas.o phaseswap.o crossover.o loadmult.o tempfile.o undo.o ApplicationStartup.o MainAppWindow.o Interface.o gui.o c_interface.o Stretch.o Wobble.o MultiplyPhase.o DerivativeAmp.o Filter.o Invert.o Threshold.o SpectrumShift.o AmplitudeToPhase.o Gain.o CombSplit.o SplitRealImag.o KeepPeaks.o BlockSwap.o Mirror.o Stereo.o juceplay.o Progressbar.o jackplay.o PictureHolder.o Zoom.o oggsoundholder.o Prefs.o error.o
+
+
+# C++
+
+gui.o: gui.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) gui.cpp
+
+ApplicationStartup.o: ApplicationStartup.cpp MainHeader.h GraphComponent.h $(ALLDEP) Interface.h
+	$(CPP) -c $(CPPFLAGS) ApplicationStartup.cpp
+
+MainAppWindow.o: MainAppWindow.cpp MainAppWindow.h MainHeader.h  GraphComponent.h $(ALLDEP) Interface.h
+	$(CPP) -c $(CPPFLAGS) MainAppWindow.cpp
+
+Interface.o: Interface.cpp $(ALLDEP) GraphComponent.h PictureHolder.h Prefs.h Stretch.h Interface.h
+	$(CPP) -c $(CPPFLAGS) Interface.cpp
+PictureHolder.o: PictureHolder.cpp $(ALLDEP) PictureHolder.h
+	$(CPP) -c $(CPPFLAGS) PictureHolder.cpp
+
+
+Stretch.o: Stretch.cpp $(ALLDEP) transformheader.h  Stretch.h
+	$(CPP) -c $(CPPFLAGS) Stretch.cpp
+Wobble.o: Wobble.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Wobble.cpp
+MultiplyPhase.o: MultiplyPhase.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) MultiplyPhase.cpp
+DerivativeAmp.o: DerivativeAmp.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) DerivativeAmp.cpp
+Filter.o: Filter.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Filter.cpp
+Invert.o: Invert.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Invert.cpp
+Threshold.o: Threshold.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Threshold.cpp
+SpectrumShift.o: SpectrumShift.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) SpectrumShift.cpp
+AmplitudeToPhase.o: AmplitudeToPhase.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) AmplitudeToPhase.cpp
+Gain.o: Gain.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Gain.cpp
+CombSplit.o: CombSplit.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) CombSplit.cpp
+SplitRealImag.o: SplitRealImag.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) SplitRealImag.cpp
+KeepPeaks.o: KeepPeaks.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) KeepPeaks.cpp
+BlockSwap.o: BlockSwap.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) BlockSwap.cpp
+Mirror.o: Mirror.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Mirror.cpp
+Stereo.o: Stereo.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Stereo.cpp
+jueceplay.o: jueceplay.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) jueceplay.cpp
+tempfile.o: tempfile.cpp $(ALLDEP) tempfile.h
+	$(CPP) -c $(CPPFLAGS) tempfile.cpp
+Progressbar.o: Progressbar.cpp $(ALLDEP) undo.h
+	$(CPP) -c $(CPPFLAGS) Progressbar.cpp
+Zoom.o: Zoom.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Zoom.cpp
+oggsoundholder.o: oggsoundholder.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) oggsoundholder.cpp
+Prefs.o: Prefs.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Prefs.cpp
+error.o: error.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) error.cpp
+
+
+
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+
+
+
+
+
+# C
+c_interface.o: c_interface.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) c_interface.c
+globals.o: globals.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) globals.c
+load.o: load.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) load.c
+fft.o: fft.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) fft.c
+t_stretch.o: $(T)t_stretch.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_stretch.c
+t_wobble.o: $(T)t_wobble.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_wobble.c
+t_sshift.o: $(T)t_sshift.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_sshift.c
+t_phadd.o: $(T)t_phadd.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_phadd.c
+t_pderiv.o: $(T)t_pderiv.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_pderiv.c
+t_filter.o: $(T)t_filter.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_filter.c
+t_invert.o: $(T)t_invert.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_invert.c
+t_threshold.o: $(T)t_threshold.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_threshold.c
+t_peaks.o: $(T)t_peaks.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_peaks.c
+t_blockmov.o: $(T)t_blockmov.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_blockmov.c
+analysett.o: analysett.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) analysett.c
+t_gain.o: $(T)t_gain.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_gain.c
+t_combsplit.o: $(T)t_combsplit.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_combsplit.c
+save.o: save.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) save.c
+t_reimsplit.o: $(T)t_reimsplit.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_reimsplit.c
+t_mirror.o:$(T)t_mirror.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_mirror.c
+t_ampphas.o: $(T)t_ampphas.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_ampphas.c
+phaseswap.o: phaseswap.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) phaseswap.c
+crossover.o: crossover.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) crossover.c
+loadmult.o: loadmult.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) loadmult.c
+
+undo.o: undo.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) undo.c
+
+jackplay.o: jackplay.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) jackplay.c
+
+#.o: .c $(ALLDEP)
+#	$(CC) -c $(CFLAGS) .c
+#.o: .c $(ALLDEP)
+#	$(CC) -c $(CFLAGS) .c
+#.o: .c $(ALLDEP)
+#	$(CC) -c $(CFLAGS) .c
+
+

@@ -1,0 +1,348 @@
+# Makefile for Mammut
+#
+
+
+
+#----------------USER SETTINGS-----------------------------
+
+# No trailing slash!
+#INSTALLPATH=/usr/local
+INSTALLPATH=/hom/kjetism/site
+#INSTALLPATH=/user/k/kjetil/site
+#INSTALLPATH=/tmp
+
+
+
+# Where to put temporary files. (No appending slash!)
+# (Variable only used on linux)
+TEMPDIR=/tmp
+
+
+# Where juce is.
+JUCE=/hom/kjetism/juce
+#JUCE=/home/kjetil/juce
+
+
+
+
+#----------------END USER SETTINGS---------------------------
+
+
+
+
+
+
+
+############# Developer settings. #######################
+
+
+###########################################################
+# Note, the default values should work for most systems as
+# long as the necesarry libraries and python are installed.
+# Hopefully, you should only have to change any of the
+# values if you know very well what you are doing.
+###########################################################
+
+
+
+# 1.
+#--------------------
+# GCC must either point to gcc or any other gcc compatible
+# compiler. (Not icc.)
+# If compiling with gcc for an athlon based cpu, you should
+# add "-march=athlon" for a small performance boost.
+
+GCC=gcc -Wall
+CPP=g++ -Wall
+
+#GCC=gcc -Wall -march=athlon
+
+
+
+
+
+# 2.
+#--------------------
+# CC must either point to $(GCC) or icc (The intel c compiler).
+# Icc must be at least V6.0. (Note, icc seems to perform better
+# than gcc, even for athlon based computers)
+
+CC=$(GCC)
+
+#CC=icc
+
+
+
+
+
+# 4.
+#--------------------
+#TEMPDIR=/lyd/local/tmp
+
+
+
+
+
+# 5.
+#--------------------
+#ADDITIONALCFLAGS will be added to the CFLAGS line.
+#ADDITIONALLDFLAGS will be added to the LDFLAGS line.
+
+ADDITIONALCFLAGS= -O3 -I/site/include -I/usr/local/include -DHAVE_JACK
+ADDITIONALLDFLAGS=-L/site/lib -L/usr/local/include -lsndfile -lm -lpthread -ldl -L. -ljack -lsamplerate
+# -L$(SOUNDLIBNAME)
+
+
+
+
+
+# 6.
+#--------------------
+# If you don't want to use the standard python in your system,
+# or python is not in the path, change PYTHONEXE. For example,
+# if you use a RedHat distribution where the necesarry python
+# v1.5 is placed in /usr/bin, and you have python v2.2
+# installed in /usr/local/bin/, set PYTHONEXE to
+# "/usr/local/bin/python2.2".
+
+PYTHONEXE=/usr/bin/env python
+#PYTHONEXE=/site/bin/python2.2
+#PYTHONEXE=/usr/local/bin/python2.2
+
+
+
+
+######### Should not be necesarry to edit below here. ########
+
+
+
+SHAREPATH=$(INSTALLPATH)/share/mammut
+
+
+T=transform/
+
+CFLAGS= -DTEMPDIR=\"$(TEMPDIR)\"  $(ADDITIONALCFLAGS) $(USEJACK) 
+
+LDFLAGS= $(ADDITIONALLDFLAGS)
+
+CPPFLAGS := -MD -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -I "/usr/include" -I$(JUCE)  -DTEMPDIR=\"$(TEMPDIR)\" $(CFLAGS)
+CFLAGS	 += $(CPPFLAGS) -g -D_DEBUG -ggdb
+CXXFLAGS := $(CFLAGS)
+LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L "/usr/X11R6/lib/" -L "../../../bin" -lfreetype -lpthread -lX11 -lGL -lGLU -lXinerama -lasound -ljuce
+#_debug
+
+
+OBJS=globals.o load.o fft.o t_stretch.o t_wobble.o t_sshift.o t_phadd.o t_pderiv.o t_filter.o t_invert.o t_threshold.o t_peaks.o t_blockmov.o analysett.o t_gain.o t_combsplit.o save.o t_reimsplit.o t_mirror.o t_ampphas.o phaseswap.o crossover.o loadmult.o tempfile.o undo.o ApplicationStartup.o MainAppWindow.o Interface.o gui.o c_interface.o Stretch.o Wobble.o MultiplyPhase.o DerivativeAmp.o Filter.o Invert.o Threshold.o SpectrumShift.o AmplitudeToPhase.o Gain.o CombSplit.o SplitRealImag.o KeepPeaks.o BlockSwap.o Mirror.o Stereo.o juceplay.o Progressbar.o jackplay.o PictureHolder.o Zoom.o soundholder.o
+
+#interface_wrap.o interface.o  gui.o
+
+ALLDEP=
+
+ALL=mammut
+
+all: $(ALL) 
+	@echo
+	@echo "Compilation OK."
+
+clean:
+	rm -f *.o transform/*.o core core.* makesource.sh check
+	rm -f */*~ ../*~  ../*/*~ ../*/*.bak ../*/*.pyc *.d */*.d
+
+
+install: $(ALL)
+	mkdir -p $(SHAREPATH)
+	mkdir -p $(SHAREPATH)/etc
+	mkdir -p $(SHAREPATH)/lib
+	mkdir -p $(SHAREPATH)/bin
+	mkdir -p $(SHAREPATH)/doc
+	mkdir -p $(INSTALLPATH)/bin
+	cp ../lib/mammutcmodule.so $(SHAREPATH)/lib/
+	cp ../etc/mammut.glade $(SHAREPATH)/etc/
+	cp ../bin/mammut.py $(SHAREPATH)/bin/
+	cp ../doc/mammuthelp.html $(SHAREPATH)/doc/
+	cp ../bin/mammut $(INSTALLPATH)/bin/
+
+uninstall:
+	rm -fr $(SHAREPATH)
+	rm $(INSTALLPATH)/bin/mammut
+
+mammut: $(OBJS)
+	g++ -o mammut -I$(JUCE) -L$(JUCE)/bin $(CPPFLAGS) $(OBJS) $(LDFLAGS)
+
+#http://ccrma.stanford.edu/software/snd/sndlib/
+$(SNDLIBPATH)/sndlib.a:
+	echo "\
+	cd packages;\
+	rm -fr sndlib;\
+	tar xvzf sndlib.tar.gz;\
+	cd sndlib;\
+	./configure $(SNDLIBWITHJACK) --without-guile;\
+	make\
+	" >makesource.sh
+	sh makesource.sh
+	rm makesource.sh
+
+
+interface_wrap.o: interface_wrap.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) -w interface_wrap.c
+
+#interface_wrap.c: interface.h
+#	swig -python -module mammutc interface.h
+
+libdummy.a: Makefile gakk.o
+	cp gakk.o libdummy.a
+
+gakk.o: gakk.c
+	$(CC) gakk.c -c
+
+gakk.c: Makefile
+	echo "void gakkgakk(void){}"> gakk.c
+
+# C++
+gui.o: gui.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) gui.cpp
+
+ApplicationStartup.o: ApplicationStartup.cpp MainHeader.h GraphComponent.h $(ALLDEP) Interface.h
+	$(CPP) -c $(CPPFLAGS) ApplicationStartup.cpp
+
+MainAppWindow.o: MainAppWindow.cpp MainComponent.h MainAppWindow.h MainHeader.h  GraphComponent.h $(ALLDEP) Interface.h
+	$(CPP) -c $(CPPFLAGS) MainAppWindow.cpp
+
+Interface.o: Interface.cpp $(ALLDEP) GraphComponent.h PictureHolder.h
+	$(CPP) -c $(CPPFLAGS) Interface.cpp
+PictureHolder.o: PictureHolder.cpp $(ALLDEP) PictureHolder.h
+	$(CPP) -c $(CPPFLAGS) PictureHolder.cpp
+
+
+Stretch.o: Stretch.cpp $(ALLDEP) transformheader.h
+	$(CPP) -c $(CPPFLAGS) Stretch.cpp
+Wobble.o: Wobble.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Wobble.cpp
+MultiplyPhase.o: MultiplyPhase.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) MultiplyPhase.cpp
+DerivativeAmp.o: DerivativeAmp.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) DerivativeAmp.cpp
+Filter.o: Filter.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Filter.cpp
+Invert.o: Invert.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Invert.cpp
+Threshold.o: Threshold.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Threshold.cpp
+SpectrumShift.o: SpectrumShift.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) SpectrumShift.cpp
+AmplitudeToPhase.o: AmplitudeToPhase.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) AmplitudeToPhase.cpp
+Gain.o: Gain.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Gain.cpp
+CombSplit.o: CombSplit.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) CombSplit.cpp
+SplitRealImag.o: SplitRealImag.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) SplitRealImag.cpp
+KeepPeaks.o: KeepPeaks.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) KeepPeaks.cpp
+BlockSwap.o: BlockSwap.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) BlockSwap.cpp
+Mirror.o: Mirror.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Mirror.cpp
+Stereo.o: Stereo.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Stereo.cpp
+jueceplay.o: jueceplay.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) jueceplay.cpp
+tempfile.o: tempfile.cpp $(ALLDEP) tempfile.h
+	$(CPP) -c $(CPPFLAGS) tempfile.cpp
+Progressbar.o: Progressbar.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Progressbar.cpp
+Zoom.o: Zoom.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) Zoom.cpp
+
+#soundholder takes forever to compile if little memory.
+#soundholder.o: soundholder.cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) soundholder.cpp -O0
+
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+#.o: .cpp $(ALLDEP)
+#	$(CPP) -c $(CPPFLAGS) .cpp
+
+
+
+
+
+# C
+c_interface.o: c_interface.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) c_interface.c
+globals.o: globals.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) globals.c
+load.o: load.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) load.c
+fft.o: fft.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) fft.c
+t_stretch.o: $(T)t_stretch.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_stretch.c
+t_wobble.o: $(T)t_wobble.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_wobble.c
+t_sshift.o: $(T)t_sshift.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_sshift.c
+t_phadd.o: $(T)t_phadd.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_phadd.c
+t_pderiv.o: $(T)t_pderiv.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_pderiv.c
+t_filter.o: $(T)t_filter.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_filter.c
+t_invert.o: $(T)t_invert.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_invert.c
+t_threshold.o: $(T)t_threshold.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_threshold.c
+t_peaks.o: $(T)t_peaks.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_peaks.c
+t_blockmov.o: $(T)t_blockmov.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_blockmov.c
+analysett.o: analysett.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) analysett.c
+t_gain.o: $(T)t_gain.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_gain.c
+t_combsplit.o: $(T)t_combsplit.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_combsplit.c
+save.o: save.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) save.c
+t_reimsplit.o: $(T)t_reimsplit.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_reimsplit.c
+t_mirror.o:$(T)t_mirror.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_mirror.c
+t_ampphas.o: $(T)t_ampphas.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) $(T)t_ampphas.c
+phaseswap.o: phaseswap.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) phaseswap.c
+crossover.o: crossover.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) crossover.c
+loadmult.o: loadmult.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) loadmult.c
+
+undo.o: undo.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) undo.c
+
+jackplay.o: jackplay.c $(ALLDEP)
+	$(CC) -c $(CFLAGS) jackplay.c
+
+#.o: .c $(ALLDEP)
+#	$(CC) -c $(CFLAGS) .c
+#.o: .c $(ALLDEP)
+#	$(CC) -c $(CFLAGS) .c
+#.o: .c $(ALLDEP)
+#	$(CC) -c $(CFLAGS) .c
+
+

@@ -1,0 +1,10 @@
+extern LANGSPEC void UNDO_cleanup(void);
+extern LANGSPEC void UNDO_Reset(void);
+extern LANGSPEC char *UNDO_addLyd(void);
+extern LANGSPEC void UNDO_do(void);
+extern LANGSPEC void UNDO_redo(void);
+extern LANGSPEC int UNDO_getDoUndo(void);
+extern LANGSPEC void UNDO_setDoUndo(int dasdoundo);
+extern LANGSPEC bool UNDO_allowedUndo(void);
+extern LANGSPEC bool UNDO_allowedRedo(void);
+extern LANGSPEC void UNDO_do_noredraw(void);

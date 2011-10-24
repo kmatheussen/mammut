@@ -1,0 +1,8 @@
+benchmark-calc_snr.o benchmark-calc_snr.o: calc_snr.c ../src/config.h \
+  calc_snr.h util.h
+
+../src/config.h:
+
+calc_snr.h:
+
+util.h:

@@ -1,0 +1,160 @@
+# Makefile for Mammut
+#
+
+
+
+#----------------USER SETTINGS-----------------------------
+
+# No trailing slash!
+INSTALLPATH=/usr/local
+#INSTALLPATH=/hom/kjetism/site
+#INSTALLPATH=/user/k/kjetil/site
+#INSTALLPATH=/tmp
+
+
+
+# Where to put temporary files. (No appending slash!)
+# (Variable only used on linux)
+TEMPDIR=/tmp
+
+
+# Where juce is.
+JUCE=../../juce
+#JUCE=/hom/kjetism/juce
+#JUCE=/home/kjetil/juce
+
+
+
+
+#----------------END USER SETTINGS---------------------------
+
+
+
+############# Developer settings. #######################
+
+# Set in Interface.h
+#VERSION=0.53
+
+
+###########################################################
+# Note, the default values should work for most systems as
+# long as the necesarry libraries and python are installed.
+# Hopefully, you should only have to change any of the
+# values if you know very well what you are doing.
+###########################################################
+
+
+
+# 1.
+#--------------------
+# GCC must either point to gcc or any other gcc compatible
+# compiler. (Not icc.)
+# If compiling with gcc for an athlon based cpu, you should
+# add "-march=athlon" for a small performance boost.
+
+GCC=gcc -Wall
+CPP=g++ -Wall
+
+#GCC=gcc -Wall -march=athlon
+
+
+
+
+
+# 2.
+#--------------------
+# CC must either point to $(GCC) or icc (The intel c compiler).
+# Icc must be at least V6.0. (Note, icc seems to perform better
+# than gcc, even for athlon based computers)
+
+CC=$(GCC)
+
+#CC=icc
+
+
+
+
+
+# 4.
+#--------------------
+#TEMPDIR=/lyd/local/tmp
+
+
+
+
+
+# 5.
+#--------------------
+#ADDITIONALCFLAGS will be added to the CFLAGS line.
+#ADDITIONALLDFLAGS will be added to the LDFLAGS line.
+
+ADDITIONALCFLAGS= -O2 -I/site/include -I/usr/local/include -DHAVE_JACK --fast-math  -D "NDEBUG=1"
+# -g -ggdb
+ADDITIONALLDFLAGS=-L/site/lib -L/usr/local/include -lsndfile -lm -lpthread -ldl -L. -ljack -lsamplerate
+# -L$(SOUNDLIBNAME)
+
+
+
+
+
+
+######### Should not be necesarry to edit below here. ########
+
+
+CFLAGS= -DTEMPDIR=\"$(TEMPDIR)\"  $(ADDITIONALCFLAGS) $(USEJACK)  -I/usr/include/vorbis
+# -DNOBACKGROUNDSOUND
+
+LDFLAGS= $(ADDITIONALLDFLAGS)  -lvorbisfile 
+
+CPPFLAGS := -MD -D "LINUX=1" -I "/usr/include" -I$(JUCE)  -DTEMPDIR=\"$(TEMPDIR)\" $(CFLAGS)
+CFLAGS	 += $(CPPFLAGS)
+CXXFLAGS := $(CFLAGS)
+LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L "/usr/X11R6/lib/" -L "../../../bin" -lfreetype -lpthread -lX11 -lGL  -lXinerama -lasound -ljuce
+#_debug
+
+
+ALLDEP=
+
+ALL=mammut
+
+all: $(ALL) 
+	@echo
+	@echo "Compilation OK."
+
+-include Makefile.files
+
+DASVERSION=0.60
+dist: clean
+	rm -fr ../mammut-$(DASVERSION) ../mammut-$(DASVERSION).tar.gz ../mammut-$(DASVERSION).tar
+	mkdir ../mammut-$(DASVERSION)
+	cp -a ../src ../mammut-$(DASVERSION)/
+	cp -a ../icons ../mammut-$(DASVERSION)/
+	cp -a ../doc ../mammut-$(DASVERSION)/
+	cp -a ../macosx ../mammut-$(DASVERSION)/
+	cp -a ../mingw ../mammut-$(DASVERSION)/
+	cp ../NEW ../INSTALL ../mammut.gif ../mammut-$(DASVERSION)/
+	echo "\
+	cd ..;\
+	tar cvf mammut-$(DASVERSION).tar mammut-$(DASVERSION);\
+	gzip mammut-$(DASVERSION).tar\
+	" >makesource.sh
+	sh makesource.sh
+	rm makesource.sh
+
+
+clean:
+	rm -f *.o transform/*.o core core.* makesource.sh check mammut w
+	rm -f */*~ ../*~  ../*/*~ ../*/*.bak ../*/*.pyc *.d */*.d
+
+
+mammut: $(OBJS)
+	g++ -o mammut -I$(JUCE) -L$(JUCE)/bin $(CPPFLAGS) $(OBJS) $(LDFLAGS)
+
+install:
+	cp mammut $(INSTALLPATH)/bin/
+	cp ../doc/mammuthelp.html $(INSTALLPATH)/share/doc/
+
+uninstall:
+	rm $(INSTALLPATH)/bin/mammut
+	rm $(INSTALLPATH)/share/doc/mammuthelp.html
+
