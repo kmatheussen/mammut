@@ -1,0 +1,30 @@
+../../bin/intermediate_linux/Release/juce_linux_Midi.o: \
+ platform_specific_code/juce_linux_Midi.cpp \
+ platform_specific_code/../../../juce_Config.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_StandardHeader.h \
+ platform_specific_code/../../../src/juce_core/basics/../../../juce_Config.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_PlatformDefs.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_Memory.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_MathsFunctions.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_DataConversions.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_Logger.h \
+ platform_specific_code/../../../src/juce_core/basics/../text/juce_String.h \
+ platform_specific_code/../../../src/juce_core/basics/../text/juce_CharacterFunctions.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/juce_MidiOutput.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/text/juce_StringArray.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/text/juce_String.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/text/../containers/juce_VoidArray.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/text/../containers/juce_Array.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/text/../containers/juce_ArrayAllocationBase.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/text/../containers/juce_ElementComparator.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/text/../containers/../threads/juce_CriticalSection.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/threads/juce_Thread.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/threads/juce_WaitableEvent.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/threads/../text/juce_String.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../../../juce_core/threads/juce_CriticalSection.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../midi/juce_MidiMessage.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../midi/../../../juce_core/text/juce_String.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../midi/juce_MidiBuffer.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../midi/../../../juce_core/containers/juce_ArrayAllocationBase.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/../midi/juce_MidiMessage.h \
+ platform_specific_code/../../../src/juce_appframework/audio/devices/juce_MidiInput.h

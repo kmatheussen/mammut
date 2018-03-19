@@ -1,0 +1,24 @@
+../../bin/intermediate_linux/Release/juce_linux_Network.o: \
+ platform_specific_code/juce_linux_Network.cpp \
+ platform_specific_code/linuxincludes.h \
+ platform_specific_code/../../../juce_Config.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_StandardHeader.h \
+ platform_specific_code/../../../src/juce_core/basics/../../../juce_Config.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_PlatformDefs.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_Memory.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_MathsFunctions.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_DataConversions.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_Logger.h \
+ platform_specific_code/../../../src/juce_core/basics/../text/juce_String.h \
+ platform_specific_code/../../../src/juce_core/basics/../text/juce_CharacterFunctions.h \
+ platform_specific_code/../../../src/juce_core/text/juce_StringArray.h \
+ platform_specific_code/../../../src/juce_core/text/juce_String.h \
+ platform_specific_code/../../../src/juce_core/text/../containers/juce_VoidArray.h \
+ platform_specific_code/../../../src/juce_core/text/../containers/juce_Array.h \
+ platform_specific_code/../../../src/juce_core/text/../containers/juce_ArrayAllocationBase.h \
+ platform_specific_code/../../../src/juce_core/text/../containers/juce_ElementComparator.h \
+ platform_specific_code/../../../src/juce_core/text/../containers/../threads/juce_CriticalSection.h \
+ platform_specific_code/../../../src/juce_core/basics/juce_SystemStats.h \
+ platform_specific_code/../../../src/juce_core/containers/juce_MemoryBlock.h \
+ platform_specific_code/../../../src/juce_core/containers/../text/juce_String.h \
+ platform_specific_code/../../macosx/platform_specific_code/juce_mac_HTTPStream.h

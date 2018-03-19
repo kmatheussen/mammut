@@ -1,0 +1,34 @@
+../../bin/intermediate_linux/Release/juce_LocalisedStrings.o: \
+ ../../src/juce_core/text/juce_LocalisedStrings.cpp \
+ ../../src/juce_core/text/../basics/juce_StandardHeader.h \
+ ../../src/juce_core/text/../basics/../../../juce_Config.h \
+ ../../src/juce_core/text/../basics/juce_PlatformDefs.h \
+ ../../src/juce_core/text/../basics/juce_Memory.h \
+ ../../src/juce_core/text/../basics/juce_MathsFunctions.h \
+ ../../src/juce_core/text/../basics/juce_DataConversions.h \
+ ../../src/juce_core/text/../basics/juce_Logger.h \
+ ../../src/juce_core/text/../basics/../text/juce_String.h \
+ ../../src/juce_core/text/../basics/../text/juce_CharacterFunctions.h \
+ ../../src/juce_core/text/juce_LocalisedStrings.h \
+ ../../src/juce_core/text/juce_StringPairArray.h \
+ ../../src/juce_core/text/juce_StringArray.h \
+ ../../src/juce_core/text/juce_String.h \
+ ../../src/juce_core/text/../containers/juce_VoidArray.h \
+ ../../src/juce_core/text/../containers/juce_Array.h \
+ ../../src/juce_core/text/../containers/juce_ArrayAllocationBase.h \
+ ../../src/juce_core/text/../containers/juce_ElementComparator.h \
+ ../../src/juce_core/text/../containers/../threads/juce_CriticalSection.h \
+ ../../src/juce_core/text/../basics/juce_Singleton.h \
+ ../../src/juce_core/text/../basics/../threads/juce_ScopedLock.h \
+ ../../src/juce_core/text/../basics/../threads/juce_CriticalSection.h \
+ ../../src/juce_core/text/../io/files/juce_File.h \
+ ../../src/juce_core/text/../io/files/../../containers/juce_OwnedArray.h \
+ ../../src/juce_core/text/../io/files/../../containers/juce_ArrayAllocationBase.h \
+ ../../src/juce_core/text/../io/files/../../containers/juce_ElementComparator.h \
+ ../../src/juce_core/text/../io/files/../../containers/../threads/juce_CriticalSection.h \
+ ../../src/juce_core/text/../io/files/../../basics/juce_Time.h \
+ ../../src/juce_core/text/../io/files/../../basics/juce_RelativeTime.h \
+ ../../src/juce_core/text/../io/files/../../basics/../text/juce_String.h \
+ ../../src/juce_core/text/../io/files/../../text/juce_StringArray.h \
+ ../../src/juce_core/text/../io/files/../../containers/juce_MemoryBlock.h \
+ ../../src/juce_core/text/../io/files/../../containers/../text/juce_String.h

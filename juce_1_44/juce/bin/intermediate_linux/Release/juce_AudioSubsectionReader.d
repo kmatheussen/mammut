@@ -1,0 +1,25 @@
+../../bin/intermediate_linux/Release/juce_AudioSubsectionReader.o: \
+ ../../src/juce_appframework/audio/audio_file_formats/juce_AudioSubsectionReader.cpp \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/basics/juce_StandardHeader.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/basics/../../../juce_Config.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/basics/juce_PlatformDefs.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/basics/juce_Memory.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/basics/juce_MathsFunctions.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/basics/juce_DataConversions.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/basics/juce_Logger.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/basics/../text/juce_String.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/basics/../text/juce_CharacterFunctions.h \
+ ../../src/juce_appframework/audio/audio_file_formats/juce_AudioSubsectionReader.h \
+ ../../src/juce_appframework/audio/audio_file_formats/juce_AudioFormatReader.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/io/juce_InputStream.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/io/../text/juce_String.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/io/../containers/juce_MemoryBlock.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/io/../containers/../text/juce_String.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/text/juce_StringPairArray.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/text/juce_StringArray.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/text/juce_String.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/text/../containers/juce_VoidArray.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/text/../containers/juce_Array.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/text/../containers/juce_ArrayAllocationBase.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/text/../containers/juce_ElementComparator.h \
+ ../../src/juce_appframework/audio/audio_file_formats/../../../juce_core/text/../containers/../threads/juce_CriticalSection.h

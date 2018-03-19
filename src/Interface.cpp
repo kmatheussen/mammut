@@ -27,6 +27,7 @@
  * Cancel processing knapp.
  */
 
+#include <unistd.h>
 
 #include "mammut.h"
 #include "PictureHolder.h"
