@@ -23,10 +23,7 @@ extern LANGSPEC int theheight;
 
 #include "c_interface.h"
 
-#ifdef min
-#undef min
-#endif
-#define min(a,b) (((a)<(b))?(a):(b))
+#define mammut_min(a,b) (((a)<(b))?(a):(b))
 
 
 /* Following code copied from Ceres. */

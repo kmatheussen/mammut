@@ -19,9 +19,9 @@ TEMPDIR=/tmp
 
 
 # Where juce is.
-JUCE=../../juce
+JUCE=../juce_1_44/juce
 #JUCE=/hom/kjetism/juce
-#JUCE=/home/kjetil/juce
+#JUCE=/home/kjetil/juce_1_44/juce
 
 
 
@@ -109,7 +109,7 @@ LDFLAGS= $(ADDITIONALLDFLAGS)  -lvorbisfile
 CPPFLAGS := -MD -D "LINUX=1" -I "/usr/include" -I$(JUCE)  -DTEMPDIR=\"$(TEMPDIR)\" $(CFLAGS)
 CFLAGS	 += $(CPPFLAGS)
 CXXFLAGS := $(CFLAGS)
-LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L "/usr/X11R6/lib/" -L "../../../bin" -lfreetype -lpthread -lX11 -lGL  -lXinerama -lasound -ljuce
+LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L "/usr/X11R6/lib/" -L "../../../bin" -lfreetype -lpthread -lX11 -lXext -lGL  -lXinerama -lasound -ljuce
 #_debug
 
 

@@ -1,6 +1,7 @@
 
 /* tempfile.c taken from ceres. */
 
+#include <unistd.h>
 
 #include "mammut.h"
 

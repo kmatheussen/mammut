@@ -111,7 +111,7 @@ void writesound(
     for(ch=0;ch<samps_per_frame;ch++){
       ly[ch]=l+i+(ch*N);
     }
-    (*WaveConsumer)(pointer,ly,min(N-i,1024));
+    (*WaveConsumer)(pointer,ly,mammut_min(N-i,1024));
   }
 
 }

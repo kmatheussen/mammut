@@ -1,19 +1,20 @@
 
 
 FAST INSTALL
-	cd src
-	make
+        cd juce_1_44/juce/build/linux
+        CONFIG=Release CFLAGS='-Wno-narrowing' make -j8
+	cd ../../../../src
+	make -f Makefile.linux -j8
 	make install
 
 
 
 REQUIRED LIBRARIES
 	libjack
-	libjuce
 	libsamplerate
 	libsndfile
 	libvorbisfile
 
 
--Kjetil M. / last updated 15.2.2007
+-Kjetil M. / last updated 2018-03-19
 
