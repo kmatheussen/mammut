@@ -389,7 +389,7 @@ InterProcessLock::InterProcessLock (const String& name_) throw()
     const File temp (tempDir.getChildFile (name));
     temp.create();
 
-    internal = (void*) open (temp.getFullPathName().toUTF8(), 'a');
+    internal = (void*) open (temp.getFullPathName().toUTF8(), 'a', 0600);
 }
 
 InterProcessLock::~InterProcessLock() throw()
