@@ -5,7 +5,7 @@ FAST INSTALL
         CONFIG=Release CFLAGS='-Wno-narrowing' make -j8
 	cd ../../../../src
 	make -f Makefile.linux -j8
-	make install
+	(sudo) make -f Makefile.linux install
 
 
 

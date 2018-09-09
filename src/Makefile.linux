@@ -109,7 +109,7 @@ LDFLAGS= $(ADDITIONALLDFLAGS)  -lvorbisfile
 CPPFLAGS := -MD -D "LINUX=1" -I "/usr/include" -I$(JUCE)  -DTEMPDIR=\"$(TEMPDIR)\" $(CFLAGS)
 CFLAGS	 += $(CPPFLAGS)
 CXXFLAGS := $(CFLAGS)
-LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L "/usr/X11R6/lib/" -L "../../../bin" -lfreetype -lpthread -lX11 -lXext -lGL  -lXinerama -lasound -ljuce
+LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L "/usr/include/X11/" -L "../../../bin" -ljuce -lfreetype -ldl -lpthread -lX11 -lXext -lGL  -lXinerama -lasound 
 #_debug
 
 
