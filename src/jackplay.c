@@ -48,7 +48,8 @@ static bool setup_ports(void){
   // Find ports to connect to
   {
     portnames=(char **)jack_get_ports(client,NULL,NULL,JackPortIsPhysical|JackPortIsInput);
-    channels=JP_MAX(DEFAULT_NUM_CHANNELS,findnumports(portnames));
+    //channels=JP_MAX(DEFAULT_NUM_CHANNELS,findnumports(portnames));
+    channels=DEFAULT_NUM_CHANNELS;
   }
 
 
