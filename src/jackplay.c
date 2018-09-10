@@ -49,7 +49,7 @@ static bool setup_ports(void){
   {
     portnames=(char **)jack_get_ports(client,NULL,NULL,JackPortIsPhysical|JackPortIsInput);
     //channels=JP_MAX(DEFAULT_NUM_CHANNELS,findnumports(portnames));
-    channels=2;
+    channels=DEFAULT_NUM_CHANNELS;
   }
 
 
