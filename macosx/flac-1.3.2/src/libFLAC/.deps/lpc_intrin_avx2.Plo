@@ -1,0 +1,99 @@
+lpc_intrin_avx2.lo: lpc_intrin_avx2.c ../../config.h \
+  include/private/cpu.h ../../include/FLAC/ordinals.h \
+  /newhd/fedora19stuff/site_clang5/bin/../lib/clang/5.0.0/include/stdint.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/stdint.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_int8_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_int16_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_int32_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_int64_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uint8_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uint16_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uint32_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uint64_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/cdefs.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_symbol_aliasing.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_posix_availability.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/machine/_types.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/i386/_types.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_pthread/_pthread_types.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_intptr_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/machine/types.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/i386/types.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_u_int8_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_u_int16_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_u_int32_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_u_int64_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_uintptr_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_intmax_t.h \
+  /gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uintmax_t.h \
+  include/private/lpc.h include/private/float.h \
+  ../../include/FLAC/format.h ../../include/FLAC/export.h
+
+../../config.h:
+
+include/private/cpu.h:
+
+../../include/FLAC/ordinals.h:
+
+/newhd/fedora19stuff/site_clang5/bin/../lib/clang/5.0.0/include/stdint.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/stdint.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_int8_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_int16_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_int32_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_int64_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uint8_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uint16_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uint32_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uint64_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/cdefs.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_symbol_aliasing.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_posix_availability.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/machine/_types.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/i386/_types.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_pthread/_pthread_types.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_intptr_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/machine/types.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/i386/types.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_u_int8_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_u_int16_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_u_int32_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_u_int64_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/sys/_types/_uintptr_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_intmax_t.h:
+
+/gammelhd/newhd/osxcross_10_12/target/bin/../SDK/MacOSX10.13.sdk/usr/include/_types/_uintmax_t.h:
+
+include/private/lpc.h:
+
+include/private/float.h:
+
+../../include/FLAC/format.h:
+
+../../include/FLAC/export.h:
