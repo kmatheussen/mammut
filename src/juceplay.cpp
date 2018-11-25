@@ -530,15 +530,14 @@ private:
   bool pleasestop;
   bool isinitialized;
   bool isusingjack;
-  bool firstbatch_supplied;
   bool mustrunonemore;
+#if 0
   BigInteger *outchannels;
-
+#endif
+  
   bool isreadingdata;
   bool isplaying_ogg;
-  bool oggisresampling;
   SRC_STATE *oggsrc_state;
-  float **oggsound;
   int lastreadoggpos;
   int nextreadoggpos;
   int current_oggsection; //(?)

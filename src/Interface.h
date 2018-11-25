@@ -57,7 +57,7 @@ public:
     bool loadFile(char *das_filename);
     char *loadFileMul(char *das_filename);
     bool filewasjustsaved;
-    void timerCallback();
+    void timerCallback() override;
     void run();
     //[/UserMethods]
 

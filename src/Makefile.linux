@@ -5,12 +5,6 @@
 
 #----------------USER SETTINGS-----------------------------
 
-# No trailing slash!
-INSTALLPATH=/usr/local
-#INSTALLPATH=/hom/kjetism/site
-#INSTALLPATH=/user/k/kjetil/site
-#INSTALLPATH=/tmp
-
 
 
 # Where to put temporary files. (No appending slash!)
@@ -20,8 +14,6 @@ TEMPDIR=/tmp
 
 # Where juce is.
 JUCE=../juce_5_3_2
-#JUCE=/hom/kjetism/juce
-#JUCE=/home/kjetil/juce_1_44/juce
 
 
 

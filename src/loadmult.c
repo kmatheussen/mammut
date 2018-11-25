@@ -15,7 +15,7 @@ static char *das_load_and_multiply_ok(char *filename)
   int i, N2, framecnt2, method=0, samps_per_frame2,ch;
   float r1, r2, i1, i2, amp,phi;
   //  int progral;
-  struct LoadStruct ls={0};
+  struct LoadStruct ls={};
 
   SNDFILE *infile;
 

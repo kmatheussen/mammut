@@ -908,7 +908,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       if(loadcomboBox->getSelectedId()==0)
 	loadcomboBox->addItem(loadcomboBox->getText(),loadcomboBox->getNumItems()+1);
 
-      sprintf(lastvalid,loadcomboBox->getText().toRawUTF8());
+      sprintf(lastvalid,"%s", loadcomboBox->getText().toRawUTF8());
 
         //[/UserComboBoxCode_loadcomboBox]
     }
@@ -921,7 +921,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 	lastvalid=(char*)erroralloc(1024);
 	sprintf(lastvalid,"%s","");
       }
-
+      
       //printf("Gakk! %s %d\n",loadmulcomboBox->getText().toRawUTF8(),loadmulcomboBox->getSelectedId());
 
       if(savebutton->isEnabled()==true){
@@ -939,7 +939,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       if(loadmulcomboBox->getSelectedId()==0)
 	loadmulcomboBox->addItem(loadmulcomboBox->getText(),loadmulcomboBox->getNumItems()+1);
 
-      sprintf(lastvalid,loadmulcomboBox->getText().toRawUTF8());
+      sprintf(lastvalid,"%s", loadmulcomboBox->getText().toRawUTF8());
 
         //[/UserComboBoxCode_loadmulcomboBox]
     }

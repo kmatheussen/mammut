@@ -25,7 +25,7 @@ struct Undo_lyd{
   struct TempFile *lydfile;
 };
 
-static struct Undo UndoRoot={0};
+static struct Undo UndoRoot={};
 static struct Undo *CurrUndo=&UndoRoot;
 static int num_undos=0;
 static int undonum=0;
