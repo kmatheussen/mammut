@@ -25,7 +25,7 @@
 #include "mammut.h"
 #include "GraphComponent.h"
 #include "Prefs.h"
-#define VERSION "0.60"
+#define VERSION "0.61"
 //[/Headers]
 
 

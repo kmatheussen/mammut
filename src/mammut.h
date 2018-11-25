@@ -48,29 +48,22 @@ struct LoadStruct{
 #define PI 3.141592654
 #define TWOPI 6.2831853
 
-/*
-void gdk_draw_segments	 (GdkDrawable  *drawable,
-			  GdkGC	       *gc,
-			  GdkSegment   *segs,
-			  gint		nsegs);
+// On Intel set FZ (Flush to Zero) and DAZ (Denormals Are Zero)
+// flags to avoid costly denormals
+// (Copied from faust)
+#ifdef __SSE__
+#   include <xmmintrin.h>
+    #ifdef __SSE2__
+        #define AVOIDDENORMALS _mm_setcsr(_mm_getcsr() | 0x8040)
+    #else
+        #define AVOIDDENORMALS _mm_setcsr(_mm_getcsr() | 0x8000)
+    #endif
+#else
+#   error "AVOIDDENORMALS is not defined"
+    #define AVOIDDENORMALS 
+#endif
 
-          XDrawSegments(theDisplay,bitmap,thGC,list,count);   \
-*/
 
-#define LSIZE 100
-#define FLUSH_LIST(list, count, shoGC, thGC)        \
-        gdk_draw_segments(pixmap,thGC,list,count); \
-        gdk_draw_segments(drawing_area->window,thGC,list,count); \
-        count=0
-
-#define ADD_LINE(xx1, yy1, xx2, yy2, list, count, shoGC, thGC) \
-      list[count].x1 = xx1;     \
-      list[count].y1 = yy1;     \
-      list[count].x2 = xx2;     \
-      list[count++].y2 = yy2;     \
-      if (count==LSIZE) { \
-              FLUSH_LIST(list,count,shoGC, thGC);    \
-      }
 
 #define elephant_width 110
 #define elephant_height 100
