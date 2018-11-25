@@ -1,9 +1,9 @@
 
 
 FAST INSTALL
-        cd juce_5_3_2/juce/build/linux
+        cd juce_5_3_2/Builds/Linux
         CONFIG=Release make -j8
-	cd ../../../../src
+	cd ../../../src
 	make -f Makefile.linux -j8
 	(sudo) make -f Makefile.linux install
 
