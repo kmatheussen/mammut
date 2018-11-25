@@ -97,7 +97,8 @@ ADDITIONALLDFLAGS=-L/site/lib -L/usr/local/include -lsndfile -lm -lpthread -ldl 
 ######### Should not be necesarry to edit below here. ########
 
 
-CFLAGS= -DTEMPDIR=\"$(TEMPDIR)\"  $(ADDITIONALCFLAGS) -Wno-deprecated-declarations -Wno-unused-parameter -Werror -Wextra -Wall
+CFLAGS= -DTEMPDIR=\"$(TEMPDIR)\"  $(ADDITIONALCFLAGS) -Wno-deprecated-declarations -Wno-unused-parameter -Wextra -Wall
+# -Werror 
 # -DNOBACKGROUNDSOUND
 
 LDFLAGS= $(ADDITIONALLDFLAGS)  -lvorbisfile 
