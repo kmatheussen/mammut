@@ -1,14 +1,40 @@
 
+ABOUT
 
-The description from the orignal author, Øyvind Hammer:
-"Mammut will FFT your sound in one single gigantic analysis (no windows).
-These spectral data, where the development in time is incorporated in mysterious ways,
-may then be transformed by different algorithms prior to resynthesis.
-An interesting aspect of Mammut is its completely non-intuitive sound transformation approach."
-
-
-Homepage:
-http://archive.notam02.no/arkiv/doc/mammut/
+        The description from the orignal author, Øyvind Hammer:
+        "Mammut will FFT your sound in one single gigantic analysis (no windows).
+        These spectral data, where the development in time is incorporated in mysterious ways,
+        may then be transformed by different algorithms prior to resynthesis.
+        An interesting aspect of Mammut is its completely non-intuitive sound transformation approach."
 
 
--Kjetil
+
+FAST INSTALL
+        cd juce_5_3_2/Builds/Linux
+        CONFIG=Release make -j8
+	cd ../../../src
+	make -f Makefile.linux -j8
+	(sudo) make -f Makefile.linux install
+
+
+COMPILATION ERRORS
+        If you get this error message: "No rule to make target '/usr/include/freetype2/freetype/config/ftconfig-64.h', needed by '../../bin/intermediate_linux/Release/juce_linux_Fonts.o'.",
+        it might work to run this command:
+
+            ln -s /usr/include/freetype2/freetype/config/ftconfig.h /usr/include/freetype2/freetype/config/ftconfig-64.h
+
+
+REQUIRED LIBRARIES
+	libjack
+	libsamplerate
+	libsndfile
+	libvorbisfile
+
+
+        Homepage:
+        http://archive.notam02.no/arkiv/doc/mammut/
+
+
+
+-Kjetil M. / last updated 2018-11-25
+
