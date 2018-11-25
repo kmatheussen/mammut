@@ -151,8 +151,8 @@ mammut: $(OBJS)
 	$(CPP) $(OBJS) $(LDFLAGS) -o mammut 
 	$P-otool -L mammut
 
-install:
+install: all
 	cp mammut ../macosx/Mammut/mammut.app/Contents/MacOS/
 	cp ../doc/mammuthelp.html ../macosx/Mammut/
 	cp ../NEW ../macosx/Mammut/NEW.txt
-	cd ../macosx/ && zip -r Mammut-$(DASVERSION).zip Mammut && mv Mammut-$(DASVERSION).zip ../
+	cd ../macosx/ && zip -r Mammut-$(DASVERSION)-macosx.zip Mammut && mv Mammut-$(DASVERSION)-macosx.zip ../
