@@ -18,6 +18,8 @@
 // [BEGIN_USER_CODE_SECTION]
 
 // (You can add your own code in this section, and the Introjucer will not overwrite it)
+#define JUCE_REPORT_APP_USAGE 0
+#define JUCE_DISPLAY_SPLASH_SCREEN 0
 
 // [END_USER_CODE_SECTION]
 
