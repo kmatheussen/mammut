@@ -6,7 +6,7 @@ extern struct LoadStruct loadstruct;
 void split_real_imag_ok(void)
 {
   int i,ch;
-  char filename[200]={0},tmpfn[200]={0};
+  char filename[400]={0},tmpfn[300]={0};
   char extension[20]={0};
   char *extp;
   int nch,nchN;

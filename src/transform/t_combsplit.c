@@ -14,7 +14,7 @@ void combsplit_ok(void)
 {
   int i,ch;
   int div,num=0;
-  char filename[200]={0},tmpfn[200]={0};
+  char filename[400]={0};
   char extension[20]={0};
   char *extp;
 
@@ -44,6 +44,7 @@ void combsplit_ok(void)
     /*og så må vi lagre da*/
     extp=strrchr(playfile,'.');
     if(extp>strrchr(playfile,'/')) { 
+      char tmpfn[300]={0};
       strcpy(extension,++extp);
       strncpy(tmpfn,playfile,(extp-playfile)-1);
       //      tmpfn[extp-playfile-1]=0;
