@@ -13,7 +13,7 @@ extern struct LoadStruct loadstruct;
 void combsplit_ok(void)
 {
   int i,ch;
-  int div,num;
+  int div,num=0;
   char filename[200]={0},tmpfn[200]={0};
   char extension[20]={0};
   char *extp;

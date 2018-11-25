@@ -70,8 +70,8 @@ static size_t oggread_func  (void *ptr, size_t size, size_t nmemb, void *datasou
   }
 
   int i;
-  for(i=0;i<nmemb;i++){
-    for(int b=0;b<size;b++){
+  for(i=0;i<(int)nmemb;i++){
+    for(int b=0;b<(int)size;b++){
       dst[i*size+b]=source[oggpos++];
     }
     if(oggpos>=maxsize){
@@ -114,7 +114,7 @@ bool jp_isplaying=false;
 static float normalize_val;
 
 static void source_init(void){
-  int progval=0;
+  //int progval=0;
 
   memcpy(lyd2,lyd,samps_per_frame*N*sizeof(float));
   
@@ -160,7 +160,7 @@ public:
       else
 	isplaying_ogg=false;
       N=getSourceLength();
-      R=44100;
+      g_samplerate=44100;
       oggsrc_state=src_callback_new(audio_getOggResampledData_callback,SRC_QUALITY,2,NULL,NULL);
     }
 
@@ -278,7 +278,7 @@ public:
     return lyd+(position+(channel*N));
   }
   double getSourceRate(){
-    return (double)R;
+    return (double)g_samplerate;
   }
   int getSourceNumChannels(){
     return samps_per_frame;
@@ -371,7 +371,7 @@ public:
       return;
 
     if(isplaying_ogg==true && prefs_soundonoff==true){
-      if( (fabs(((double)R) - samplerate)) > 0.1)
+      if( (fabs(((double)g_samplerate) - samplerate)) > 0.1)
 	getOggResampledData(outputChannelData,numSamples);
       else
 	getOggData(outputChannelData,numSamples);
@@ -392,7 +392,7 @@ public:
       return;
     }
 
-    if( (fabs(((double)R) - samplerate)) > 0.1){
+    if( (fabs(((double)g_samplerate) - samplerate)) > 0.1){
       insertDataResample(outputChannelData,numSamples,num_channels);
     }else{
       insertData(outputChannelData,numSamples,num_channels);

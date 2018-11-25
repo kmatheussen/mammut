@@ -101,14 +101,14 @@ float x[]; int NC, forward;
 		m,
 		i,j,
 		delta;
-  int logND;
+  //int logND;
 
 
   int_progval();
 
 
     ND = NC<<1;
-    logND=log(ND);
+    //logND=log(ND);
 
     GUI_startprogressbar(0,progval,log(ND*2)*100);
     //GUI_startprogressbar(2,&progval,ND);

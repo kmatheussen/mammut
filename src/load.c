@@ -61,10 +61,10 @@ static char *das_loadana(char *filename)
     return "Could not open file";
   }
 
-  samps_per_frame   = sfinfo->channels;
-  R                 = sfinfo->samplerate;
+  samps_per_frame = sfinfo->channels;
+  g_samplerate = sfinfo->samplerate;
 
-  framecnt          = sfinfo->MSF_FRAMENAME;
+  framecnt = sfinfo->MSF_FRAMENAME;
 
   /*
   if (framecnt >  50000000) {
@@ -81,8 +81,8 @@ static char *das_loadana(char *filename)
   for (i=0; i<dobler; i++)
     N*=2;
 
-  duration = (float)framecnt/R;
-  binfreq = (float)R/N;
+  duration = (float)framecnt/g_samplerate;
+  binfreq = (float)g_samplerate/N;
   if (lyd!=NULL) free(lyd);
   lyd=NULL;
 

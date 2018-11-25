@@ -439,7 +439,7 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
 Interface::~Interface()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
-  printf("exitgakk0 %d\n",sizeof(float));
+  printf("exitgakk0 %d\n",(int)sizeof(float));
   printf("exitgakk\n");
     //[/Destructor_pre]
 
@@ -890,7 +890,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
       if(lastvalid==NULL){
 	lastvalid=(char*)erroralloc(1024);
-	sprintf(lastvalid,"");
+	sprintf(lastvalid,"%s","");
       }
 
       //printf("Gakk! %s %d\n",loadcomboBox->getText().toRawUTF8(),loadcomboBox->getSelectedId());
@@ -919,7 +919,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
       if(lastvalid==NULL){
 	lastvalid=(char*)erroralloc(1024);
-	sprintf(lastvalid,"");
+	sprintf(lastvalid,"%s","");
       }
 
       //printf("Gakk! %s %d\n",loadmulcomboBox->getText().toRawUTF8(),loadmulcomboBox->getSelectedId());

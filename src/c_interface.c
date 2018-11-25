@@ -117,7 +117,7 @@ void MC_left(void){
 }
 
 void MC_right(void){
-  if(zoom==0 || leftkc==R/2000) return;
+  if(zoom==0 || leftkc==g_samplerate/2000) return;
   leftkc++;
   RedrawWin();
 }

@@ -102,7 +102,7 @@ static char *TF_getPath(void){
     sprintf(ret, "%s/", TEMPDIR );
   }else
 #endif
-    sprintf(ret,"%s",File::getSpecialLocation(File::tempDirectory).getFullPathName().toUTF8());
+    sprintf(ret,"%s",File::getSpecialLocation(File::tempDirectory).getFullPathName().toRawUTF8());
 
 
   return ret;

@@ -90,7 +90,7 @@ extern LANGSPEC float *lyd, *lyd2;
 extern LANGSPEC float duration;		    /* Duration in secs */
 extern LANGSPEC int numchannels;	    /* Number of FFT channels */
 extern LANGSPEC float binfreq;		    /* Frequency pr. bin */
-extern LANGSPEC int R;
+extern LANGSPEC int g_samplerate;
 
 extern LANGSPEC int playing, dobler, zoom, leftkc;
 extern LANGSPEC char playfile[200];

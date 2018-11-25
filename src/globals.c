@@ -17,7 +17,7 @@ float *lyd=NULL, *lyd2=NULL;
 float duration;		    /* Duration in secs */
 int numchannels;	    /* Number of FFT channels */
 float binfreq;		    /* Frequency pr. bin */
-int R=44100;
+int g_samplerate=44100;
 
 int playing=0, theheight=400, dobler=0, zoom=0, leftkc=0;
 char playfile[200];

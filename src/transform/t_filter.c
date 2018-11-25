@@ -23,7 +23,8 @@ void filter_ok(void)
 
   low=filter_lower_cutoff/binfreq;
   up=filter_upper_cutoff/binfreq;
-  if (low<0) low=0; if (low>=N/2) low=N/2-1;
+  if (low<0) low=0;
+  if (low>=N/2) low=N/2-1;
   if (up>=N/2) up=N/2-1;
   mid=(low+up)/2;
 

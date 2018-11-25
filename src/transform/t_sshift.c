@@ -23,7 +23,8 @@ void spectrum_shift_ok(void)
     *progval=ch*3+1;
     for (i=0; i<N/2; i++) {
       tnum=(int)(i+bins);
-      if (tnum<0) tnum=0; if (tnum>=N/2) tnum=N/2-1;
+      if (tnum<0) tnum=0;
+      if (tnum>=N/2) tnum=N/2-1;
       *(lyd2+tnum+tnum+chN)=*(lyd+i+i+chN); *(lyd2+tnum+tnum+1+chN)=*(lyd+i+i+1+chN);
     }
     *progval=ch*3+2;

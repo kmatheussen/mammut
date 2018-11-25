@@ -44,7 +44,7 @@ void GUI_progressbar(int minvalue,int newvalue,int maxvalue){
 void drawscale(Graphics *g)
 {
   int i, grafx, ch;
-  char tall[10];
+  char tall[20];
   bool havefile=samps_per_frame!=0?false:true;
   int startx=havefile==true?STARTX-10:STARTX;
 
@@ -55,16 +55,16 @@ void drawscale(Graphics *g)
   g->drawLine(startx,theheight+20,
 	      startx,10);
 
-  for (i=0; i<=(int)(R/2000.); i++) {
-    grafx=(int)(i*1600000./R)+STARTX+10;
+  for (i=0; i<=(int)(g_samplerate/2000.); i++) {
+    grafx=(int)(i*1600000./g_samplerate)+STARTX+10;
     g->drawLine(grafx,theheight+15,grafx,theheight+25);
     if (zoom) {
       if ((i%2==0) && (i>0) && (i<22)) {
-	sprintf(tall, "%d", i*100+leftkc*1000);
+	snprintf(tall, 19, "%d", i*100+leftkc*1000);
 	g->drawSingleLineText(tall,grafx-14,theheight+40);
       }
     } else {
-      sprintf(tall, "%d", i);
+      snprintf(tall, 19, "%d", i);
       g->drawSingleLineText(tall,grafx-6,theheight+40);
     }
   }
@@ -81,8 +81,9 @@ void drawscale(Graphics *g)
 }
 
 
+#define USE_RESTOREWIN 0
 
-
+#if USE_RESTOREWIN
 
 static void RestoreWin(int x1,int y1,int width,int height){
 #if 1
@@ -110,12 +111,13 @@ void RestoreWinAll(void){
   RestoreWin(0,0,drawing_area->allocation.width,drawing_area->allocation.height);
 #endif
 }
+#endif
 
 
 static void DrawImage(void){
 
   long i;
-  int c0=0, y, grafx, grafold=-1, start, range,ch;
+  int y, grafx, grafold=-1, start, range,ch; // c0=0, 
   double real, imag, amp, maxamp=-1.;  
 
   Graphics g(image);
@@ -125,10 +127,12 @@ static void DrawImage(void){
   drawscale(&g);
   
   g.setColour(Colours::black);
+
+#if USE_RESTOREWIN
+  RestoreWinAll();
+#endif
   
-  //RestoreWinAll();
-  
-  start=(zoom==0?0:1000.*leftkc*N/R);
+  start=(zoom==0?0:1000.*leftkc*N/g_samplerate);
   range=N/(zoom?20:2); if (start+range>=N/2) range=N/2-start-1;
 
   printf("I am drawing\n");

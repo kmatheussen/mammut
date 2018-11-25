@@ -10,87 +10,87 @@ OBJS=globals.o load.o fft.o t_stretch.o t_wobble.o t_sshift.o t_phadd.o t_pderiv
 # C++
 
 gui.o: gui.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) gui.cpp
+	$(CPP) -c $(CXXFLAGS) gui.cpp
 
 ApplicationStartup.o: ApplicationStartup.cpp MainHeader.h GraphComponent.h $(ALLDEP) Interface.h
-	$(CPP) -c $(CPPFLAGS) ApplicationStartup.cpp
+	$(CPP) -c $(CXXFLAGS) ApplicationStartup.cpp
 
 MainAppWindow.o: MainAppWindow.cpp MainAppWindow.h MainHeader.h  GraphComponent.h $(ALLDEP) Interface.h
-	$(CPP) -c $(CPPFLAGS) MainAppWindow.cpp
+	$(CPP) -c $(CXXFLAGS) MainAppWindow.cpp
 
 Interface.o: Interface.cpp $(ALLDEP) GraphComponent.h PictureHolder.h Prefs.h Stretch.h Interface.h
-	$(CPP) -c $(CPPFLAGS) Interface.cpp
+	$(CPP) -c $(CXXFLAGS) Interface.cpp
 PictureHolder.o: PictureHolder.cpp $(ALLDEP) PictureHolder.h
-	$(CPP) -c $(CPPFLAGS) PictureHolder.cpp
+	$(CPP) -c $(CXXFLAGS) PictureHolder.cpp
 
 
 Stretch.o: Stretch.cpp $(ALLDEP) transformheader.h  Stretch.h
-	$(CPP) -c $(CPPFLAGS) Stretch.cpp
+	$(CPP) -c $(CXXFLAGS) Stretch.cpp
 Wobble.o: Wobble.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) Wobble.cpp
+	$(CPP) -c $(CXXFLAGS) Wobble.cpp
 MultiplyPhase.o: MultiplyPhase.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) MultiplyPhase.cpp
+	$(CPP) -c $(CXXFLAGS) MultiplyPhase.cpp
 DerivativeAmp.o: DerivativeAmp.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) DerivativeAmp.cpp
+	$(CPP) -c $(CXXFLAGS) DerivativeAmp.cpp
 Filter.o: Filter.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) Filter.cpp
+	$(CPP) -c $(CXXFLAGS) Filter.cpp
 Invert.o: Invert.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) Invert.cpp
+	$(CPP) -c $(CXXFLAGS) Invert.cpp
 Threshold.o: Threshold.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) Threshold.cpp
+	$(CPP) -c $(CXXFLAGS) Threshold.cpp
 SpectrumShift.o: SpectrumShift.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) SpectrumShift.cpp
+	$(CPP) -c $(CXXFLAGS) SpectrumShift.cpp
 AmplitudeToPhase.o: AmplitudeToPhase.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) AmplitudeToPhase.cpp
+	$(CPP) -c $(CXXFLAGS) AmplitudeToPhase.cpp
 Gain.o: Gain.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) Gain.cpp
+	$(CPP) -c $(CXXFLAGS) Gain.cpp
 CombSplit.o: CombSplit.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) CombSplit.cpp
+	$(CPP) -c $(CXXFLAGS) CombSplit.cpp
 SplitRealImag.o: SplitRealImag.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) SplitRealImag.cpp
+	$(CPP) -c $(CXXFLAGS) SplitRealImag.cpp
 KeepPeaks.o: KeepPeaks.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) KeepPeaks.cpp
+	$(CPP) -c $(CXXFLAGS) KeepPeaks.cpp
 BlockSwap.o: BlockSwap.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) BlockSwap.cpp
+	$(CPP) -c $(CXXFLAGS) BlockSwap.cpp
 Mirror.o: Mirror.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) Mirror.cpp
+	$(CPP) -c $(CXXFLAGS) Mirror.cpp
 Stereo.o: Stereo.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) Stereo.cpp
+	$(CPP) -c $(CXXFLAGS) Stereo.cpp
 juceplay.o: juceplay.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) juceplay.cpp
+	$(CPP) -c $(CXXFLAGS) juceplay.cpp
 tempfile.o: tempfile.cpp $(ALLDEP) tempfile.h
-	$(CPP) -c $(CPPFLAGS) tempfile.cpp
+	$(CPP) -c $(CXXFLAGS) tempfile.cpp
 Progressbar.o: Progressbar.cpp $(ALLDEP) undo.h
-	$(CPP) -c $(CPPFLAGS) Progressbar.cpp
+	$(CPP) -c $(CXXFLAGS) Progressbar.cpp
 Zoom.o: Zoom.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) Zoom.cpp
+	$(CPP) -c $(CXXFLAGS) Zoom.cpp
 oggsoundholder.o: oggsoundholder.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) oggsoundholder.cpp
+	$(CPP) -c $(CXXFLAGS) oggsoundholder.cpp
 Prefs.o: Prefs.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) Prefs.cpp
+	$(CPP) -c $(CXXFLAGS) Prefs.cpp
 error.o: error.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) error.cpp
+	$(CPP) -c $(CXXFLAGS) error.cpp
 
 
 
 #.o: .cpp $(ALLDEP)
-#	$(CPP) -c $(CPPFLAGS) .cpp
+#	$(CPP) -c $(CXXFLAGS) .cpp
 #.o: .cpp $(ALLDEP)
-#	$(CPP) -c $(CPPFLAGS) .cpp
+#	$(CPP) -c $(CXXFLAGS) .cpp
 #.o: .cpp $(ALLDEP)
-#	$(CPP) -c $(CPPFLAGS) .cpp
+#	$(CPP) -c $(CXXFLAGS) .cpp
 #.o: .cpp $(ALLDEP)
-#	$(CPP) -c $(CPPFLAGS) .cpp
+#	$(CPP) -c $(CXXFLAGS) .cpp
 #.o: .cpp $(ALLDEP)
-#	$(CPP) -c $(CPPFLAGS) .cpp
+#	$(CPP) -c $(CXXFLAGS) .cpp
 #.o: .cpp $(ALLDEP)
-#	$(CPP) -c $(CPPFLAGS) .cpp
+#	$(CPP) -c $(CXXFLAGS) .cpp
 #.o: .cpp $(ALLDEP)
-#	$(CPP) -c $(CPPFLAGS) .cpp
+#	$(CPP) -c $(CXXFLAGS) .cpp
 #.o: .cpp $(ALLDEP)
-#	$(CPP) -c $(CPPFLAGS) .cpp
+#	$(CPP) -c $(CXXFLAGS) .cpp
 #.o: .cpp $(ALLDEP)
-#	$(CPP) -c $(CPPFLAGS) .cpp
+#	$(CPP) -c $(CXXFLAGS) .cpp
 
 
 

@@ -14,7 +14,7 @@ static char *das_load_and_multiply_ok(char *filename)
 
   int i, N2, framecnt2, method=0, samps_per_frame2,ch;
   float r1, r2, i1, i2, amp,phi;
-  int progral;
+  //  int progral;
   struct LoadStruct ls={0};
 
   SNDFILE *infile;
@@ -37,7 +37,7 @@ static char *das_load_and_multiply_ok(char *filename)
   ls.infile=infile;
 
   samps_per_frame2   = ls.sfinfo.channels;
-  R                 = ls.sfinfo.samplerate;
+  g_samplerate = ls.sfinfo.samplerate;
 
   framecnt2          = ls.sfinfo.MSF_FRAMENAME;
 

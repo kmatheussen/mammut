@@ -13,7 +13,7 @@ bool blockswap_old_version_with_error=false;
 
 void block_swap_ok(void)
 {
-  long i, j, s, num, len, len2, e;
+  long i, j, s, num, len, len2; //, e;
   double size;
   int ch,chN;
 
@@ -46,7 +46,7 @@ void block_swap_ok(void)
 	s=random()%(N/2);
 #endif
 	if (s+len>=N/2) len=N/2-s-1;
-	e=s+len;
+	//e=s+len;
 	for (j=s; j<s+len/2; j++) {
 	  lyd2[j+j+chN]=lyd[j+j+chN]; lyd2[j+j+1+chN]=lyd[j+j+1+chN];
 	  lyd[j+j+chN]=lyd[j+j+len+chN]; lyd[j+j+1+chN]=lyd[j+j+len+1+chN];
