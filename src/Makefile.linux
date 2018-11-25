@@ -19,7 +19,7 @@ TEMPDIR=/tmp
 
 
 # Where juce is.
-JUCE=../juce_1_44/juce
+JUCE=../juce_5_3_2
 #JUCE=/hom/kjetism/juce
 #JUCE=/home/kjetil/juce_1_44/juce
 
@@ -88,7 +88,8 @@ CC=$(GCC)
 #ADDITIONALCFLAGS will be added to the CFLAGS line.
 #ADDITIONALLDFLAGS will be added to the LDFLAGS line.
 
-ADDITIONALCFLAGS= -O2 -I/site/include -I/usr/local/include -DHAVE_JACK --fast-math  -D "NDEBUG=1"
+ADDITIONALCFLAGS= -O3 -D "NDEBUG=1" -DHAVE_JACK 
+#
 # -g -ggdb
 ADDITIONALLDFLAGS=-L/site/lib -L/usr/local/include -lsndfile -lm -lpthread -ldl -L. -ljack -lsamplerate
 # -L$(SOUNDLIBNAME)
@@ -101,15 +102,17 @@ ADDITIONALLDFLAGS=-L/site/lib -L/usr/local/include -lsndfile -lm -lpthread -ldl 
 ######### Should not be necesarry to edit below here. ########
 
 
-CFLAGS= -DTEMPDIR=\"$(TEMPDIR)\"  $(ADDITIONALCFLAGS) $(USEJACK)  -I/usr/include/vorbis
+CFLAGS= -DTEMPDIR=\"$(TEMPDIR)\"  $(ADDITIONALCFLAGS) -Wno-deprecated-declarations
 # -DNOBACKGROUNDSOUND
 
 LDFLAGS= $(ADDITIONALLDFLAGS)  -lvorbisfile 
 
-CPPFLAGS := -MD -D "LINUX=1" -I "/usr/include" -I$(JUCE)  -DTEMPDIR=\"$(TEMPDIR)\" $(CFLAGS)
+CPPFLAGS := -MD -D "LINUX=1" -I "/usr/include" -I$(JUCE) -I$(JUCE)/JuceLibraryCode/modules/ -D "LINUX=1" -D "JUCE_CHECK_MEMORY_LEAKS=0" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" $(CFLAGS)
+#-D "_DEBUG=1" 
 CFLAGS	 += $(CPPFLAGS)
 CXXFLAGS := $(CFLAGS)
-LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L "/usr/include/X11/" -L "../../../bin" -ljuce -lfreetype -ldl -lpthread -lX11 -lXext -lGL  -lXinerama -lasound 
+LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L "/usr/include/X11/" -L "../../../bin" $(JUCE)/Builds/Linux/build/libMyPluginHost.a -lfreetype -ldl -lpthread -lX11 -lXext -lGL  -lXinerama -lasound -lrt
+#-ljuce 
 #_debug
 
 

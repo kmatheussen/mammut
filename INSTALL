@@ -1,12 +1,18 @@
 
 
 FAST INSTALL
-        cd juce_1_44/juce/build/linux
-        CONFIG=Release CFLAGS='-Wno-narrowing' make -j8
+        cd juce_5_3_2/juce/build/linux
+        CONFIG=Release make -j8
 	cd ../../../../src
 	make -f Makefile.linux -j8
 	(sudo) make -f Makefile.linux install
 
+
+COMPILATION ERRORS
+        If you get this error message: "No rule to make target '/usr/include/freetype2/freetype/config/ftconfig-64.h', needed by '../../bin/intermediate_linux/Release/juce_linux_Fonts.o'.",
+        it might work to run this command:
+
+            ln -s /usr/include/freetype2/freetype/config/ftconfig.h /usr/include/freetype2/freetype/config/ftconfig-64.h
 
 
 REQUIRED LIBRARIES
@@ -16,5 +22,5 @@ REQUIRED LIBRARIES
 	libvorbisfile
 
 
--Kjetil M. / last updated 2018-03-19
+-Kjetil M. / last updated 2018-03-25
 

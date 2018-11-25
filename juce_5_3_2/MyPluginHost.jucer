@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="lqNeLu" name="MyPluginHost" projectType="library" version="1.0.0"
+              bundleIdentifier="no.notam02.mammut" includeBinaryInAppConfig="1"
+              jucerVersion="4.2.4">
+  <MAINGROUP id="cpHnjk" name="MyPluginHost">
+    <GROUP id="{23C6F5A9-4250-663A-4A5A-762CBE968DA7}" name="Source"/>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <LINUX_MAKE targetFolder="Builds/Linux" extraCompilerFlags="" vstFolder="">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/&#10;" isDebug="1" optimisation="1"
+                       targetName="MyPluginHost" headerPath="~/SDKs/vstsdk2.4&#10;"
+                       defines=" JUCE_CHECK_MEMORY_LEAKS=0"/>
+        <CONFIGURATION name="Release" libraryPath="/usr/X11R6/lib/&#10;" isDebug="0"
+                       optimisation="3" targetName="MyPluginHost" headerPath="~/SDKs/vstsdk2.4"
+                       defines=" JUCE_CHECK_MEMORY_LEAKS=0"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+    <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="" extraCompilerFlags="">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" osxSDK="10.7 SDK" osxCompatibility="10.7 SDK" osxArchitecture="64BitIntel"
+                       isDebug="1" optimisation="1" targetName="MyPluginHost" defines=" JUCE_CHECK_MEMORY_LEAKS=0"/>
+        <CONFIGURATION name="Release" osxSDK="10.7 SDK" osxCompatibility="10.7 SDK"
+                       osxArchitecture="64BitIntel" isDebug="1" optimisation="3" targetName="MyPluginHost"
+                       defines=" JUCE_CHECK_MEMORY_LEAKS=0"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
+        <MODULEPATH id="juce_graphics" path="../../juce"/>
+        <MODULEPATH id="juce_events" path="../../juce"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce"/>
+        <MODULEPATH id="juce_core" path="../../juce"/>
+        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <CODEBLOCKS targetFolder="Builds/CodeBlocks" vstFolder="">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="MyPluginHost"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="MyPluginHost"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
+        <MODULEPATH id="juce_graphics" path="../../juce"/>
+        <MODULEPATH id="juce_events" path="../../juce"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce"/>
+        <MODULEPATH id="juce_core" path="../../juce"/>
+        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </CODEBLOCKS>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULES id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_PLUGINHOST_VST="disabled" JUCE_PLUGINHOST_VST3="disabled"
+               JUCE_PLUGINHOST_AU="disabled" JUCE_PLUGINHOST_LADSPA="disabled"
+               JUCE_WEB_BROWSER="disabled" JUCE_USE_FLAC="disabled" JUCE_USE_OGGVORBIS="disabled"
+               JUCE_USE_MP3AUDIOFORMAT="disabled" JUCE_USE_LAME_AUDIO_FORMAT="disabled"
+               JUCE_USE_WINDOWS_MEDIA_FORMAT="disabled" JUCE_USE_CDREADER="disabled"
+               JUCE_USE_CDBURNER="disabled" JUCE_CHECK_MEMORY_LEAKS="disabled"/>
+  <LIVE_SETTINGS>
+    <LINUX/>
+  </LIVE_SETTINGS>
+</JUCERPROJECT>
