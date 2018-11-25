@@ -29,6 +29,6 @@ bool isprocessing=false;
 bool prefs_soundonoff=true;
 bool prefs_picture=true;
 bool prefs_animation=true;
-bool prefs_movingcamera=false;
+bool prefs_movingcamera=true;
 bool prefs_loop=true;
 
