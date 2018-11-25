@@ -14,7 +14,7 @@
 #define snprintf _snprintf
 #endif
 
-#define USE_POSIX_FOR_FILE_OPERATIONS 0
+#define USE_POSIX_FOR_FILE_OPERATIONS 1
 
 static struct TempFile *tempfiles=NULL;
 
