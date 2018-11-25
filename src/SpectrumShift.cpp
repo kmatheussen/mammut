@@ -31,7 +31,7 @@
 
 //==============================================================================
 SpectrumShift::SpectrumShift ()
-    : Component (T("SpectrumShift")),
+    : Component (("SpectrumShift")),
       groupComponent (0),
       shift_valueslider (0),
       label (0),
@@ -40,12 +40,12 @@ SpectrumShift::SpectrumShift ()
       label2 (0),
       textButton2 (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Spectrum Shift")));
+    addAndMakeVisible (groupComponent = new GroupComponent (("new group"),
+                                                            ("Spectrum Shift")));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (shift_valueslider = new Slider (T("new slider")));
+    addAndMakeVisible (shift_valueslider = new Slider (("new slider")));
     shift_valueslider->setRange (-22050, 22050, 0);
     shift_valueslider->setSliderStyle (Slider::LinearHorizontal);
     shift_valueslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -54,8 +54,8 @@ SpectrumShift::SpectrumShift ()
     shift_valueslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     shift_valueslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Shift value (Hz)")));
+    addAndMakeVisible (label = new Label (("new label"),
+                                          ("Shift value (Hz)")));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -65,18 +65,18 @@ SpectrumShift::SpectrumShift ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    addAndMakeVisible (textButton = new TextButton (("new button")));
+    textButton->setButtonText (("Do it!"));
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x44bbbbff));
 
-    addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
-    resetbutton->setButtonText (T("reset"));
-    resetbutton->addButtonListener (this);
+    addAndMakeVisible (resetbutton = new TextButton (("resetbutton")));
+    resetbutton->setButtonText (("reset"));
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x25bbbbff));
 
-    addAndMakeVisible (label2 = new Label (T("new label"),
-                                           T("Optimal spectrum shift, with no window artefacts. The frequency you specify (positive or negative) will be added to all frequency values, shifting the spectrum up or down.")));
+    addAndMakeVisible (label2 = new Label (("new label"),
+                                           ("Optimal spectrum shift, with no window artefacts. The frequency you specify (positive or negative) will be added to all frequency values, shifting the spectrum up or down.")));
     label2->setFont (Font (15.0000f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -86,9 +86,9 @@ SpectrumShift::SpectrumShift ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    addAndMakeVisible (textButton2 = new TextButton (("new button")));
+    textButton2->setButtonText (("Redo it!"));
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
     setSize (600, 400);

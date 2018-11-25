@@ -43,11 +43,11 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    static Image *getImage(int num){
-      static Image *images[3]={ImageFileFormat::loadFrom(mammut_zerlegen2_jpg, mammut_zerlegen2_jpgSize),
-			       ImageFileFormat::loadFrom(mammut_zerlegen3_jpg, mammut_zerlegen3_jpgSize),
-			       ImageFileFormat::loadFrom(mammut_zerlegen4_jpg, mammut_zerlegen4_jpgSize)};
-
+    static Image getImage(int num){
+      static Image images[3]={ImageFileFormat::loadFrom(mammut_zerlegen2_jpg, mammut_zerlegen2_jpgSize),
+                              ImageFileFormat::loadFrom(mammut_zerlegen3_jpg, mammut_zerlegen3_jpgSize),
+                              ImageFileFormat::loadFrom(mammut_zerlegen4_jpg, mammut_zerlegen4_jpgSize)};
+      
       return images[num];
     }
     //[/UserMethods]

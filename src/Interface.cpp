@@ -80,7 +80,7 @@ class DasTabbedComponent  : public TabbedComponent
 
 //==============================================================================
 Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
-    : Component (T("Interface")),
+    : Component (("Interface")),
       groupComponent5 (0),
       groupComponent4 (0),
       groupComponent3 (0),
@@ -114,57 +114,58 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
       aboutbutton (0),
       prefsbutton (0)
 {
-    addAndMakeVisible (groupComponent5 = new GroupComponent (T("new group"),
-                                                             T("Misc")));
+    addAndMakeVisible (groupComponent5 = new GroupComponent (("new group"),
+                                                             ("Misc")));
     groupComponent5->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (groupComponent4 = new GroupComponent (T("new group"),
-                                                             T("Save")));
+    addAndMakeVisible (groupComponent4 = new GroupComponent (("new group"),
+                                                             ("Save")));
     groupComponent4->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (groupComponent3 = new GroupComponent (T("new group"),
-                                                             T("Play")));
+    addAndMakeVisible (groupComponent3 = new GroupComponent (("new group"),
+                                                             ("Play")));
     groupComponent3->setColour (GroupComponent::outlineColourId, Colour (0xb2000000));
     groupComponent3->setColour (GroupComponent::textColourId, Colours::black);
 
-    addAndMakeVisible (groupComponent1 = new GroupComponent (T("new group"),
-                                                             T("Load & Analyze")));
+    addAndMakeVisible (groupComponent1 = new GroupComponent (("new group"),
+                                                             ("Load & Analyze")));
     groupComponent1->setColour (GroupComponent::outlineColourId, Colour (0xb2000000));
     groupComponent1->setColour (GroupComponent::textColourId, Colours::black);
 
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Undo/Redo")));
+    addAndMakeVisible (groupComponent = new GroupComponent (("new group"),
+                                                            ("Undo/Redo")));
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb2000000));
 
-    addAndMakeVisible (stopbutton = new TextButton (T("Play")));
-    stopbutton->setButtonText (T("Stop"));
-    stopbutton->addButtonListener (this);
+    addAndMakeVisible (stopbutton = new TextButton (("Play")));
+    stopbutton->setButtonText (("Stop"));
+    stopbutton->addListener (this);
     stopbutton->setColour (TextButton::buttonColourId, Colour (0x5cabba2a));
     stopbutton->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
-    stopbutton->setColour (TextButton::textColourId, Colours::black);
+    stopbutton->setColour (TextButton::textColourOnId, Colours::black);
+    stopbutton->setColour (TextButton::textColourOffId, Colours::black);
 
     addAndMakeVisible (tabbedComponent = new TabbedComponent (TabbedButtonBar::TabsAtTop));
     tabbedComponent->setTabBarDepth (20);
-    tabbedComponent->addTab (T("Stretch"), Colour (0x3bf8f4c6), new Stretch(), true);
-    tabbedComponent->addTab (T("Wobble"), Colour (0x95e0cce6), new Wobble(), true);
-    tabbedComponent->addTab (T("Multiply Phase"), Colour (0x6aa9e2d8), new MultiplyPhase(), true);
-    tabbedComponent->addTab (T("Derivate Amp"), Colour (0x65fb95ca), new DerivativeAmp(), true);
-    tabbedComponent->addTab (T("Filter"), Colour (0xb2e6c3c3), new Filter(), true);
-    tabbedComponent->addTab (T("Invert"), Colour (0x617ae7e4), new Invert(), true);
-    tabbedComponent->addTab (T("Threshold"), Colour (0x70f7f1f7), new Threshold(), true);
-    tabbedComponent->addTab (T("Spectrum Shift"), Colour (0x7dc5e3f9), new SpectrumShift(), true);
-    tabbedComponent->addTab (T("Block Swap"), Colour (0x499affee), new BlockSwap(), true);
-    tabbedComponent->addTab (T("Mirror"), Colour (0x91d9daff), new Mirror(), true);
-    tabbedComponent->addTab (T("Keep Peaks"), Colour (0x84f7e1e1), new KeepPeaks(), true);
-    tabbedComponent->addTab (T("Amplitude->Phase"), Colour (0x82e5f8e3), new AmplitudeToPhase(), true);
-    tabbedComponent->addTab (T("Gain"), Colour (0x6ef1f2d1), new Gain(), true);
-    tabbedComponent->addTab (T("CombSplit"), Colour (0x7bc4ffef), new CombSplit(), true);
-    tabbedComponent->addTab (T("Split Real/Imag"), Colour (0x98d6d5ea), new SplitRealImag(), true);
-    tabbedComponent->addTab (T("Stereo"), Colour (0xa3d3d3d3), new Stereo(), true);
-    tabbedComponent->addTab (T("Zoom"), Colour (0xb0f5f5dc), new Zoom(), true);
+    tabbedComponent->addTab (("Stretch"), Colour (0x3bf8f4c6), new Stretch(), true);
+    tabbedComponent->addTab (("Wobble"), Colour (0x95e0cce6), new Wobble(), true);
+    tabbedComponent->addTab (("Multiply Phase"), Colour (0x6aa9e2d8), new MultiplyPhase(), true);
+    tabbedComponent->addTab (("Derivate Amp"), Colour (0x65fb95ca), new DerivativeAmp(), true);
+    tabbedComponent->addTab (("Filter"), Colour (0xb2e6c3c3), new Filter(), true);
+    tabbedComponent->addTab (("Invert"), Colour (0x617ae7e4), new Invert(), true);
+    tabbedComponent->addTab (("Threshold"), Colour (0x70f7f1f7), new Threshold(), true);
+    tabbedComponent->addTab (("Spectrum Shift"), Colour (0x7dc5e3f9), new SpectrumShift(), true);
+    tabbedComponent->addTab (("Block Swap"), Colour (0x499affee), new BlockSwap(), true);
+    tabbedComponent->addTab (("Mirror"), Colour (0x91d9daff), new Mirror(), true);
+    tabbedComponent->addTab (("Keep Peaks"), Colour (0x84f7e1e1), new KeepPeaks(), true);
+    tabbedComponent->addTab (("Amplitude->Phase"), Colour (0x82e5f8e3), new AmplitudeToPhase(), true);
+    tabbedComponent->addTab (("Gain"), Colour (0x6ef1f2d1), new Gain(), true);
+    tabbedComponent->addTab (("CombSplit"), Colour (0x7bc4ffef), new CombSplit(), true);
+    tabbedComponent->addTab (("Split Real/Imag"), Colour (0x98d6d5ea), new SplitRealImag(), true);
+    tabbedComponent->addTab (("Stereo"), Colour (0xa3d3d3d3), new Stereo(), true);
+    tabbedComponent->addTab (("Zoom"), Colour (0xb0f5f5dc), new Zoom(), true);
     tabbedComponent->setCurrentTabIndex (0);
 
-    addAndMakeVisible (undoredoinc = new Slider (T("new slider")));
+    addAndMakeVisible (undoredoinc = new Slider (("new slider")));
     undoredoinc->setRange (0, 0, 1);
     undoredoinc->setSliderStyle (Slider::IncDecButtons);
     undoredoinc->setTextBoxStyle (Slider::NoTextBox, true, 80, 20);
@@ -176,7 +177,7 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     undoredoinc->setColour (Slider::textBoxHighlightColourId, Colour (0x401a1aa8));
     undoredoinc->addListener (this);
 
-    addAndMakeVisible (undoredoslider = new Slider (T("new slider")));
+    addAndMakeVisible (undoredoslider = new Slider (("new slider")));
     undoredoslider->setRange (0, 0, 1);
     undoredoslider->setSliderStyle (Slider::LinearBar);
     undoredoslider->setTextBoxStyle (Slider::TextBoxAbove, true, 80, 20);
@@ -185,8 +186,8 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     undoredoslider->setColour (Slider::textBoxBackgroundColourId, Colours::white);
     undoredoslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Duration Doubling")));
+    addAndMakeVisible (label = new Label (("new label"),
+                                          ("Duration Doubling")));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -196,101 +197,102 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (groupComponent2 = new GroupComponent (T("new group"),
-                                                             T("Load & Multiply")));
+    addAndMakeVisible (groupComponent2 = new GroupComponent (("new group"),
+                                                             ("Load & Multiply")));
     groupComponent2->setColour (GroupComponent::outlineColourId, Colour (0xb4000000));
 
-    addAndMakeVisible (correlatebutton = new TextButton (T("new button")));
-    correlatebutton->setTooltip (T("Correlate. Will simply complex-multiply two spectra, giving the correlation."));
-    correlatebutton->setButtonText (T("Correlate"));
+    addAndMakeVisible (correlatebutton = new TextButton (("new button")));
+    correlatebutton->setTooltip (("Correlate. Will simply complex-multiply two spectra, giving the correlation."));
+    correlatebutton->setButtonText (("Correlate"));
     correlatebutton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
-    correlatebutton->addButtonListener (this);
+    correlatebutton->addListener (this);
     correlatebutton->setColour (TextButton::buttonColourId, Colour (0x88b26134));
     correlatebutton->setColour (TextButton::buttonOnColourId, Colour (0x371ed220));
 
-    addAndMakeVisible (funbutton = new TextButton (T("new button")));
-    funbutton->setTooltip (T("Fun. Simple complex multiplication, with intended programming \"errors\" (sign reversals and coefficient swaps)."));
-    funbutton->setButtonText (T("Fun"));
+    addAndMakeVisible (funbutton = new TextButton (("new button")));
+    funbutton->setTooltip (("Fun. Simple complex multiplication, with intended programming \"errors\" (sign reversals and coefficient swaps)."));
+    funbutton->setButtonText (("Fun"));
     funbutton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
-    funbutton->addButtonListener (this);
+    funbutton->addListener (this);
     funbutton->setColour (TextButton::buttonColourId, Colour (0x8ab26134));
     funbutton->setColour (TextButton::buttonOnColourId, Colour (0x3b6eff44));
 
-    addAndMakeVisible (abbutton = new TextButton (T("new button")));
-    abbutton->setTooltip (T("A^B. Raise spectrum A to the power of spectrum B. Useless (?)"));
-    abbutton->setButtonText (T("A^B"));
+    addAndMakeVisible (abbutton = new TextButton (("new button")));
+    abbutton->setTooltip (("A^B. Raise spectrum A to the power of spectrum B. Useless (?)"));
+    abbutton->setButtonText (("A^B"));
     abbutton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
-    abbutton->addButtonListener (this);
+    abbutton->addListener (this);
     abbutton->setColour (TextButton::buttonColourId, Colour (0x8ab26135));
     abbutton->setColour (TextButton::buttonOnColourId, Colour (0x3944ff64));
 
-    addAndMakeVisible (hyperlinkButton = new HyperlinkButton (T("http://www.notam02.no"),
-                                                              URL (T("http://www.notam02.no/notam02/prod-prg-mammuthelp.html"))));
-    hyperlinkButton->setTooltip (T("http://www.notam02.no/notam02/prod-prg-mammuthelp.html"));
+    addAndMakeVisible (hyperlinkButton = new HyperlinkButton (("http://www.notam02.no"),
+                                                              URL (("http://www.notam02.no/notam02/prod-prg-mammuthelp.html"))));
+    hyperlinkButton->setTooltip (("http://www.notam02.no/notam02/prod-prg-mammuthelp.html"));
     hyperlinkButton->setColour (HyperlinkButton::textColourId, Colour (0x930004ff));
 
-    addAndMakeVisible (savebutton = new TextButton (T("new button")));
-    savebutton->setButtonText (T("Save"));
-    savebutton->addButtonListener (this);
+    addAndMakeVisible (savebutton = new TextButton (("new button")));
+    savebutton->setButtonText (("Save"));
+    savebutton->addListener (this);
     savebutton->setColour (TextButton::buttonColourId, Colour (0x6ed58d00));
 
-    addAndMakeVisible (playbutton = new TextButton (T("Play")));
-    playbutton->setButtonText (T("Start"));
-    playbutton->addButtonListener (this);
+    addAndMakeVisible (playbutton = new TextButton (("Play")));
+    playbutton->setButtonText (("Start"));
+    playbutton->addListener (this);
     playbutton->setColour (TextButton::buttonColourId, Colour (0x7da9a335));
-    playbutton->setColour (TextButton::textColourId, Colours::black);
+    playbutton->setColour (TextButton::textColourOnId, Colours::black);
+    playbutton->setColour (TextButton::textColourOffId, Colours::black);
 
-    addAndMakeVisible (loadbrowse = new TextButton (T("new button")));
-    loadbrowse->setButtonText (T("browse"));
-    loadbrowse->addButtonListener (this);
+    addAndMakeVisible (loadbrowse = new TextButton (("new button")));
+    loadbrowse->setButtonText (("browse"));
+    loadbrowse->addListener (this);
     loadbrowse->setColour (TextButton::buttonColourId, Colour (0x469bd243));
 
-    addAndMakeVisible (loadmulbrowse = new TextButton (T("new button")));
-    loadmulbrowse->setButtonText (T("browse"));
-    loadmulbrowse->addButtonListener (this);
+    addAndMakeVisible (loadmulbrowse = new TextButton (("new button")));
+    loadmulbrowse->setButtonText (("browse"));
+    loadmulbrowse->addListener (this);
     loadmulbrowse->setColour (TextButton::buttonColourId, Colour (0x449bd2d7));
 
-    addAndMakeVisible (loadcomboBox = new ComboBox (T("new combo box")));
+    addAndMakeVisible (loadcomboBox = new ComboBox (("new combo box")));
     loadcomboBox->setEditableText (true);
     loadcomboBox->setJustificationType (Justification::centredLeft);
-    loadcomboBox->setTextWhenNothingSelected (T("(choose a soundfile)"));
-    loadcomboBox->setTextWhenNoChoicesAvailable (T("(choose a soundfile)"));
+    loadcomboBox->setTextWhenNothingSelected (("(choose a soundfile)"));
+    loadcomboBox->setTextWhenNoChoicesAvailable (("(choose a soundfile)"));
     loadcomboBox->addListener (this);
 
-    addAndMakeVisible (reload = new TextButton (T("new button")));
-    reload->setButtonText (T("reload"));
-    reload->addButtonListener (this);
+    addAndMakeVisible (reload = new TextButton (("new button")));
+    reload->setButtonText (("reload"));
+    reload->addListener (this);
     reload->setColour (TextButton::buttonColourId, Colour (0x449bd243));
 
-    addAndMakeVisible (convolvebutton = new TextButton (T("new button")));
-    convolvebutton->setTooltip (T("Will complex-multiply with the spectrum of the reversed sound. Use this for standard, high-quality convolution with eg. a room response."));
-    convolvebutton->setButtonText (T("Convolve"));
+    addAndMakeVisible (convolvebutton = new TextButton (("new button")));
+    convolvebutton->setTooltip (("Will complex-multiply with the spectrum of the reversed sound. Use this for standard, high-quality convolution with eg. a room response."));
+    convolvebutton->setButtonText (("Convolve"));
     convolvebutton->setConnectedEdges (Button::ConnectedOnRight);
-    convolvebutton->addButtonListener (this);
+    convolvebutton->addListener (this);
     convolvebutton->setColour (TextButton::buttonColourId, Colour (0x8aa64f15));
     convolvebutton->setColour (TextButton::buttonOnColourId, Colour (0x3b66ff44));
 
-    addAndMakeVisible (reloadmul = new TextButton (T("new button")));
-    reloadmul->setButtonText (T("reload"));
-    reloadmul->addButtonListener (this);
+    addAndMakeVisible (reloadmul = new TextButton (("new button")));
+    reloadmul->setButtonText (("reload"));
+    reloadmul->addListener (this);
     reloadmul->setColour (TextButton::buttonColourId, Colour (0x449bd2d7));
 
-    addAndMakeVisible (loadmulcomboBox = new ComboBox (T("new combo box")));
+    addAndMakeVisible (loadmulcomboBox = new ComboBox (("new combo box")));
     loadmulcomboBox->setEditableText (true);
     loadmulcomboBox->setJustificationType (Justification::centredLeft);
-    loadmulcomboBox->setTextWhenNothingSelected (T("(choose a soundfile)"));
-    loadmulcomboBox->setTextWhenNoChoicesAvailable (T("(choose a soundfile)"));
+    loadmulcomboBox->setTextWhenNothingSelected (("(choose a soundfile)"));
+    loadmulcomboBox->setTextWhenNoChoicesAvailable (("(choose a soundfile)"));
     loadmulcomboBox->addListener (this);
 
-    addAndMakeVisible (phaseampbutton = new TextButton (T("new button")));
-    phaseampbutton->setButtonText (T("Phase/Amp"));
+    addAndMakeVisible (phaseampbutton = new TextButton (("new button")));
+    phaseampbutton->setButtonText (("Phase/Amp"));
     phaseampbutton->setConnectedEdges (Button::ConnectedOnLeft);
-    phaseampbutton->addButtonListener (this);
+    phaseampbutton->addListener (this);
     phaseampbutton->setColour (TextButton::buttonColourId, Colour (0x4bd8530a));
     phaseampbutton->setColour (TextButton::buttonOnColourId, Colour (0x4284ff44));
 
-    addAndMakeVisible (durationdoublingslider = new Slider (T("new slider")));
-    durationdoublingslider->setTooltip (T("You may select a number of duration doublings in order to zero-pad your sound to progressively higher powers of 2. This may be useful to increase the duration of silence at the end of a sound. Some transforms may insert interesting sound in this region. You will have to run a new analysis after this value has been changed. CAREFUL! A duration doubling of 3 means that your sound will get 8 times longer. Processing time will increase even more."));
+    addAndMakeVisible (durationdoublingslider = new Slider (("new slider")));
+    durationdoublingslider->setTooltip (("You may select a number of duration doublings in order to zero-pad your sound to progressively higher powers of 2. This may be useful to increase the duration of silence at the end of a sound. Some transforms may insert interesting sound in this region. You will have to run a new analysis after this value has been changed. CAREFUL! A duration doubling of 3 means that your sound will get 8 times longer. Processing time will increase even more."));
     durationdoublingslider->setRange (0, 4, 1);
     durationdoublingslider->setSliderStyle (Slider::IncDecButtons);
     durationdoublingslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -300,8 +302,8 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     durationdoublingslider->setColour (Slider::textBoxHighlightColourId, Colour (0x40421bdc));
     durationdoublingslider->addListener (this);
 
-    addAndMakeVisible (infotext = new Label (T("infotext"),
-                                             T("Start by loading and analyzing a soundfile")));
+    addAndMakeVisible (infotext = new Label (("infotext"),
+                                             ("Start by loading and analyzing a soundfile")));
     infotext->setFont (Font (55.9000f, Font::plain));
     infotext->setJustificationType (Justification::centredLeft);
     infotext->setEditable (false, false, false);
@@ -311,7 +313,7 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     infotext->setColour (TextEditor::textColourId, Colours::black);
     infotext->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (playposslider = new Slider (T("playprogress")));
+    addAndMakeVisible (playposslider = new Slider (("playprogress")));
     playposslider->setRange (0, 256, 1);
     playposslider->setSliderStyle (Slider::LinearBar);
     playposslider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
@@ -321,29 +323,31 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     playposslider->setColour (Slider::textBoxBackgroundColourId, Colour (0x14ffffff));
     playposslider->addListener (this);
 
-    addAndMakeVisible (normalizebutton = new ToggleButton (T("new toggle button")));
-    normalizebutton->setTooltip (T("Also works when playing"));
-    normalizebutton->setButtonText (T("normalize"));
-    normalizebutton->addButtonListener (this);
+    addAndMakeVisible (normalizebutton = new ToggleButton (("new toggle button")));
+    normalizebutton->setTooltip (("Also works when playing"));
+    normalizebutton->setButtonText (("normalize"));
+    normalizebutton->addListener (this);
 
-    addAndMakeVisible (saveasbutton = new TextButton (T("new button")));
-    saveasbutton->setButtonText (T("Save As"));
-    saveasbutton->addButtonListener (this);
+    addAndMakeVisible (saveasbutton = new TextButton (("new button")));
+    saveasbutton->setButtonText (("Save As"));
+    saveasbutton->addListener (this);
     saveasbutton->setColour (TextButton::buttonColourId, Colour (0x6ac18400));
 
-    addAndMakeVisible (aboutbutton = new TextButton (T("aboutbutton")));
-    aboutbutton->setButtonText (T("About"));
-    aboutbutton->addButtonListener (this);
+    addAndMakeVisible (aboutbutton = new TextButton (("aboutbutton")));
+    aboutbutton->setButtonText (("About"));
+    aboutbutton->addListener (this);
     aboutbutton->setColour (TextButton::buttonColourId, Colour (0x1fbbbbff));
     aboutbutton->setColour (TextButton::buttonOnColourId, Colour (0x86a15f5f));
-    aboutbutton->setColour (TextButton::textColourId, Colour (0xc4000000));
+    aboutbutton->setColour (TextButton::textColourOnId, Colour (0xc4000000));
+    aboutbutton->setColour (TextButton::textColourOffId, Colour (0xc4000000));
 
-    addAndMakeVisible (prefsbutton = new TextButton (T("prefsbutton")));
-    prefsbutton->setButtonText (T("Prefs"));
-    prefsbutton->addButtonListener (this);
+    addAndMakeVisible (prefsbutton = new TextButton (("prefsbutton")));
+    prefsbutton->setButtonText (("Prefs"));
+    prefsbutton->addListener (this);
     prefsbutton->setColour (TextButton::buttonColourId, Colour (0x1fbbbbff));
     prefsbutton->setColour (TextButton::buttonOnColourId, Colour (0x86a15f5f));
-    prefsbutton->setColour (TextButton::textColourId, Colour (0xc4000000));
+    prefsbutton->setColour (TextButton::textColourOnId, Colour (0xc4000000));
+    prefsbutton->setColour (TextButton::textColourOffId, Colour (0xc4000000));
 
     setSize (900, 800);
 
@@ -352,7 +356,7 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
 
     //addAndMakeVisible(graphcomponent=new GraphComponent(componentplace->getX(),componentplace->getY(),componentplace->getWidth(),componentplace->getHeight()));
     addAndMakeVisible(graphcomponent=new GraphComponent(0,0,20,20));
-    graphcomponent->setName (T("gnew component"));
+    graphcomponent->setName (("gnew component"));
     //componentplace->setVisible(false);
 
 
@@ -375,7 +379,8 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     tabbedComponent->getTabContentComponent(tabbedComponent->getNumTabs()-2)->setEnabled(samps_per_frame>=2?true:false);
 
     tabbedComponent->setEnabled(false);
-    tabbedComponent->setOutline(Colour(0x00ddf1ee),0);
+    tabbedComponent->setColour(TabbedComponent::outlineColourId, Colour(0x00ddf1ee));
+    tabbedComponent->setOutline(0);
     tabbedComponent->setIndent(0);
 
     //->setClickingTogglesState (true);
@@ -415,10 +420,10 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
 
     startTimer(20);
 
-    this->commandLine=new String(commandLine.toUTF8());
+    this->commandLine=new String(commandLine.toRawUTF8());
     this->mainwindow=mainwindow;
-    //loadFile((char*)commandLine.toUTF8());
-    //MC_loadAndAnalyze((char*)commandLine.toUTF8());
+    //loadFile((char*)commandLine.toRawUTF8());
+    //MC_loadAndAnalyze((char*)commandLine.toRawUTF8());
 
 
     //setBufferedToImage(true);
@@ -486,28 +491,28 @@ void Interface::paint (Graphics& g)
                 408, 312, 200, 30,
                 Justification::centred, true);
 
-    GradientBrush gradient_1 (Colours::red,
+    const ColourGradient gradient_1 (Colours::red,
                               50.0f, 50.0f,
                               Colours::green,
                               744.0f, 576.0f,
                               false);
-    g.setBrush (&gradient_1);
+    g.setGradientFill (gradient_1);
     g.fillRoundedRectangle (0.0f, 448.0f, 960.0f, 384.0f, 21.5000f);
 
-    GradientBrush gradient_2 (Colour (0x7bf98f33),
+    const ColourGradient gradient_2 (Colour (0x7bf98f33),
                               664.0f, 40.0f,
                               Colour (0xd78c8c8c),
                               720.0f, 560.0f,
                               false);
-    g.setBrush (&gradient_2);
+    g.setGradientFill (gradient_2);
     g.fillRect (-8, -24, 976, 864);
-
-    GradientBrush gradient_3 (Colour (0x219d2323),
+    
+    const ColourGradient gradient_3 (Colour (0x219d2323),
                               16.0f, 736.0f,
                               Colour (0x5f0f1615),
                               696.0f, 752.0f,
                               true);
-    g.setBrush (&gradient_3);
+    g.setGradientFill (gradient_3);
     g.fillRoundedRectangle (0.0f, 584.0f, 960.0f, 304.0f, 21.5000f);
 
     //[UserPaint] Add your own custom paint stuff here..
@@ -515,11 +520,11 @@ void Interface::paint (Graphics& g)
     uint32 starttime=Time::getMillisecondCounter();
 
     if(lyd==NULL && prefscomponent->firstRun_questionmark()==true){
-      static Image *internalCachedImage4 = ImageCache::getFromMemory (temp_png, temp_pngSize);
+      static Image internalCachedImage4 = ImageCache::getFromMemory (temp_png, temp_pngSize);
       g.setColour (Colours::black.withAlpha (1.0f));//0.5140f));
       g.drawImage (internalCachedImage4,
 		   -8, 640, 384, 104,
-		   0, 0, internalCachedImage4->getWidth(), internalCachedImage4->getHeight());
+		   0, 0, internalCachedImage4.getWidth(), internalCachedImage4.getHeight());
     }
 
     g.setImageResamplingQuality(Graphics::lowResamplingQuality);
@@ -531,7 +536,7 @@ void Interface::paint (Graphics& g)
 #else
 	g.drawImage(internalCachedImage3,
 		    0, 0, 872, 738,
-		    pic_x,pic_y,pic_x2-pic_x,pic_y2-pic_y,
+		    pic_x,pic_y, pic_x2-pic_x, pic_y2-pic_y,
 		    false);
 #endif
       }else{
@@ -670,7 +675,7 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
 
 	  File mooseFile (myChooser.getResult());
 
-	  filename=(char*)mooseFile.getFullPathName().toUTF8();
+	  filename=(char*)mooseFile.getFullPathName().toRawUTF8();
 
 	  printf("Filename2: %s\n",filename);
 	  loadcomboBox->setText(mooseFile.getFullPathName(),false);
@@ -696,7 +701,7 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
       if (myChooser.browseForFileToOpen())
         {
 	  File mooseFile (myChooser.getResult());
-	  mulfilename=(char*)mooseFile.getFullPathName().toUTF8();
+	  mulfilename=(char*)mooseFile.getFullPathName().toRawUTF8();
 	  printf("Mul Filename: %s\n",mulfilename);
 	  loadmulcomboBox->setText(mooseFile.getFullPathName(),false);
 	  //loadcomboBox->addItem(mooseFile.getFullPathName(),loadcomboBox->getNumItems()+1);
@@ -712,7 +717,7 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
 	buttonClicked(loadbrowse);
       }else{
 	savefilename=NULL;
-	loadFile((char*)loadcomboBox->getText().toUTF8());
+	loadFile((char*)loadcomboBox->getText().toRawUTF8());
       }
         //[/UserButtonCode_reload]
     }
@@ -730,7 +735,7 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_reloadmul] -- add your button handler code here..
       if(savebutton->isEnabled()==true)
-	loadFileMul((char*)loadmulcomboBox->getText().toUTF8());
+	loadFileMul((char*)loadmulcomboBox->getText().toRawUTF8());
         //[/UserButtonCode_reloadmul]
     }
     else if (buttonThatWasClicked == phaseampbutton)
@@ -760,14 +765,14 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
       if (myChooser.browseForFileToSave(true))
         {
 	  File mooseFile (myChooser.getResult());
-	  savefilename=(char*)mooseFile.getFullPathName().toUTF8();
+	  savefilename=(char*)mooseFile.getFullPathName().toRawUTF8();
 	  printf("Filename: %s\n",savefilename);
 	  MC_stop();
 	  char *error=MC_synthAndSave(savefilename);
 	  if(error!=NULL){
 	    AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-					 T("Mammut"),
-					 String(error) + T(" (") + String((const char*)savefilename) + T(")"));
+					 ("Mammut"),
+					 String(error) + (" (") + String((const char*)savefilename) + (")"));
 	  }else{
 	    filewasjustsaved=true;
 	    mainwindow->setName(mooseFile.getFullPathName());
@@ -780,7 +785,7 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == aboutbutton)
     {
         //[UserButtonCode_aboutbutton] -- add your button handler code here..
-      const char *message[]={"V", VERSION, ", Notam 1995-2007.\n",
+      const char *message[]={"V", VERSION, ", Notam 1995-2018.\n",
 			     "\n",
 			     "Mammut is a program for experimental\n",
 			     "audio processing, using mammut FFT.\n",
@@ -791,7 +796,7 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
 			     "Background picture painted by Zdenek Burian.\n",
 			     "Animation by Kjetil Matheussen.\n",
 			     "\n",
-			     "The slightly crushed Mammoth Scull in the program's icon\n",
+			     "The slightly crushed Mammoth Skull in the program's icon\n",
 			     "can be observed in real life at the Palaeontological\n",
 			     "Museum, University of Oslo. (and the incident causing this\n",
 			     "injury, is realistically animated in the background of the\n",
@@ -802,7 +807,7 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
 			     "\n",
 			     "Send your comments to k.s.matheussen@notam02.no.\n"};
 
-      AlertWindow::showMessageBox(AlertWindow::InfoIcon,T("Mammut"),StringArray(message,sizeof(message)/sizeof(const char*)).joinIntoString(String::empty));
+      AlertWindow::showMessageBox(AlertWindow::InfoIcon,("Mammut"),StringArray(message,sizeof(message)/sizeof(const char*)).joinIntoString(String::empty));
 
         //[/UserButtonCode_aboutbutton]
     }
@@ -888,9 +893,9 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 	sprintf(lastvalid,"");
       }
 
-      //printf("Gakk! %s %d\n",loadcomboBox->getText().toUTF8(),loadcomboBox->getSelectedId());
+      //printf("Gakk! %s %d\n",loadcomboBox->getText().toRawUTF8(),loadcomboBox->getSelectedId());
       fprintf(stderr,"gakk gakk1!\n");
-      if(filewasjustsaved==false && loadFile((char*)loadcomboBox->getText().toUTF8())==false){
+      if(filewasjustsaved==false && loadFile((char*)loadcomboBox->getText().toRawUTF8())==false){
 	savefilename=NULL;
 	fprintf(stderr,"gakk gakk2!\n");
 	if(strcmp("",lastvalid))
@@ -903,7 +908,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       if(loadcomboBox->getSelectedId()==0)
 	loadcomboBox->addItem(loadcomboBox->getText(),loadcomboBox->getNumItems()+1);
 
-      sprintf(lastvalid,loadcomboBox->getText().toUTF8());
+      sprintf(lastvalid,loadcomboBox->getText().toRawUTF8());
 
         //[/UserComboBoxCode_loadcomboBox]
     }
@@ -917,10 +922,10 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 	sprintf(lastvalid,"");
       }
 
-      //printf("Gakk! %s %d\n",loadmulcomboBox->getText().toUTF8(),loadmulcomboBox->getSelectedId());
+      //printf("Gakk! %s %d\n",loadmulcomboBox->getText().toRawUTF8(),loadmulcomboBox->getSelectedId());
 
       if(savebutton->isEnabled()==true){
-	char *error=loadFileMul((char*)loadmulcomboBox->getText().toUTF8());
+	char *error=loadFileMul((char*)loadmulcomboBox->getText().toRawUTF8());
 	if(error!=NULL){
 	  if(strcmp("",lastvalid))
 	    loadmulcomboBox->setText(lastvalid,true);
@@ -934,19 +939,23 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       if(loadmulcomboBox->getSelectedId()==0)
 	loadmulcomboBox->addItem(loadmulcomboBox->getText(),loadmulcomboBox->getNumItems()+1);
 
-      sprintf(lastvalid,loadmulcomboBox->getText().toUTF8());
+      sprintf(lastvalid,loadmulcomboBox->getText().toRawUTF8());
 
         //[/UserComboBoxCode_loadmulcomboBox]
     }
 }
 
-bool Interface::filesDropped (const StringArray& filenames, int mouseX, int mouseY)
+void Interface::filesDropped (const StringArray& filenames, int mouseX, int mouseY)
 {
     //[UserCode_filesDropped] -- Add your code here...
   loadcomboBox->setText(filenames[0],true);
-  loadFile((char*)filenames[0].toUTF8());
-  return true;
+  loadFile((char*)filenames[0].toRawUTF8());
     //[/UserCode_filesDropped]
+}
+
+bool Interface::isInterestedInFileDrag (const StringArray& filenames)
+{
+  return true;
 }
 
 bool Interface::keyPressed (const KeyPress& key)
@@ -996,8 +1005,8 @@ char *Interface::loadFileMul(char *das_filename){
   char *error=MC_addUndo();
   if(error!=NULL){
     AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-				 T("Mammut"),
-				 String((const char*)error) + T(" (") + loadmulcomboBox->getText() + T(")."));
+				 ("Mammut"),
+				 String((const char*)error) + (" (") + loadmulcomboBox->getText() + (")."));
     return error;
   }
 
@@ -1007,8 +1016,8 @@ char *Interface::loadFileMul(char *das_filename){
     GUI_addUndo();
   }else{
     AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-				 T("Mammut"),
-				 String((const char*)error) + T(" (") + loadmulcomboBox->getText() + T(")."));
+				 ("Mammut"),
+				 String((const char*)error) + (" (") + loadmulcomboBox->getText() + (")."));
     MC_undo();
   }
   return error;
@@ -1035,12 +1044,12 @@ bool Interface::loadFile(char *das_filename){
 
   if(error!=NULL){
     AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-				 T("Mammut"),
-				 String((const char*)error) + T(" (") + filename + T(")"));
+				 ("Mammut"),
+				 String((const char*)error) + String(" (") + String(filename) + String(")"));
     return false;
   }
 
-  mainwindow->setName(T("Mammut"));
+  mainwindow->setName(("Mammut"));
 
   MC_resetUndo();
   undoredoslider->setValue(0);
@@ -1089,7 +1098,7 @@ void Interface::run(){
 
 void Interface::timerCallback(){
   static bool wasplaying=false;
-  static Image *ims[3]={
+  static Image ims[3]={
     PictureHolder::getImage(0),
     PictureHolder::getImage(1),
     PictureHolder::getImage(2)
@@ -1102,7 +1111,7 @@ void Interface::timerCallback(){
     havedoneinit=true;
 	if(commandLine->startsWithChar('-')==false){
 		loadcomboBox->setText(*commandLine,true);
-		loadFile((char*)commandLine->toUTF8());
+		loadFile((char*)commandLine->toRawUTF8());
 	}
     printf("Im here\n");
   }
@@ -1121,7 +1130,7 @@ void Interface::timerCallback(){
     double playpos=256.0;
     playpos*=jp_playpos;
     playpos/=N;
-    playposslider->setValue(playpos,false);
+    playposslider->setValue(playpos,dontSendNotification);
     wasplaying=true;
   }else if(wasplaying){
     playposslider->setValue(0.0);
@@ -1221,7 +1230,7 @@ void Interface::timerCallback(){
     static uint32 nexttime=0;
     if(time>=nexttime){
       for(int i=0;i<1000;i++){
-	Image *newim=ims[random->nextInt(3)];
+	Image newim=ims[random->nextInt(3)];
 	if(newim!=internalCachedImage3){
 	  internalCachedImage3=newim;
 	  mustpaint=true;

@@ -39,10 +39,11 @@
                                                                     //[/Comments]
 */
 class Interface  : public Component,
-                   public Timer,
-                   public ButtonListener,
-                   public SliderListener,
-                   public ComboBoxListener
+  public FileDragAndDropTarget,
+  public Timer,
+  public Button::Listener,
+  public Slider::Listener,
+  public ComboBox::Listener
 {
 public:
     //==============================================================================
@@ -60,13 +61,14 @@ public:
     void run();
     //[/UserMethods]
 
-    void paint (Graphics& g);
-    void resized();
-    void buttonClicked (Button* buttonThatWasClicked);
-    void sliderValueChanged (Slider* sliderThatWasMoved);
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
-    bool filesDropped (const StringArray& filenames, int mouseX, int mouseY);
-    bool keyPressed (const KeyPress& key);
+    void paint (Graphics& g) override;
+    void resized() override;
+    void buttonClicked (Button* buttonThatWasClicked) override;
+    void sliderValueChanged (Slider* sliderThatWasMoved) override;
+    void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
+    void filesDropped (const StringArray& filenames, int mouseX, int mouseY) override;
+    bool isInterestedInFileDrag (const StringArray& filenames) override;
+    bool keyPressed (const KeyPress& key) override;
 
     // Binary resources:
     static const char* temp_png;
@@ -80,7 +82,7 @@ private:
     GraphComponent *graphcomponent;
     ProgressBar *progressbar;
     FilenameComponent *loadcomponent;
-    Image* internalCachedImage3;
+    Image internalCachedImage3;
 #if 0
     Image* tempimage;
 #endif

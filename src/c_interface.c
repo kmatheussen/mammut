@@ -1,5 +1,5 @@
 
-#ifdef LINUX
+#if defined(LINUX) || defined(FOR_MACOSX)
 # include <signal.h>
 # include <sys/types.h>
 # include <unistd.h>

@@ -35,7 +35,7 @@
                                                                     //[/Comments]
 */
 class KeepPeaks  : public Component,
-                   public ButtonListener
+                   public Button::Listener
 {
 public:
     //==============================================================================

@@ -31,7 +31,7 @@
 
 //==============================================================================
 Invert::Invert ()
-    : Component (T("Invert")),
+    : Component (("Invert")),
       groupComponent (0),
       inversion_block_sizeslider (0),
       label (0),
@@ -40,12 +40,12 @@ Invert::Invert ()
       label2 (0),
       textButton2 (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Invert")));
+    addAndMakeVisible (groupComponent = new GroupComponent (("new group"),
+                                                            ("Invert")));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (inversion_block_sizeslider = new Slider (T("new slider")));
+    addAndMakeVisible (inversion_block_sizeslider = new Slider (("new slider")));
     inversion_block_sizeslider->setRange (0, 100, 0);
     inversion_block_sizeslider->setSliderStyle (Slider::LinearHorizontal);
     inversion_block_sizeslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -54,8 +54,8 @@ Invert::Invert ()
     inversion_block_sizeslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     inversion_block_sizeslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Inversion block size (0-100%)")));
+    addAndMakeVisible (label = new Label (("new label"),
+                                          ("Inversion block size (0-100%)")));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -65,18 +65,18 @@ Invert::Invert ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    addAndMakeVisible (textButton = new TextButton (("new button")));
+    textButton->setButtonText (("Do it!"));
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
-    addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
-    resetbutton->setButtonText (T("reset"));
-    resetbutton->addButtonListener (this);
+    addAndMakeVisible (resetbutton = new TextButton (("resetbutton")));
+    resetbutton->setButtonText (("reset"));
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x35bbbbff));
 
-    addAndMakeVisible (label2 = new Label (T("new label"),
-                                           T("Splits the spectrum into regions with specified size, and turns each of these backwards. If you select a region size of 100%, the entire spectrum will be mirrored around its center. Also, the result is complex conjugated to avoid reversal of the sound.\n\n")));
+    addAndMakeVisible (label2 = new Label (("new label"),
+                                           ("Splits the spectrum into regions with specified size, and turns each of these backwards. If you select a region size of 100%, the entire spectrum will be mirrored around its center. Also, the result is complex conjugated to avoid reversal of the sound.\n\n")));
     label2->setFont (Font (10.7000f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -86,9 +86,9 @@ Invert::Invert ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    addAndMakeVisible (textButton2 = new TextButton (("new button")));
+    textButton2->setButtonText (("Redo it!"));
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
     setSize (600, 400);

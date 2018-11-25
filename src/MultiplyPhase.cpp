@@ -31,7 +31,7 @@
 
 //==============================================================================
 MultiplyPhase::MultiplyPhase ()
-    : Component (T("MultiplyPhase")),
+    : Component (("MultiplyPhase")),
       groupComponent (0),
       phase_multiplierslider (0),
       label (0),
@@ -41,12 +41,12 @@ MultiplyPhase::MultiplyPhase ()
       textButton2 (0),
       randomButton (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Multiply Phase")));
+    addAndMakeVisible (groupComponent = new GroupComponent (("new group"),
+                                                            ("Multiply Phase")));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (phase_multiplierslider = new Slider (T("new slider")));
+    addAndMakeVisible (phase_multiplierslider = new Slider (("new slider")));
     phase_multiplierslider->setRange (-5, 5, 0);
     phase_multiplierslider->setSliderStyle (Slider::LinearHorizontal);
     phase_multiplierslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -56,8 +56,8 @@ MultiplyPhase::MultiplyPhase ()
     phase_multiplierslider->setColour (Slider::textBoxHighlightColourId, Colour (0x251111ee));
     phase_multiplierslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Phase multiplier (-5 5)")));
+    addAndMakeVisible (label = new Label (("new label"),
+                                          ("Phase multiplier (-5 5)")));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -67,18 +67,18 @@ MultiplyPhase::MultiplyPhase ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    addAndMakeVisible (textButton = new TextButton (("new button")));
+    textButton->setButtonText (("Do it!"));
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x18bbbbff));
 
-    addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
-    resetbutton->setButtonText (T("reset"));
-    resetbutton->addButtonListener (this);
+    addAndMakeVisible (resetbutton = new TextButton (("resetbutton")));
+    resetbutton->setButtonText (("reset"));
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x25bbbbff));
 
-    addAndMakeVisible (label2 = new Label (T("new label"),
-                                           T("Multiply all phases with the value you specify. A value of -1 will reverse the sound.\n")));
+    addAndMakeVisible (label2 = new Label (("new label"),
+                                           ("Multiply all phases with the value you specify. A value of -1 will reverse the sound.\n")));
     label2->setFont (Font (15.0000f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -88,14 +88,14 @@ MultiplyPhase::MultiplyPhase ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    addAndMakeVisible (textButton2 = new TextButton (("new button")));
+    textButton2->setButtonText (("Redo it!"));
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x18bbbbff));
 
-    addAndMakeVisible (randomButton = new ToggleButton (T("new toggle button")));
-    randomButton->setButtonText (T("Random Phases"));
-    randomButton->addButtonListener (this);
+    addAndMakeVisible (randomButton = new ToggleButton (("new toggle button")));
+    randomButton->setButtonText (("Random Phases"));
+    randomButton->addListener (this);
 
     setSize (600, 400);
 

@@ -37,8 +37,8 @@
                                                                     //[/Comments]
 */
 class Wobble  : public Component,
-                public ButtonListener,
-                public SliderListener
+                public Button::Listener,
+                public Slider::Listener
 {
 public:
     //==============================================================================

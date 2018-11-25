@@ -33,7 +33,7 @@
 
 //==============================================================================
 Stretch::Stretch ()
-    : Component (T("Stretch")),
+    : Component (("Stretch")),
       groupComponent (0),
       exponentslider (0),
       label (0),
@@ -42,12 +42,12 @@ Stretch::Stretch ()
       label2 (0),
       textButton2 (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Stretch")));
+    addAndMakeVisible (groupComponent = new GroupComponent (("new group"),
+                                                            ("Stretch")));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (exponentslider = new Slider (T("exponentslider")));
+    addAndMakeVisible (exponentslider = new Slider (("exponentslider")));
     exponentslider->setRange (0.5, 1.5, 0);
     exponentslider->setSliderStyle (Slider::LinearHorizontal);
     exponentslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 30);
@@ -58,8 +58,8 @@ Stretch::Stretch ()
     exponentslider->setColour (Slider::textBoxOutlineColourId, Colours::black);
     exponentslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Exponent")));
+    addAndMakeVisible (label = new Label (("new label"),
+                                          ("Exponent")));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -69,18 +69,18 @@ Stretch::Stretch ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    addAndMakeVisible (textButton = new TextButton (("new button")));
+    textButton->setButtonText (("Do it!"));
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x957f7f9f));
 
-    addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
-    resetbutton->setButtonText (T("reset"));
-    resetbutton->addButtonListener (this);
+    addAndMakeVisible (resetbutton = new TextButton (("resetbutton")));
+    resetbutton->setButtonText (("reset"));
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x3b7d7dab));
 
-    addAndMakeVisible (label2 = new Label (T("new label"),
-                                           T("\nAll frequencies will be raised to the power of the exponent you specify, and the frequency axis is then re-normalized. This is a non-linear stretching of the frequency axis. Values close to 1 (0.9-1.1) are recommended. This transform will produce dispersion effects, with frequency sweeps. \n\n")));
+    addAndMakeVisible (label2 = new Label (("new label"),
+                                           ("\nAll frequencies will be raised to the power of the exponent you specify, and the frequency axis is then re-normalized. This is a non-linear stretching of the frequency axis. Values close to 1 (0.9-1.1) are recommended. This transform will produce dispersion effects, with frequency sweeps. \n\n")));
     label2->setFont (Font (11.2000f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -90,9 +90,9 @@ Stretch::Stretch ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    addAndMakeVisible (textButton2 = new TextButton (("new button")));
+    textButton2->setButtonText (("Redo it!"));
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x5498908a));
 
     setSize (600, 400);
@@ -123,13 +123,13 @@ Stretch::~Stretch()
 //==============================================================================
 void Stretch::paint (Graphics& g)
 {
-    GradientBrush gradient_1 (Colour (0x7bf00ff),
-                              50.0f, 50.0f,
-                              Colour (0x8000),
-                              48.0f, 136.0f,
-                              false);
-    g.setBrush (&gradient_1);
-    g.fillRect (-32, -72, 984, 216);
+  static const ColourGradient gradient_1 (Colour (0x7bf00ff),
+                                          50.0f, 50.0f,
+                                          Colour (0x8000),
+                                          48.0f, 136.0f,
+                                          false);
+  g.setGradientFill (gradient_1);
+  g.fillRect (-32, -72, 984, 216);
 
     //[UserPaint] Add your own custom paint stuff here..
   //fillit();

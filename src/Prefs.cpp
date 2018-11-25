@@ -38,38 +38,44 @@ Prefs::Prefs ()
 {
     addAndMakeVisible (soundonoffButton = new ToggleButton (T("new toggle button")));
     soundonoffButton->setButtonText (T("Startup Sound"));
-    soundonoffButton->addButtonListener (this);
+    soundonoffButton->addListener (this);
     soundonoffButton->setToggleState (true, false);
 
     addAndMakeVisible (movingcameraButton = new ToggleButton (T("new toggle button")));
     movingcameraButton->setButtonText (T("Moving Camera"));
-    movingcameraButton->addButtonListener (this);
+    movingcameraButton->addListener (this);
     movingcameraButton->setToggleState (true, false);
 
     addAndMakeVisible (animationButton = new ToggleButton (T("new toggle button")));
     animationButton->setButtonText (T("Animation"));
-    animationButton->addButtonListener (this);
+    animationButton->addListener (this);
     animationButton->setToggleState (true, false);
 
     addAndMakeVisible (pictureButton = new ToggleButton (T("new toggle button")));
     pictureButton->setButtonText (T("Background Picture"));
-    pictureButton->addButtonListener (this);
+    pictureButton->addListener (this);
     pictureButton->setToggleState (true, false);
 
     addAndMakeVisible (loopButton = new ToggleButton (T("new toggle button")));
     loopButton->setButtonText (T("Loop playing"));
-    loopButton->addButtonListener (this);
+    loopButton->addListener (this);
     loopButton->setToggleState (true, false);
 
     addAndMakeVisible (audioSettingsButton = new TextButton (T("new button")));
     audioSettingsButton->setButtonText (T("Audio Settings"));
-    audioSettingsButton->addButtonListener (this);
+    audioSettingsButton->addListener (this);
     audioSettingsButton->setColour (TextButton::buttonColourId, Colour (0x21bbbbff));
 
     setSize (200, 230);
 
     //[Constructor] You can add your own custom stuff here..
-    propertiesfile=PropertiesFile::createDefaultAppPropertiesFile("mammut",".prefs",String::empty,false,0,PropertiesFile::storeAsXML);
+    PropertiesFile::Options options;
+    options.applicationName = "mammut";
+    options.filenameSuffix = ".prefs";
+    options.storageFormat = PropertiesFile::StorageFormat::storeAsXML;
+    propertiesfile = new PropertiesFile(options);
+      //PropertiesFile::createDefaultAppPropertiesFile("mammut",".prefs",String::empty,false,0,PropertiesFile::storeAsXML);
+
     //propertiesfile->setValue("tes",54);
     //printf("get: -%d-\n",propertiesfile->getIntValue("tes"));
     //printf("Getting: %d\n",propertiesfile->getBoolValue(soundonoffButton->getButtonText(),true)==true?1:0);

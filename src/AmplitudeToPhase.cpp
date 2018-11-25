@@ -67,12 +67,12 @@ AmplitudeToPhase::AmplitudeToPhase ()
 
     addAndMakeVisible (textButton = new TextButton (T("new button")));
     textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x4bbbbbff));
 
     addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
     resetbutton->setButtonText (T("reset"));
-    resetbutton->addButtonListener (this);
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
     addAndMakeVisible (label2 = new Label (T("new label"),
@@ -88,7 +88,7 @@ AmplitudeToPhase::AmplitudeToPhase ()
 
     addAndMakeVisible (textButton2 = new TextButton (T("new button")));
     textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
     setSize (600, 400);

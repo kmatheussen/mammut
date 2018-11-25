@@ -31,7 +31,7 @@
 
 //==============================================================================
 Wobble::Wobble ()
-    : Component (T("Wobble")),
+    : Component (("Wobble")),
       groupComponent2 (0),
       textButton (0),
       label (0),
@@ -42,18 +42,18 @@ Wobble::Wobble ()
       label3 (0),
       textButton2 (0)
 {
-    addAndMakeVisible (groupComponent2 = new GroupComponent (T("new group"),
-                                                             T("Wobble")));
+    addAndMakeVisible (groupComponent2 = new GroupComponent (("new group"),
+                                                             ("Wobble")));
     groupComponent2->setTextLabelPosition (Justification::centredLeft);
     groupComponent2->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    addAndMakeVisible (textButton = new TextButton (("new button")));
+    textButton->setButtonText (("Do it!"));
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x2ebbbbff));
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Frequency (0-1000)")));
+    addAndMakeVisible (label = new Label (("new label"),
+                                          ("Frequency (0-1000)")));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -63,7 +63,7 @@ Wobble::Wobble ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (frequencyslider = new Slider (T("new slider")));
+    addAndMakeVisible (frequencyslider = new Slider (("new slider")));
     frequencyslider->setRange (0, 1000, 0);
     frequencyslider->setSliderStyle (Slider::LinearHorizontal);
     frequencyslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -71,7 +71,7 @@ Wobble::Wobble ()
     frequencyslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     frequencyslider->addListener (this);
 
-    addAndMakeVisible (amplitudeslider = new Slider (T("new slider")));
+    addAndMakeVisible (amplitudeslider = new Slider (("new slider")));
     amplitudeslider->setRange (0, 1, 0);
     amplitudeslider->setSliderStyle (Slider::LinearHorizontal);
     amplitudeslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -79,8 +79,8 @@ Wobble::Wobble ()
     amplitudeslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     amplitudeslider->addListener (this);
 
-    addAndMakeVisible (label2 = new Label (T("new label"),
-                                           T("Amplitude (0-1)")));
+    addAndMakeVisible (label2 = new Label (("new label"),
+                                           ("Amplitude (0-1)")));
     label2->setFont (Font (15.0000f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -90,13 +90,13 @@ Wobble::Wobble ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
-    resetbutton->setButtonText (T("Reset"));
-    resetbutton->addButtonListener (this);
+    addAndMakeVisible (resetbutton = new TextButton (("resetbutton")));
+    resetbutton->setButtonText (("Reset"));
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x46bbbbff));
 
-    addAndMakeVisible (label3 = new Label (T("new label"),
-                                           T("\nAll frequencies will be raised to the power of the exponent you specify, and the frequency axis is then re-normalized. This is a non-linear stretching of the frequency axis. Values close to 1 (0.9-1.1) are recommended. This transform will produce dispersion effects, with frequency sweeps. \n\n\n")));
+    addAndMakeVisible (label3 = new Label (("new label"),
+                                           ("\nAll frequencies will be raised to the power of the exponent you specify, and the frequency axis is then re-normalized. This is a non-linear stretching of the frequency axis. Values close to 1 (0.9-1.1) are recommended. This transform will produce dispersion effects, with frequency sweeps. \n\n\n")));
     label3->setFont (Font (11.2000f, Font::plain));
     label3->setJustificationType (Justification::centredLeft);
     label3->setEditable (false, false, false);
@@ -106,9 +106,9 @@ Wobble::Wobble ()
     label3->setColour (TextEditor::textColourId, Colours::black);
     label3->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    addAndMakeVisible (textButton2 = new TextButton (("new button")));
+    textButton2->setButtonText (("Redo it!"));
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
     setSize (600, 400);

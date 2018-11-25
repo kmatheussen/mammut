@@ -40,23 +40,25 @@ Zoom::Zoom ()
 
     addAndMakeVisible (zoomtoggle = new ToggleButton (T("new toggle button")));
     zoomtoggle->setButtonText (T("Zoom"));
-    zoomtoggle->addButtonListener (this);
+    zoomtoggle->addListener (this);
 
     addAndMakeVisible (zoomleft = new TextButton (T("Play")));
     zoomleft->setButtonText (T("<"));
     zoomleft->setConnectedEdges (Button::ConnectedOnRight);
-    zoomleft->addButtonListener (this);
+    zoomleft->addListener (this);
     zoomleft->setColour (TextButton::buttonColourId, Colour (0x7bb46b1f));
     zoomleft->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
-    zoomleft->setColour (TextButton::textColourId, Colours::black);
+    zoomleft->setColour (TextButton::textColourOnId, Colours::black);
+    zoomleft->setColour (TextButton::textColourOffId, Colours::black);
 
     addAndMakeVisible (zoomright = new TextButton (T("Play")));
     zoomright->setButtonText (T(">"));
     zoomright->setConnectedEdges (Button::ConnectedOnLeft);
-    zoomright->addButtonListener (this);
+    zoomright->addListener (this);
     zoomright->setColour (TextButton::buttonColourId, Colour (0x8fab6e38));
     zoomright->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
-    zoomright->setColour (TextButton::textColourId, Colours::black);
+    zoomright->setColour (TextButton::textColourOnId, Colours::black);
+    zoomright->setColour (TextButton::textColourOffId, Colours::black);
 
     setSize (600, 400);
 

@@ -31,7 +31,7 @@
 
 //==============================================================================
 Threshold::Threshold ()
-    : Component (T("Threshold")),
+    : Component (("Threshold")),
       groupComponent (0),
       threshold_levelslider (0),
       label (0),
@@ -41,12 +41,12 @@ Threshold::Threshold ()
       label2 (0),
       textButton2 (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Threshold")));
+    addAndMakeVisible (groupComponent = new GroupComponent (("new group"),
+                                                            ("Threshold")));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (threshold_levelslider = new Slider (T("new slider")));
+    addAndMakeVisible (threshold_levelslider = new Slider (("new slider")));
     threshold_levelslider->setRange (0, 10, 0);
     threshold_levelslider->setSliderStyle (Slider::LinearHorizontal);
     threshold_levelslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -55,8 +55,8 @@ Threshold::Threshold ()
     threshold_levelslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     threshold_levelslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Threshold level (0-10)")));
+    addAndMakeVisible (label = new Label (("new label"),
+                                          ("Threshold level (0-10)")));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -66,22 +66,22 @@ Threshold::Threshold ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    addAndMakeVisible (textButton = new TextButton (("new button")));
+    textButton->setButtonText (("Do it!"));
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
-    addAndMakeVisible (toggleButton = new ToggleButton (T("new toggle button")));
-    toggleButton->setButtonText (T("Remove above threshold"));
-    toggleButton->addButtonListener (this);
+    addAndMakeVisible (toggleButton = new ToggleButton (("new toggle button")));
+    toggleButton->setButtonText (("Remove above threshold"));
+    toggleButton->addListener (this);
 
-    addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
-    resetbutton->setButtonText (T("reset"));
-    resetbutton->addButtonListener (this);
+    addAndMakeVisible (resetbutton = new TextButton (("resetbutton")));
+    resetbutton->setButtonText (("reset"));
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x3bbbbbff));
 
-    addAndMakeVisible (label2 = new Label (T("new label"),
-                                           T("Removes all partials below a given amplitude threshold.")));
+    addAndMakeVisible (label2 = new Label (("new label"),
+                                           ("Removes all partials below a given amplitude threshold.")));
     label2->setFont (Font (15.0000f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -91,9 +91,9 @@ Threshold::Threshold ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    addAndMakeVisible (textButton2 = new TextButton (("new button")));
+    textButton2->setButtonText (("Redo it!"));
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
     setSize (600, 400);

@@ -28,8 +28,8 @@
 
 namespace AppSettings
 {
-	const String appName		=	T("My Test Application");
-	const String appVersion		=	T("0.0");
+	const String appName		=	"My Test Application";
+	const String appVersion		=	"0.0";
 
 	const int appWidth			=	700;
 	const int appHeight			=	400;

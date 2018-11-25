@@ -34,7 +34,7 @@
 
 //==============================================================================
 MainAppWindow::MainAppWindow(const String& commandLine)
-  :	DocumentWindow (T("Mammut"), 
+  :	DocumentWindow ("Mammut", 
 			Colours::lightgrey, 
 			DocumentWindow::allButtons,
 			true)
@@ -50,7 +50,7 @@ MainAppWindow::MainAppWindow(const String& commandLine)
   centreWithSize(855,737);
 #endif
 
-  LookAndFeel::setDefaultLookAndFeel(new OldSchoolLookAndFeel());
+  LookAndFeel::setDefaultLookAndFeel(new LookAndFeel_V1);
   //setLookAndFeel(new OldSchoolLookAndFeel());
   setResizable (false, false); // resizability is a property of ResizableWindow
   setVisible (true);

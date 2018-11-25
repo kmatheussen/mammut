@@ -51,7 +51,7 @@ Stereo::Stereo ()
     addAndMakeVisible (swapphasesbutton = new TextButton (T("new button")));
     swapphasesbutton->setTooltip (T("The phases, but not the amplitudes, are interchanged between the two channels."));
     swapphasesbutton->setButtonText (T("Do it!"));
-    swapphasesbutton->addButtonListener (this);
+    swapphasesbutton->addListener (this);
     swapphasesbutton->setColour (TextButton::buttonColourId, Colour (0x33bbbbff));
 
     addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
@@ -61,7 +61,7 @@ Stereo::Stereo ()
     addAndMakeVisible (crossoverbutton = new TextButton (T("new button")));
     crossoverbutton->setTooltip (T("Swaps blocks between the two channels. The probability, for each frequency bin, that the program will switch between swapping and non-swapping mode as it runs through all the bins, must be specified. Small probability means that large blocks are swapped (or kept)."));
     crossoverbutton->setButtonText (T("Do it!"));
-    crossoverbutton->addButtonListener (this);
+    crossoverbutton->addListener (this);
     crossoverbutton->setColour (TextButton::buttonColourId, Colour (0x35bbbbff));
 
     addAndMakeVisible (label = new Label (T("new label"),
@@ -95,7 +95,7 @@ Stereo::Stereo ()
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
     addAndMakeVisible (resetbutton = new TextButton (T("Reset")));
-    resetbutton->addButtonListener (this);
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x23bbbbff));
 
     setSize (600, 400);

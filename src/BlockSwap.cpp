@@ -70,12 +70,12 @@ BlockSwap::BlockSwap ()
 
     addAndMakeVisible (textButton = new TextButton (T("new button")));
     textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x39bbbbff));
 
     addAndMakeVisible (toggleButton = new ToggleButton (T("new toggle button")));
     toggleButton->setButtonText (T("Old version with error"));
-    toggleButton->addButtonListener (this);
+    toggleButton->addListener (this);
 
     addAndMakeVisible (block_sizeslider = new Slider (T("new slider")));
     block_sizeslider->setRange (0, 100, 0);
@@ -99,7 +99,7 @@ BlockSwap::BlockSwap ()
 
     addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
     resetbutton->setButtonText (T("reset"));
-    resetbutton->addButtonListener (this);
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x4fbbbbff));
 
     addAndMakeVisible (label3 = new Label (T("new label"),
@@ -115,7 +115,7 @@ BlockSwap::BlockSwap ()
 
     addAndMakeVisible (textButton2 = new TextButton (T("new button")));
     textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
     setSize (600, 400);

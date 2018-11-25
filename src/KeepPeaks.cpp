@@ -38,7 +38,7 @@ KeepPeaks::KeepPeaks ()
 
     addAndMakeVisible (textButton = new TextButton (T("new button")));
     textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x1fbbffd4));
 
     setSize (600, 400);

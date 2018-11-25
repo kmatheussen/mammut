@@ -31,7 +31,7 @@
 
 //==============================================================================
 DerivativeAmp::DerivativeAmp ()
-    : Component (T("DerivativeAmp")),
+    : Component (("DerivativeAmp")),
       groupComponent (0),
       amp_derivate_multiplierslider (0),
       label (0),
@@ -40,12 +40,12 @@ DerivativeAmp::DerivativeAmp ()
       label2 (0),
       textButton2 (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Derivate Amp")));
+    addAndMakeVisible (groupComponent = new GroupComponent (("new group"),
+                                                            ("Derivate Amp")));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (amp_derivate_multiplierslider = new Slider (T("new slider")));
+    addAndMakeVisible (amp_derivate_multiplierslider = new Slider (("new slider")));
     amp_derivate_multiplierslider->setRange (-5, 5, 0);
     amp_derivate_multiplierslider->setSliderStyle (Slider::LinearHorizontal);
     amp_derivate_multiplierslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -54,8 +54,8 @@ DerivativeAmp::DerivativeAmp ()
     amp_derivate_multiplierslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     amp_derivate_multiplierslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Amp derivate multiplier (-5 5)")));
+    addAndMakeVisible (label = new Label (("new label"),
+                                          ("Amp derivate multiplier (-5 5)")));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -65,18 +65,18 @@ DerivativeAmp::DerivativeAmp ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    addAndMakeVisible (textButton = new TextButton (("new button")));
+    textButton->setButtonText (("Do it!"));
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x39bbbbff));
 
-    addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
-    resetbutton->setButtonText (T("reset"));
-    resetbutton->addButtonListener (this);
+    addAndMakeVisible (resetbutton = new TextButton (("resetbutton")));
+    resetbutton->setButtonText (("reset"));
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x42bbbbff));
 
-    addAndMakeVisible (label2 = new Label (T("new label"),
-                                           T("Replaces the amplitude spectrum with its derivative (slope). You may specify a gain factor.\n")));
+    addAndMakeVisible (label2 = new Label (("new label"),
+                                           ("Replaces the amplitude spectrum with its derivative (slope). You may specify a gain factor.\n")));
     label2->setFont (Font (15.0000f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -86,9 +86,9 @@ DerivativeAmp::DerivativeAmp ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    addAndMakeVisible (textButton2 = new TextButton (("new button")));
+    textButton2->setButtonText (("Redo it!"));
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
     setSize (600, 400);

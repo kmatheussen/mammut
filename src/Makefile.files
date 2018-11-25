@@ -56,8 +56,8 @@ Mirror.o: Mirror.cpp $(ALLDEP)
 	$(CPP) -c $(CPPFLAGS) Mirror.cpp
 Stereo.o: Stereo.cpp $(ALLDEP)
 	$(CPP) -c $(CPPFLAGS) Stereo.cpp
-jueceplay.o: jueceplay.cpp $(ALLDEP)
-	$(CPP) -c $(CPPFLAGS) jueceplay.cpp
+juceplay.o: juceplay.cpp $(ALLDEP)
+	$(CPP) -c $(CPPFLAGS) juceplay.cpp
 tempfile.o: tempfile.cpp $(ALLDEP) tempfile.h
 	$(CPP) -c $(CPPFLAGS) tempfile.cpp
 Progressbar.o: Progressbar.cpp $(ALLDEP) undo.h

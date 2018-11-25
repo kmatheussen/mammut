@@ -37,8 +37,8 @@
                                                                     //[/Comments]
 */
 class BlockSwap  : public Component,
-                   public SliderListener,
-                   public ButtonListener
+                   public Slider::Listener,
+                   public Button::Listener
 {
 public:
     //==============================================================================

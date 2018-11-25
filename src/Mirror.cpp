@@ -47,7 +47,7 @@ Mirror::Mirror ()
 
     addAndMakeVisible (textButton = new TextButton (T("new button")));
     textButton->setButtonText (T("Do it!"));
-    textButton->addButtonListener (this);
+    textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x25bbbbff));
 
     addAndMakeVisible (description = new Label (T("new label"),
@@ -83,12 +83,12 @@ Mirror::Mirror ()
 
     addAndMakeVisible (resetbutton = new TextButton (T("new button")));
     resetbutton->setButtonText (T("Reset"));
-    resetbutton->addButtonListener (this);
+    resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x25bbbbff));
 
     addAndMakeVisible (textButton2 = new TextButton (T("new button")));
     textButton2->setButtonText (T("Redo it!"));
-    textButton2->addButtonListener (this);
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x25bbbbff));
 
     setSize (600, 400);

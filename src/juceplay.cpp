@@ -23,20 +23,22 @@ I'm sorry about all the non-C++ stuff. I'm not a big C++ fan.
 */
 
 
+#include <vorbis/codec.h>
+#include <vorbis/vorbisfile.h>
+#include <samplerate.h>
+
 
 #include "juce.h"
 #include "mammut.h"
 #include "juceplay.h"
 
 #include "oggsoundholder.h"
-#include <vorbis/codec.h>
-#include <vorbisfile.h>
 
 
 #ifdef HAVE_JACK
 #  include "jackplay.h"
 #endif
-#include <samplerate.h>
+
 
 #define SRC_QUALITY SRC_SINC_BEST_QUALITY
 #define JP_MIN(a,b) (((a)<(b))?(a):(b))
@@ -177,7 +179,7 @@ public:
     audioDeviceManager.addChangeListener(this);
   }
 
-  void changeListenerCallback(void *something){
+  void changeListenerCallback(ChangeBroadcaster *source) override {
     printf("Some audio change thing.\n");
     if(audioDeviceManager.getCurrentAudioDevice()!=NULL){
       samplerate=audioDeviceManager.getCurrentAudioDevice()->getCurrentSampleRate();
@@ -205,7 +207,7 @@ public:
 	isinitialized=true;
 	
 	// start the IO device pulling its data from our callback..
-	audioDeviceManager.setAudioCallback (this);
+	audioDeviceManager.addAudioCallback (this);
 	
       }
   }
@@ -352,6 +354,7 @@ public:
 			     int 	totalNumOutputChannels, 
 			     int 	numSamples
 			     )
+    override
   {
 
     // First find the real number of totalNumOutputChannels.
@@ -492,8 +495,10 @@ public:
 
     AudioDeviceSelectorComponent audioSettingsComp (audioDeviceManager,
 						    0, 0,
-						    2, 8,
-						    false);
+						    1, 2000,
+						    false, false,
+                                                    false, false
+                                                    );
     
     // ...and show it in a DialogWindow...
     audioSettingsComp.setSize (400, 170);
@@ -506,14 +511,15 @@ public:
     }
   }
   
-  void audioDeviceAboutToStart (double sampleRate, int numSamplesPerBlock)
+  void audioDeviceAboutToStart (AudioIODevice *device) override
   {
+    double sampleRate = device->getCurrentSampleRate ();
     printf("Samplerate set to %f\n",(float)sampleRate);
     samplerate=sampleRate;
     return;
   }
   
-  void audioDeviceStopped()
+  void audioDeviceStopped() override
   {
     return;
   }
@@ -526,7 +532,7 @@ private:
   bool isusingjack;
   bool firstbatch_supplied;
   bool mustrunonemore;
-  BitArray *outchannels;
+  BigInteger *outchannels;
 
   bool isreadingdata;
   bool isplaying_ogg;

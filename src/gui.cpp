@@ -12,7 +12,7 @@
 static GraphComponent *graphcomponent;
 static Interface *interface;
 
-static Image *image=NULL;
+static Image image;
 
 //extern ThreadWithProgressWindow das_mytask;
 
@@ -118,9 +118,9 @@ static void DrawImage(void){
   int c0=0, y, grafx, grafold=-1, start, range,ch;
   double real, imag, amp, maxamp=-1.;  
 
-  Graphics g(*image);
+  Graphics g(image);
 
-  image->clear(0,0,image->getWidth(),image->getHeight());
+  image.clear(Rectangle<int>(0,0,image.getWidth(),image.getHeight()));
 
   drawscale(&g);
   
@@ -174,7 +174,7 @@ void RedrawWin(void){
 void GUI_init(GraphComponent *das_graphcomponent,Interface *das_interface){
   graphcomponent=das_graphcomponent;
   interface=das_interface;
-  image=new Image(Image::ARGB,das_graphcomponent->getWidth(),das_graphcomponent->getHeight(),false);
+  image=Image(Image::ARGB,das_graphcomponent->getWidth(),das_graphcomponent->getHeight(),false);
   RedrawWin();
   printf("GUI_init()\n");
 }

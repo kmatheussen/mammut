@@ -204,7 +204,7 @@ struct TempFile *TF_new(char *firstname){
 #endif
     {
       File temptempfile=File::createTempFile("mammut_temp");
-      snprintf(temp,4990,"%s",temptempfile.getFullPathName().toUTF8());
+      snprintf(temp,4990,"%s",temptempfile.getFullPathName().toRawUTF8());
       printf("Creating new tempfile \"%s\"n",temp);
       //temptempfile.deleteFile();
     }
