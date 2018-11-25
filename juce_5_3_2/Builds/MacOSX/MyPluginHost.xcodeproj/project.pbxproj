@@ -2613,6 +2613,7 @@
 				HEADER_SEARCH_PATHS = ("../../JuceLibraryCode", "../../JuceLibraryCode/modules", "$(inherited)");
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MACOSX_DEPLOYMENT_TARGET_ppc = 10.4;
+				OTHER_CPLUSPLUSFLAGS = "-mfpmath=sse -msse2 -mtune=generic";
 				PRODUCT_BUNDLE_IDENTIFIER = no.notam02.mammut;
 				SDKROOT = macosx10.7;
 				SDKROOT_ppc = macosx10.5; }; name = Debug; };
@@ -2636,6 +2637,7 @@
 				HEADER_SEARCH_PATHS = ("../../JuceLibraryCode", "../../JuceLibraryCode/modules", "$(inherited)");
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MACOSX_DEPLOYMENT_TARGET_ppc = 10.4;
+				OTHER_CPLUSPLUSFLAGS = "-mfpmath=sse -msse2 -mtune=generic";
 				PRODUCT_BUNDLE_IDENTIFIER = no.notam02.mammut;
 				SDKROOT = macosx10.7;
 				SDKROOT_ppc = macosx10.5; }; name = Release; };

@@ -7,7 +7,8 @@
     <GROUP id="{23C6F5A9-4250-663A-4A5A-762CBE968DA7}" name="Source"/>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <LINUX_MAKE targetFolder="Builds/Linux" extraCompilerFlags="" vstFolder="">
+    <LINUX_MAKE targetFolder="Builds/Linux" extraCompilerFlags="-mfpmath=sse -msse2"
+                vstFolder="" cppLanguageStandard="-std=c++11">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/&#10;" isDebug="1" optimisation="1"
                        targetName="MyPluginHost" headerPath="~/SDKs/vstsdk2.4&#10;"
@@ -30,7 +31,7 @@
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="" extraCompilerFlags="">
+    <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="" extraCompilerFlags="-mfpmath=sse -msse2 -mtune=generic">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="10.7 SDK" osxCompatibility="10.7 SDK" osxArchitecture="64BitIntel"
                        isDebug="1" optimisation="1" targetName="MyPluginHost" defines=" JUCE_CHECK_MEMORY_LEAKS=0"/>
@@ -52,7 +53,7 @@
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <CODEBLOCKS targetFolder="Builds/CodeBlocks" vstFolder="">
+    <CODEBLOCKS targetFolder="Builds/CodeBlocks" vstFolder="" extraCompilerFlags="-mfpmath=sse -msse2 -mtune=generic">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="MyPluginHost"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="MyPluginHost"/>

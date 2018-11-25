@@ -19,6 +19,9 @@
           <Add option="-std=c++11"/>
           <Add option="-mstackrealign"/>
           <Add option="-g"/>
+          <Add option="-mfpmath=sse"/>
+          <Add option="-msse2"/>
+          <Add option="-mtune=generic"/>
           <Add option="-D__MINGW__=1"/>
           <Add option="-D__MINGW_EXTENSION="/>
           <Add option="-DDEBUG=1"/>
@@ -55,6 +58,9 @@
           <Add option="-Os"/>
           <Add option="-std=c++11"/>
           <Add option="-mstackrealign"/>
+          <Add option="-mfpmath=sse"/>
+          <Add option="-msse2"/>
+          <Add option="-mtune=generic"/>
           <Add option="-D__MINGW__=1"/>
           <Add option="-D__MINGW_EXTENSION="/>
           <Add option="-DNDEBUG=1"/>
