@@ -31,7 +31,6 @@
 #include "MainAppWindow.h"
 #include "Interface.h"
 
-
 //==============================================================================
 MainAppWindow::MainAppWindow(const String& commandLine)
   :	DocumentWindow ("Mammut", 
@@ -46,15 +45,20 @@ MainAppWindow::MainAppWindow(const String& commandLine)
   setTitleBarHeight(20);
   centreWithSize(855,737+getTitleBarHeight());
 #else
-  setUsingNativeTitleBar(true);
+  if (true)
+    setUsingNativeTitleBar(true);
+  else
+    setTitleBarHeight(20);
   centreWithSize(855,737);
 #endif
 
   LookAndFeel::setDefaultLookAndFeel(new LookAndFeel_V1);
   //setLookAndFeel(new OldSchoolLookAndFeel());
   //setResizeLimits(855, 50, 855, 100000);
-  getConstrainer()->setFixedAspectRatio(855.0 / 737.0); // doesn't work on linux when native title bar is true. Might be true for other platforms as well.
-  setResizable (true, true); // resizability is a property of ResizableWindow
+  
+  //getConstrainer()->setFixedAspectRatio(855.0 / 737.0); // doesn't work on linux when native title bar is true. Might be true for other platforms as well.
+
+  setResizable (true, false); // resizability is a property of ResizableWindow
   setVisible (true);
 
 	// create the main component, which is described in MainComponent.h
@@ -62,7 +66,9 @@ MainAppWindow::MainAppWindow(const String& commandLine)
 
     // sets the main content component for the window to be whatever MainComponent
     // is. This will be deleted when the window is deleted.
-  setContentComponent (new Interface(this,commandLine));//contentComponent);
+  _interface = new Interface(this,commandLine);//contentComponent);
+  //setContentComponent (_interface);
+  addAndMakeVisible(_interface);
 }
 
 MainAppWindow::~MainAppWindow()
@@ -72,6 +78,14 @@ MainAppWindow::~MainAppWindow()
 }
 
 void MainAppWindow::resized(void){
+#if 1
+  if (_interface!=NULL){
+    AffineTransform aff;
+    //printf("h: %d (%d). scale: %f\n", getHeight(), _interface->getHeight(), new_scale_factor);
+    _interface->setTransform(aff.scaled((double)getWidth()/855.0, (double)getHeight()/737.0));
+    //    _interface->setSize(855.0/getWidth(),737.0/getHeight());
+  }
+#else
   static int counter = 0;
 
   if (counter++ > 10 && getHeight() != 737){
@@ -84,7 +98,7 @@ void MainAppWindow::resized(void){
       Desktop::getInstance().setGlobalScaleFactor(new_scale_factor);
     }
   }
-
+#endif
   ResizableWindow::resized();
 }
 

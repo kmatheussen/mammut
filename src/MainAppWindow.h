@@ -29,6 +29,8 @@
 
 #include "juce.h"
 
+class Interface;
+
 //==============================================================================
 class MainAppWindow  : public DocumentWindow
 {
@@ -43,6 +45,8 @@ public:
     void closeButtonPressed() override;
 
     void resized(void) override;
+
+    Interface *_interface = NULL;
 };
 
 

@@ -535,15 +535,21 @@ void Interface::paint (Graphics& g)
 	g.drawImageAt(tempimage,0,0,false);
 #else
 	g.drawImage(internalCachedImage3,
-		    0, 0, 855, 738,
+		    0, 0, 872, 738, // TODO: Increase window width to 872 pixels. (since the images are 872 pixels wide.)
 		    pic_x,pic_y, pic_x2-pic_x, pic_y2-pic_y,
 		    false);
 #endif
       }else{
+#if 1
+	g.drawImageAt(internalCachedImage3,
+                      0,0,
+                      false);
+#else
 	g.drawImage(internalCachedImage3,
                     0,0, 855, 738,
                     0,0, 855, 738,
                     false);
+#endif
       }
     }
     lastrepaint=Time::getMillisecondCounter();
@@ -606,6 +612,8 @@ void Interface::resized()
     //[UserResized] Add your own custom resize handling here..
     //    if(graphcomponent)
     // graphcomponent->setBounds(0,0,600,550);
+    //setBounds(0,0,855,737);
+    //printf("Resized: %d %d\n", getWidth(), getHeight());
     //[/UserResized]
 }
 
