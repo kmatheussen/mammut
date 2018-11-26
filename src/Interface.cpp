@@ -1097,6 +1097,10 @@ void Interface::run(){
 #endif
 
 void Interface::timerCallback(){
+  if (this->mainwindow->getWidth() != 855){
+    this->mainwindow->setSize(855, this->mainwindow->getHeight());
+  }
+
   static bool wasplaying=false;
   static Image ims[3]={
     PictureHolder::getImage(0),

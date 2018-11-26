@@ -40,7 +40,9 @@ public:
 
     //==============================================================================
     // called when the close button is pressed or esc is pushed
-    void closeButtonPressed();
+    void closeButtonPressed() override;
+
+    void resized(void) override;
 };
 
 

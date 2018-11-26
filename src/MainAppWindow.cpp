@@ -52,7 +52,9 @@ MainAppWindow::MainAppWindow(const String& commandLine)
 
   LookAndFeel::setDefaultLookAndFeel(new LookAndFeel_V1);
   //setLookAndFeel(new OldSchoolLookAndFeel());
-  setResizable (false, false); // resizability is a property of ResizableWindow
+  //setResizeLimits(855, 50, 855, 100000);
+  getConstrainer()->setFixedAspectRatio(855.0 / 737.0); // doesn't work on linux when native title bar is true. Might be true for other platforms as well.
+  setResizable (true, true); // resizability is a property of ResizableWindow
   setVisible (true);
 
 	// create the main component, which is described in MainComponent.h
@@ -67,6 +69,23 @@ MainAppWindow::~MainAppWindow()
 {
     // our content component will get deleted by the DialogWindow base class, 
     // and that will clean up the other components.
+}
+
+void MainAppWindow::resized(void){
+  static int counter = 0;
+
+  if (counter++ > 10 && getHeight() != 737){
+    double scaleFactor = Desktop::getInstance().getGlobalScaleFactor();
+    double ideal_height = 737;
+    double now_height = getHeight() * scaleFactor;
+    double new_scale_factor = now_height / ideal_height;
+    if (getHeight() != 737){ //-ideal_height) > 1){//fabs(scaleFactor-new_scale_factor) > 0.001){
+      //printf("scale: %f. height: %d\n", new_scale_factor, getHeight());
+      Desktop::getInstance().setGlobalScaleFactor(new_scale_factor);
+    }
+  }
+
+  ResizableWindow::resized();
 }
 
 void MainAppWindow::closeButtonPressed()
