@@ -69,7 +69,7 @@ public:
     void initialise (const String& commandLine)
     {
       AVOIDDENORMALS;
-        
+
         // just create the main window...
       theMainWindow = new MainAppWindow(commandLine);
 	//theMainWindow->centreWithSize (AppSettings::appWidth, AppSettings::appHeight);

@@ -349,7 +349,7 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     prefsbutton->setColour (TextButton::textColourOnId, Colour (0xc4000000));
     prefsbutton->setColour (TextButton::textColourOffId, Colour (0xc4000000));
 
-    setSize (900, 800);
+    setSize (855, 737);
 
     //[Constructor] You can add your own custom stuff here..
     /*************************************************************/
@@ -497,7 +497,7 @@ void Interface::paint (Graphics& g)
                               744.0f, 576.0f,
                               false);
     g.setGradientFill (gradient_1);
-    g.fillRoundedRectangle (0.0f, 448.0f, 960.0f, 384.0f, 21.5000f);
+    g.fillRoundedRectangle (0.0f, 448.0f, 855.0f, 384.0f, 21.5000f);
 
     const ColourGradient gradient_2 (Colour (0x7bf98f33),
                               664.0f, 40.0f,
@@ -505,7 +505,7 @@ void Interface::paint (Graphics& g)
                               720.0f, 560.0f,
                               false);
     g.setGradientFill (gradient_2);
-    g.fillRect (-8, -24, 976, 864);
+    g.fillRect (-8, -24, 855+8, 864);
     
     const ColourGradient gradient_3 (Colour (0x219d2323),
                               16.0f, 736.0f,
@@ -513,7 +513,7 @@ void Interface::paint (Graphics& g)
                               696.0f, 752.0f,
                               true);
     g.setGradientFill (gradient_3);
-    g.fillRoundedRectangle (0.0f, 584.0f, 960.0f, 304.0f, 21.5000f);
+    g.fillRoundedRectangle (0.0f, 584.0f, 855.0f, 304.0f, 21.5000f);
 
     //[UserPaint] Add your own custom paint stuff here..
 #if 1
@@ -535,12 +535,15 @@ void Interface::paint (Graphics& g)
 	g.drawImageAt(tempimage,0,0,false);
 #else
 	g.drawImage(internalCachedImage3,
-		    0, 0, 872, 738,
+		    0, 0, 855, 738,
 		    pic_x,pic_y, pic_x2-pic_x, pic_y2-pic_y,
 		    false);
 #endif
       }else{
-	g.drawImageAt(internalCachedImage3,0,0,false);
+	g.drawImage(internalCachedImage3,
+                    0,0, 855, 738,
+                    0,0, 855, 738,
+                    false);
       }
     }
     lastrepaint=Time::getMillisecondCounter();
@@ -1097,10 +1100,13 @@ void Interface::run(){
 #endif
 
 void Interface::timerCallback(){
-  if (this->mainwindow->getWidth() != 855){
-    this->mainwindow->setSize(855, this->mainwindow->getHeight());
-  }
 
+  /*
+  if (this->mainwindow->getHeight()==737 && this->mainwindow->getWidth() != 855){
+  this->mainwindow->setSize(855, this->mainwindow->getHeight());
+  }
+  */
+  
   static bool wasplaying=false;
   static Image ims[3]={
     PictureHolder::getImage(0),
