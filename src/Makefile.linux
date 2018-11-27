@@ -15,7 +15,7 @@ TEMPDIR=/tmp
 # Where juce is.
 JUCE=../juce_5_3_2
 
-
+INSTALLPATH=/usr/local
 
 
 #----------------END USER SETTINGS---------------------------
