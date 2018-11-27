@@ -15,7 +15,7 @@ TEMPDIR=/tmp
 # Where juce is.
 JUCE=../juce_5_3_2
 
-INSTALLPATH ?= /usr/local
+PREFIX ?= /usr/local
 
 
 #----------------END USER SETTINGS---------------------------
@@ -150,10 +150,10 @@ mammut: $(OBJS)
 	g++ -o mammut -I$(JUCE) -L$(JUCE)/bin $(CPPFLAGS) $(OBJS) $(LDFLAGS)
 
 install:
-	cp mammut $(INSTALLPATH)/bin/
-	cp ../doc/mammuthelp.html $(INSTALLPATH)/share/doc/
+	cp mammut $(PREFIX)/bin/
+	cp ../doc/mammuthelp.html $(PREFIX)/share/doc/
 
 uninstall:
-	rm $(INSTALLPATH)/bin/mammut
-	rm $(INSTALLPATH)/share/doc/mammuthelp.html
+	rm $(PREFIX)/bin/mammut
+	rm $(PREFIX)/share/doc/mammuthelp.html
 

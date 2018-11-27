@@ -14,7 +14,7 @@ FAST INSTALL
         CONFIG=Release make -j8
 	cd ../../../src
 	make -f Makefile.linux -j8
-	(sudo) make -f Makefile.linux install
+	sudo PREFIX=/usr/local make -f Makefile.linux install
 
 
 COMPILATION ERRORS
