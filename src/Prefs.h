@@ -1,24 +1,23 @@
 /*
   ==============================================================================
 
-  This is an automatically generated file created by the Jucer!
-
-  Creation date:  11 Feb 2007 11:30:46 pm
+  This is an automatically generated GUI class created by the Projucer!
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
+  Created with Projucer version: 5.2.0
+
   ------------------------------------------------------------------------------
 
-  The Jucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright 2004-6 by Raw Material Software ltd.
+  The Projucer is part of the JUCE library - "Jules' Utility Class Extensions"
+  Copyright (c) 2015 - ROLI Ltd.
 
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_PREFS_PREFS_4F2799EC__
-#define __JUCER_HEADER_PREFS_PREFS_4F2799EC__
+#pragma once
 
 //[Headers]     -- You can add your own extra header files here --
 #include "juce.h"
@@ -48,31 +47,28 @@ public:
     bool firstRun_questionmark();
     //[/UserMethods]
 
-    void paint (Graphics& g);
-    void resized();
-    void buttonClicked (Button* buttonThatWasClicked);
+    void paint (Graphics& g) override;
+    void resized() override;
+    void buttonClicked (Button* buttonThatWasClicked) override;
 
 
-    //==============================================================================
-    juce_UseDebuggingNewOperator
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     //[/UserVariables]
 
     //==============================================================================
-    ToggleButton* soundonoffButton;
-    ToggleButton* movingcameraButton;
-    ToggleButton* animationButton;
-    ToggleButton* pictureButton;
-    ToggleButton* loopButton;
-    TextButton* audioSettingsButton;
+    ScopedPointer<ToggleButton> soundonoffButton;
+    ScopedPointer<ToggleButton> movingcameraButton;
+    ScopedPointer<ToggleButton> animationButton;
+    ScopedPointer<ToggleButton> pictureButton;
+    ScopedPointer<ToggleButton> loopButton;
+    ScopedPointer<TextButton> audioSettingsButton;
+
 
     //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
-    Prefs (const Prefs&);
-    const Prefs& operator= (const Prefs&);
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Prefs)
 };
 
-
-#endif   // __JUCER_HEADER_PREFS_PREFS_4F2799EC__
+//[EndFile] You can add extra defines here...
+//[/EndFile]

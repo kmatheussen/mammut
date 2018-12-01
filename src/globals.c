@@ -26,7 +26,7 @@ bool isprocessing=false;
 
 /* Prefs */
 
-bool prefs_soundonoff=true;
+bool prefs_soundonoff=false;
 bool prefs_picture=true;
 bool prefs_animation=true;
 bool prefs_movingcamera=true;

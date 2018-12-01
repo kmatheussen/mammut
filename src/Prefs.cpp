@@ -1,18 +1,18 @@
 /*
   ==============================================================================
 
-  This is an automatically generated file created by the Jucer!
-
-  Creation date:  11 Feb 2007 11:30:46 pm
+  This is an automatically generated GUI class created by the Projucer!
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
+  Created with Projucer version: 5.2.0
+
   ------------------------------------------------------------------------------
 
-  The Jucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright 2004-6 by Raw Material Software ltd.
+  The Projucer is part of the JUCE library - "Jules' Utility Class Extensions"
+  Copyright (c) 2015 - ROLI Ltd.
 
   ==============================================================================
 */
@@ -26,47 +26,50 @@
 #include "Prefs.h"
 
 
+//[MiscUserDefs] You can add your own user definitions and misc code here...
+//[/MiscUserDefs]
 
 //==============================================================================
 Prefs::Prefs ()
-    : soundonoffButton (0),
-      movingcameraButton (0),
-      animationButton (0),
-      pictureButton (0),
-      loopButton (0),
-      audioSettingsButton (0)
 {
-    addAndMakeVisible (soundonoffButton = new ToggleButton (T("new toggle button")));
-    soundonoffButton->setButtonText (T("Startup Sound"));
+    //[Constructor_pre] You can add your own custom stuff here..
+    //[/Constructor_pre]
+
+    addAndMakeVisible (soundonoffButton = new ToggleButton ("new toggle button"));
+    soundonoffButton->setButtonText (TRANS("Startup Sound"));
     soundonoffButton->addListener (this);
-    soundonoffButton->setToggleState (true, false);
 
-    addAndMakeVisible (movingcameraButton = new ToggleButton (T("new toggle button")));
-    movingcameraButton->setButtonText (T("Moving Camera"));
+    addAndMakeVisible (movingcameraButton = new ToggleButton ("new toggle button"));
+    movingcameraButton->setButtonText (TRANS("Moving Camera"));
     movingcameraButton->addListener (this);
-    movingcameraButton->setToggleState (true, false);
+    movingcameraButton->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (animationButton = new ToggleButton (T("new toggle button")));
-    animationButton->setButtonText (T("Animation"));
+    addAndMakeVisible (animationButton = new ToggleButton ("new toggle button"));
+    animationButton->setButtonText (TRANS("Animation"));
     animationButton->addListener (this);
-    animationButton->setToggleState (true, false);
+    animationButton->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (pictureButton = new ToggleButton (T("new toggle button")));
-    pictureButton->setButtonText (T("Background Picture"));
+    addAndMakeVisible (pictureButton = new ToggleButton ("new toggle button"));
+    pictureButton->setButtonText (TRANS("Background Picture"));
     pictureButton->addListener (this);
-    pictureButton->setToggleState (true, false);
+    pictureButton->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (loopButton = new ToggleButton (T("new toggle button")));
-    loopButton->setButtonText (T("Loop playing"));
+    addAndMakeVisible (loopButton = new ToggleButton ("new toggle button"));
+    loopButton->setButtonText (TRANS("Loop playing"));
     loopButton->addListener (this);
-    loopButton->setToggleState (true, false);
+    loopButton->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (audioSettingsButton = new TextButton (T("new button")));
-    audioSettingsButton->setButtonText (T("Audio Settings"));
+    addAndMakeVisible (audioSettingsButton = new TextButton ("new button"));
+    audioSettingsButton->setButtonText (TRANS("Audio Settings"));
     audioSettingsButton->addListener (this);
     audioSettingsButton->setColour (TextButton::buttonColourId, Colour (0x21bbbbff));
 
+
+    //[UserPreSize]
+    //[/UserPreSize]
+
     setSize (200, 230);
+
 
     //[Constructor] You can add your own custom stuff here..
     PropertiesFile::Options options;
@@ -80,11 +83,11 @@ Prefs::Prefs ()
     //printf("get: -%d-\n",propertiesfile->getIntValue("tes"));
     //printf("Getting: %d\n",propertiesfile->getBoolValue(soundonoffButton->getButtonText(),true)==true?1:0);
 
-    soundonoffButton->setToggleState(propertiesfile->getBoolValue(soundonoffButton->getButtonText().replaceCharacters(String(" "),String("_")),true),true);
-    pictureButton->setToggleState(propertiesfile->getBoolValue(pictureButton->getButtonText().replaceCharacters(String(" "),String("_")),true),true);
-    movingcameraButton->setToggleState(propertiesfile->getBoolValue(movingcameraButton->getButtonText().replaceCharacters(String(" "),String("_")),true),true);
-    animationButton->setToggleState(propertiesfile->getBoolValue(animationButton->getButtonText().replaceCharacters(String(" "),String("_")),true),true);
-    loopButton->setToggleState(propertiesfile->getBoolValue(loopButton->getButtonText().replaceCharacters(String(" "),String("_")),true),true);
+    soundonoffButton->setToggleState(propertiesfile->getBoolValue(soundonoffButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_soundonoff),true);
+    pictureButton->setToggleState(propertiesfile->getBoolValue(pictureButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_picture),true);
+    movingcameraButton->setToggleState(propertiesfile->getBoolValue(movingcameraButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_movingcamera),true);
+    animationButton->setToggleState(propertiesfile->getBoolValue(animationButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_animation),true);
+    loopButton->setToggleState(propertiesfile->getBoolValue(loopButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_loop),true);
     //[/Constructor]
 }
 
@@ -93,12 +96,13 @@ Prefs::~Prefs()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    deleteAndZero (soundonoffButton);
-    deleteAndZero (movingcameraButton);
-    deleteAndZero (animationButton);
-    deleteAndZero (pictureButton);
-    deleteAndZero (loopButton);
-    deleteAndZero (audioSettingsButton);
+    soundonoffButton = nullptr;
+    movingcameraButton = nullptr;
+    animationButton = nullptr;
+    pictureButton = nullptr;
+    loopButton = nullptr;
+    audioSettingsButton = nullptr;
+
 
     //[Destructor]. You can add your own custom destruction code here..
     //[/Destructor]
@@ -107,14 +111,20 @@ Prefs::~Prefs()
 //==============================================================================
 void Prefs::paint (Graphics& g)
 {
+    //[UserPrePaint] Add your own custom painting code here..
+    //[/UserPrePaint]
+
     g.fillAll (Colour (0x9cb1886c));
 
-    //[UserPaint] Add your own custom paint stuff here..
+    //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
 }
 
 void Prefs::resized()
 {
+    //[UserPreResize] Add your own custom resize code here..
+    //[/UserPreResize]
+
     soundonoffButton->setBounds (32, 24, 150, 24);
     movingcameraButton->setBounds (32, 120, 150, 24);
     animationButton->setBounds (32, 88, 150, 24);
@@ -127,13 +137,16 @@ void Prefs::resized()
 
 void Prefs::buttonClicked (Button* buttonThatWasClicked)
 {
+    //[UserbuttonClicked_Pre]
+    //[/UserbuttonClicked_Pre]
+
     if (buttonThatWasClicked == soundonoffButton)
     {
         //[UserButtonCode_soundonoffButton] -- add your button handler code here..
       prefs_soundonoff=buttonThatWasClicked->getToggleState();
       //sleep(1);
       propertiesfile->setValue(buttonThatWasClicked->getButtonText().replaceCharacters(String(" "),String("_")),buttonThatWasClicked->getToggleState());
-      //propertiesfile->save();
+      propertiesfile->save();
         //[/UserButtonCode_soundonoffButton]
     }
     else if (buttonThatWasClicked == movingcameraButton)
@@ -142,7 +155,7 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
       prefs_movingcamera=buttonThatWasClicked->getToggleState();
       //sleep(1);
       propertiesfile->setValue(buttonThatWasClicked->getButtonText().replaceCharacters(String(" "),String("_")),buttonThatWasClicked->getToggleState());
-      //propertiesfile->save();
+      propertiesfile->save();
         //[/UserButtonCode_movingcameraButton]
     }
     else if (buttonThatWasClicked == animationButton)
@@ -151,7 +164,7 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
       prefs_animation=buttonThatWasClicked->getToggleState();
       //sleep(1);
       propertiesfile->setValue(buttonThatWasClicked->getButtonText().replaceCharacters(String(" "),String("_")),buttonThatWasClicked->getToggleState());
-      //propertiesfile->save();
+      propertiesfile->save();
         //[/UserButtonCode_animationButton]
     }
     else if (buttonThatWasClicked == pictureButton)
@@ -167,7 +180,7 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
 #endif
       //      sleep(1);
       propertiesfile->setValue(buttonThatWasClicked->getButtonText().replaceCharacters(String(" "),String("_")),buttonThatWasClicked->getToggleState());
-      //propertiesfile->save();
+      propertiesfile->save();
         //[/UserButtonCode_pictureButton]
     }
     else if (buttonThatWasClicked == loopButton)
@@ -175,14 +188,19 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_loopButton] -- add your button handler code here..
       prefs_loop=buttonThatWasClicked->getToggleState();
       propertiesfile->setValue(buttonThatWasClicked->getButtonText().replaceCharacters(String(" "),String("_")),buttonThatWasClicked->getToggleState());
+      propertiesfile->save();
         //[/UserButtonCode_loopButton]
     }
     else if (buttonThatWasClicked == audioSettingsButton)
     {
         //[UserButtonCode_audioSettingsButton] -- add your button handler code here..
       juceplay_prefs();
+      propertiesfile->save();
         //[/UserButtonCode_audioSettingsButton]
     }
+
+    //[UserbuttonClicked_Post]
+    //[/UserbuttonClicked_Post]
 }
 
 
@@ -198,36 +216,43 @@ bool Prefs::firstRun_questionmark(){
 
 //==============================================================================
 #if 0
-/*  -- Jucer information section --
+/*  -- Projucer information section --
 
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
+    This is where the Projucer stores the metadata that describe this GUI layout, so
+    make changes in here at your peril!
 
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="Prefs" componentName="" parentClasses="public Component"
                  constructorParams="" variableInitialisers="" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330000013" fixedSize="0" initialWidth="200"
+                 snapShown="1" overlayOpacity="0.330" fixedSize="0" initialWidth="200"
                  initialHeight="230">
   <BACKGROUND backgroundColour="9cb1886c"/>
-  <TOGGLEBUTTON name="new toggle button" memberName="soundonoffButton" pos="32 24 150 24"
-                buttonText="Startup Sound" connectedEdges="0" needsCallback="1"
-                state="1"/>
-  <TOGGLEBUTTON name="new toggle button" memberName="movingcameraButton" pos="32 120 150 24"
-                buttonText="Moving Camera" connectedEdges="0" needsCallback="1"
-                state="1"/>
-  <TOGGLEBUTTON name="new toggle button" memberName="animationButton" pos="32 88 150 24"
-                buttonText="Animation" connectedEdges="0" needsCallback="1" state="1"/>
-  <TOGGLEBUTTON name="new toggle button" memberName="pictureButton" pos="32 56 150 24"
-                buttonText="Background Picture" connectedEdges="0" needsCallback="1"
-                state="1"/>
-  <TOGGLEBUTTON name="new toggle button" memberName="loopButton" pos="32 152 150 24"
-                buttonText="Loop playing" connectedEdges="0" needsCallback="1"
-                state="1"/>
-  <TEXTBUTTON name="new button" memberName="audioSettingsButton" pos="24 192 158 24"
-              bgColOff="21bbbbff" buttonText="Audio Settings" connectedEdges="0"
-              needsCallback="1"/>
+  <TOGGLEBUTTON name="new toggle button" id="b8fcca0d7071dd4c" memberName="soundonoffButton"
+                virtualName="" explicitFocusOrder="0" pos="32 24 150 24" buttonText="Startup Sound"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TOGGLEBUTTON name="new toggle button" id="8336b82cb369b836" memberName="movingcameraButton"
+                virtualName="" explicitFocusOrder="0" pos="32 120 150 24" buttonText="Moving Camera"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
+  <TOGGLEBUTTON name="new toggle button" id="fcb13aab9ea5bd22" memberName="animationButton"
+                virtualName="" explicitFocusOrder="0" pos="32 88 150 24" buttonText="Animation"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
+  <TOGGLEBUTTON name="new toggle button" id="5af8568366e23286" memberName="pictureButton"
+                virtualName="" explicitFocusOrder="0" pos="32 56 150 24" buttonText="Background Picture"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
+  <TOGGLEBUTTON name="new toggle button" id="7236fe3a917c1716" memberName="loopButton"
+                virtualName="" explicitFocusOrder="0" pos="32 152 150 24" buttonText="Loop playing"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
+  <TEXTBUTTON name="new button" id="b7a94adafb3d0fe" memberName="audioSettingsButton"
+              virtualName="" explicitFocusOrder="0" pos="24 192 158 24" bgColOff="21bbbbff"
+              buttonText="Audio Settings" connectedEdges="0" needsCallback="1"
+              radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
 */
 #endif
+
+
+//[EndFile] You can add extra defines here...
+//[/EndFile]
