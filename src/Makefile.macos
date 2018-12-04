@@ -39,6 +39,7 @@ clean: common_clean
 
 
 install: all
+	touch ../macosx/Mammut/mammut.app
 	cp mammut ../macosx/Mammut/mammut.app/Contents/MacOS/
 	cp ../doc/mammuthelp.html ../macosx/Mammut/
 	cp ../NEW ../macosx/Mammut/NEW.txt
