@@ -23,6 +23,10 @@ COMPILATION ERRORS
 
             ln -s /usr/include/freetype2/freetype/config/ftconfig.h /usr/include/freetype2/freetype/config/ftconfig-64.h
 
+SOURCE CODE
+        Repository: https://github.com/kmatheussen/mammut
+        Get tarball this way: wget https://github.com/kmatheussen/radium/archive/<version>.tar.gz
+
 
 REQUIRED LIBRARIES
 	libjack

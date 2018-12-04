@@ -28,6 +28,7 @@ common_clean:
 	rm -f ../macosx/Mammut/mammut.app/Contents/MacOS/*
 	rm -f ../macosx/Mammut/mammuthelp.html
 	rm -f ../macosx/Mammut/NEW.txt
+	rm -fr ../mingw
 
 mammut: $(OBJS)
 	$(CPP) -o mammut $(OBJS) $(LDFLAGS)

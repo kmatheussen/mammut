@@ -58,23 +58,6 @@ all: mammut
 
 -include Makefile.common
 
-dist: clean
-	rm -fr ../mammut-$(MAMMUT_VERSION) ../mammut-$(MAMMUT_VERSION).tar.gz ../mammut-$(MAMMUT_VERSION).tar
-	mkdir ../mammut-$(MAMMUT_VERSION)
-	cp -a ../src ../mammut-$(MAMMUT_VERSION)/
-	cp -a ../icons ../mammut-$(MAMMUT_VERSION)/
-	cp -a ../doc ../mammut-$(MAMMUT_VERSION)/
-	cp -a ../macosx ../mammut-$(MAMMUT_VERSION)/
-	cp -a ../mingw ../mammut-$(MAMMUT_VERSION)/
-	cp ../NEW ../INSTALL ../mammut.gif ../mammut-$(MAMMUT_VERSION)/
-	echo "\
-	cd ..;\
-	tar cvf mammut-$(MAMMUT_VERSION).tar mammut-$(MAMMUT_VERSION);\
-	gzip mammut-$(MAMMUT_VERSION).tar\
-	" >makesource.sh
-	sh makesource.sh
-	rm makesource.sh
-
 clean: common_clean
 
 install:
@@ -82,6 +65,6 @@ install:
 	cp ../doc/mammuthelp.html $(PREFIX)/share/doc/
 
 uninstall:
-	rm $(PREFIX)/bin/mammut
-	rm $(PREFIX)/share/doc/mammuthelp.html
+	rm -f $(PREFIX)/bin/mammut
+	rm -f $(PREFIX)/share/doc/mammuthelp.html
 
