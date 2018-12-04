@@ -1,4 +1,3 @@
-
 #include "mammut.h"
 
 double multiplyphase_phase_multiplier_default=1.0;
@@ -23,7 +22,7 @@ void multiply_phase_ok(void)
       real=lyd[i+i+chN]; imag=lyd[i+i+1+chN];
 
       if(multiplyphase_phase_random){
-	phase=2*3.14159265*((double)random())/((double)RAND_MAX);
+	phase=2*3.14159265*((double)rand())/((double)RAND_MAX);
       }else{
 	phase=atan2(imag, real);
 	phase*=multiplyphase_phase_multiplier;
