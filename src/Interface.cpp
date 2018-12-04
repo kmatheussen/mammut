@@ -1148,8 +1148,8 @@ void Interface::timerCallback(){
 
   if(jp_isplaying){
     double playpos=256.0;
-    playpos*=jp_playpos;
-    playpos/=N;
+    playpos *= jp_playpos.get();
+    playpos /= N;
     playposslider->setValue(playpos,dontSendNotification);
     wasplaying=true;
   }else if(wasplaying){

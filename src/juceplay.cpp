@@ -109,7 +109,7 @@ static long oggtell_func  (void *datasource){
 }
 
 
-int jp_playpos;
+Atomic<int64_t> jp_playpos;
 bool jp_isplaying=false;
 static float normalize_val;
 
@@ -274,7 +274,7 @@ public:
     }
   }
 
-  float *getSourceData(int channel,int position,int num_frames){
+  float *getSourceData(int channel,int64_t position,int num_frames){
     return lyd+(position+(channel*N));
   }
   double getSourceRate(){
@@ -290,11 +290,12 @@ public:
   void insertDataResample(float **outdata,int frames,int num_channels){
     static float nulldata[512]={0.0f};
     int last_consumed=0;
+    int64_t playpos = jp_playpos.get();
     double ratio=samplerate/getSourceRate();
     for(int ch=0;ch<num_channels;ch++){
       SRC_DATA src_data={
-	mustrunonemore==true?nulldata:getSourceData(ch,jp_playpos,1024), outdata[ch],
-	mustrunonemore==true?512:JP_MIN((long)(64+1.2*frames/ratio),getSourceLength()-jp_playpos), frames,
+	mustrunonemore==true?nulldata:getSourceData(ch,playpos,1024), outdata[ch],
+	mustrunonemore==true?512:JP_MIN((long)(64+1.2*frames/ratio),getSourceLength()-playpos), frames,
 	0,0,
 	0,
 	ratio
@@ -317,8 +318,8 @@ public:
 	    }
 	  }
 	}else{
-	  jp_playpos+=src_data.input_frames_used;
-	  if(jp_playpos>=getSourceLength())
+	  jp_playpos += src_data.input_frames_used;
+	  if(jp_playpos.get() >= getSourceLength())
 	    mustrunonemore=true;
 	}
 	//printf("running_more: %d, consumed: %d %f %d\n",mustrunonemore,last_consumed,rate,(int)(frames/rate));
@@ -327,19 +328,22 @@ public:
   }
 
   void insertData(float **outdata,int frames,int num_channels){
-    if(frames+jp_playpos <= getSourceLength()){
+    int64_t playpos = jp_playpos.get();
+    if(frames+playpos <= getSourceLength()){
       for(int ch=0;ch<num_channels;ch++){
-	memcpy(outdata[ch],getSourceData(ch,jp_playpos,frames),sizeof(float)*frames);
+	memcpy(outdata[ch],getSourceData(ch,playpos,frames),sizeof(float)*frames);
       }
     }else{
-      int len = getSourceLength() - jp_playpos;
+      int len = getSourceLength() - playpos;
       for(int ch=0;ch<num_channels;ch++){
-	memcpy(outdata[ch],getSourceData(ch,jp_playpos,len),sizeof(float)*len);
+	memcpy(outdata[ch],getSourceData(ch,playpos,len),sizeof(float)*len);
 	zeromem(outdata[ch]+len,sizeof(float)*(frames-len));
       }
     }
-    jp_playpos+=frames;
-    if(jp_playpos>=getSourceLength()){
+    
+    jp_playpos += frames;
+    
+    if(jp_playpos.get()>=getSourceLength()){
       if(prefs_loop==true){
 	jp_playpos=0;
       }else{

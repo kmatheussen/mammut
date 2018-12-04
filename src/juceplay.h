@@ -9,6 +9,10 @@ extern LANGSPEC void juceplay_start();
 extern LANGSPEC void juceplay_stop();
 extern LANGSPEC void juceplay_prefs();
 
-extern int jp_playpos;
+#ifdef __cplusplus
+extern Atomic<int64_t> jp_playpos;
+#endif
+
+
 extern bool jp_isplaying;
 
