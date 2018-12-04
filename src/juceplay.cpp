@@ -212,7 +212,7 @@ public:
       }
   }
 
-  int getSourceLength(){
+  int64_t getSourceLength(){
     if(isplaying_ogg)
       return ov_pcm_total(&oggvorbisfile,-1);
     return N;
@@ -294,8 +294,8 @@ public:
     double ratio=samplerate/getSourceRate();
     for(int ch=0;ch<num_channels;ch++){
       SRC_DATA src_data={
-	mustrunonemore==true?nulldata:getSourceData(ch,playpos,1024), outdata[ch],
-	mustrunonemore==true?512:JP_MIN((long)(64+1.2*frames/ratio),getSourceLength()-playpos), frames,
+	mustrunonemore==true ? nulldata : getSourceData(ch,playpos,1024), outdata[ch],
+	mustrunonemore==true ? 512 : (int)JP_MIN((int64_t)(64+1.2*frames/ratio),getSourceLength()-playpos), frames,
 	0,0,
 	0,
 	ratio
