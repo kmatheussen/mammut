@@ -1,0 +1,33 @@
+# Makefile for Mammut
+#
+
+MAMMUT_VERSION = 0.61
+
+
+
+
+# Where juce is.
+JUCE=../juce_5_3_2
+
+OPTIMIZE=-mfpmath=sse -msse2 -O3
+
+CFLAGS = $(OPTIMIZE) $(PLATFORM_CFLAGS) -Wextra -Wall -Wno-deprecated-declarations -Wno-unused-parameter
+# -Werror 
+# -DNOBACKGROUNDSOUND
+
+
+CXXFLAGS := -I$(JUCE) -I$(JUCE)/JuceLibraryCode/modules/ $(CFLAGS) -std=gnu++11 $(PLATFORM_CXXFLAGS)
+
+LDFLAGS= $(PLATFORM_LDFLAGS)
+
+-include Makefile.files
+
+common_clean:
+	rm -f *.o transform/*.o core core.* makesource.sh check mammut w
+	rm -f */*~ ../*~  ../*/*~ ../*/*.bak ../*/*.pyc *.d */*.d
+	rm -f ../macosx/Mammut/mammut.app/Contents/MacOS/*
+	rm -f ../macosx/Mammut/mammuthelp.html
+	rm -f ../macosx/Mammut/NEW.txt
+
+mammut: $(OBJS)
+	$(CPP) -o mammut $(OBJS) $(LDFLAGS)

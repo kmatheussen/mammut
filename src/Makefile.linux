@@ -1,6 +1,3 @@
-# Makefile for Mammut
-#
-
 
 
 #----------------USER SETTINGS-----------------------------
@@ -12,9 +9,6 @@
 TEMPDIR=/tmp
 
 
-# Where juce is.
-JUCE=../juce_5_3_2
-
 PREFIX ?= /usr/local
 
 
@@ -24,8 +18,6 @@ PREFIX ?= /usr/local
 
 ############# Developer settings. #######################
 
-# Set in Interface.h
-#VERSION=0.53
 
 
 ###########################################################
@@ -46,108 +38,44 @@ PREFIX ?= /usr/local
 
 GCC=gcc -Wall
 CPP=g++ -Wall
-
-#GCC=gcc -Wall -march=athlon
-
-
-
-
-
-# 2.
-#--------------------
-# CC must either point to $(GCC) or icc (The intel c compiler).
-# Icc must be at least V6.0. (Note, icc seems to perform better
-# than gcc, even for athlon based computers)
-
 CC=$(GCC)
-
-#CC=icc
-
-
-
-
-
-# 4.
-#--------------------
-#TEMPDIR=/lyd/local/tmp
-
 
 
 
 
 # 5.
 #--------------------
-#ADDITIONALCFLAGS will be added to the CFLAGS line.
-#ADDITIONALLDFLAGS will be added to the LDFLAGS line.
 
-OPTIMIZE=-mfpmath=sse -msse2 -O3
+PLATFORM_CFLAGS = -DTEMPDIR=\"$(TEMPDIR)\" -D "NDEBUG=1" -DHAVE_JACK -MD -D "LINUX=1" -D "JUCE_CHECK_MEMORY_LEAKS=0" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"
 
-ADDITIONALCFLAGS= -D "NDEBUG=1" -DHAVE_JACK $(OPTIMIZE)
+PLATFORM_CXXFLAGS = -Wno-class-memaccess
 
-#
-# -g -ggdb
-ADDITIONALLDFLAGS=-L/site/lib -L/usr/local/include -lsndfile -lm -lpthread -ldl -L. -ljack -lsamplerate
-# -L$(SOUNDLIBNAME)
+PLATFORM_LDFLAGS = $(JUCE)/Builds/Linux/build/libMyPluginHost.a -lsndfile -lm -lpthread -ldl -ljack -lsamplerate -lvorbisfile  -lfreetype -ldl -lpthread -lX11 -lXext -lGL  -lXinerama -lasound -lrt
 
-
-
-
-
-
-######### Should not be necesarry to edit below here. ########
-
-
-CFLAGS= -DTEMPDIR=\"$(TEMPDIR)\"  $(ADDITIONALCFLAGS) -Wno-deprecated-declarations -Wno-unused-parameter -Wextra -Wall
-# -Werror 
-# -DNOBACKGROUNDSOUND
-
-LDFLAGS= $(ADDITIONALLDFLAGS)  -lvorbisfile 
-
-CPPFLAGS := -MD -D "LINUX=1" -I "/usr/include" -I$(JUCE) -I$(JUCE)/JuceLibraryCode/modules/ -D "LINUX=1" -D "JUCE_CHECK_MEMORY_LEAKS=0" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"
-#-D "_DEBUG=1" 
-CFLAGS	 += $(CPPFLAGS)
-CXXFLAGS := $(CFLAGS) -std=gnu++11 -Wno-class-memaccess
-LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L "/usr/include/X11/" -L "../../../bin" $(JUCE)/Builds/Linux/build/libMyPluginHost.a -lfreetype -ldl -lpthread -lX11 -lXext -lGL  -lXinerama -lasound -lrt
-#-ljuce 
-#_debug
-
-
-ALLDEP=
-
-ALL=mammut
-
-all: $(ALL) 
+all: mammut
 	@echo
 	@echo "Compilation OK."
 
--include Makefile.files
+-include Makefile.common
 
-DASVERSION=0.60
 dist: clean
-	rm -fr ../mammut-$(DASVERSION) ../mammut-$(DASVERSION).tar.gz ../mammut-$(DASVERSION).tar
-	mkdir ../mammut-$(DASVERSION)
-	cp -a ../src ../mammut-$(DASVERSION)/
-	cp -a ../icons ../mammut-$(DASVERSION)/
-	cp -a ../doc ../mammut-$(DASVERSION)/
-	cp -a ../macosx ../mammut-$(DASVERSION)/
-	cp -a ../mingw ../mammut-$(DASVERSION)/
-	cp ../NEW ../INSTALL ../mammut.gif ../mammut-$(DASVERSION)/
+	rm -fr ../mammut-$(MAMMUT_VERSION) ../mammut-$(MAMMUT_VERSION).tar.gz ../mammut-$(MAMMUT_VERSION).tar
+	mkdir ../mammut-$(MAMMUT_VERSION)
+	cp -a ../src ../mammut-$(MAMMUT_VERSION)/
+	cp -a ../icons ../mammut-$(MAMMUT_VERSION)/
+	cp -a ../doc ../mammut-$(MAMMUT_VERSION)/
+	cp -a ../macosx ../mammut-$(MAMMUT_VERSION)/
+	cp -a ../mingw ../mammut-$(MAMMUT_VERSION)/
+	cp ../NEW ../INSTALL ../mammut.gif ../mammut-$(MAMMUT_VERSION)/
 	echo "\
 	cd ..;\
-	tar cvf mammut-$(DASVERSION).tar mammut-$(DASVERSION);\
-	gzip mammut-$(DASVERSION).tar\
+	tar cvf mammut-$(MAMMUT_VERSION).tar mammut-$(MAMMUT_VERSION);\
+	gzip mammut-$(MAMMUT_VERSION).tar\
 	" >makesource.sh
 	sh makesource.sh
 	rm makesource.sh
 
-
-clean:
-	rm -f *.o transform/*.o core core.* makesource.sh check mammut w
-	rm -f */*~ ../*~  ../*/*~ ../*/*.bak ../*/*.pyc *.d */*.d
-
-
-mammut: $(OBJS)
-	g++ -o mammut -I$(JUCE) -L$(JUCE)/bin $(CPPFLAGS) $(OBJS) $(LDFLAGS)
+clean: common_clean
 
 install:
 	cp mammut $(PREFIX)/bin/

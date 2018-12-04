@@ -796,7 +796,7 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == aboutbutton)
     {
         //[UserButtonCode_aboutbutton] -- add your button handler code here..
-      const char *message[]={"V", VERSION, ", Notam 1995-2018.\n",
+      const char *message[]={"V", MAMMUT_VERSION, ", Notam 1995-2018.\n",
 			     "\n",
 			     "Mammut is a program for experimental\n",
 			     "audio processing, using mammut FFT.\n",

@@ -221,7 +221,7 @@ void Wobble::sliderValueChanged (Slider* sliderThatWasMoved)
 
 //==============================================================================
 #if 0
-/*  -- Jucer information section --
+/*  -- Projucer information section --
 
     This is where the Jucer puts all of its metadata, so don't change anything in here!
 

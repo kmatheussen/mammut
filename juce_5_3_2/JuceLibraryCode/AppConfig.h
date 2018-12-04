@@ -51,11 +51,11 @@
 // juce_audio_devices flags:
 
 #ifndef    JUCE_ASIO
- //#define JUCE_ASIO
+ #define   JUCE_ASIO 0
 #endif
 
 #ifndef    JUCE_WASAPI
- //#define JUCE_WASAPI
+ #define   JUCE_WASAPI 1
 #endif
 
 #ifndef    JUCE_WASAPI_EXCLUSIVE
@@ -63,19 +63,19 @@
 #endif
 
 #ifndef    JUCE_DIRECTSOUND
- //#define JUCE_DIRECTSOUND
+ #define   JUCE_DIRECTSOUND 1
 #endif
 
 #ifndef    JUCE_ALSA
- //#define JUCE_ALSA
+ #define   JUCE_ALSA 1
 #endif
 
 #ifndef    JUCE_JACK
- //#define JUCE_JACK
+ #define   JUCE_JACK 0
 #endif
 
 #ifndef    JUCE_BELA
- //#define JUCE_BELA
+ #define   JUCE_BELA 0
 #endif
 
 #ifndef    JUCE_USE_ANDROID_OBOE

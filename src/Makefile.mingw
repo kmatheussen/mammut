@@ -1,157 +1,50 @@
+
 # Makefile for Mammut
 #
 
-
-# Before writing Make -f Makefile.win, go into the ../mingw directory and compile libsndfile, libsamplerate,
-# libogg and libvorbis like this: (no make install, make sure you have cygwin+sh+mingw+make installed.)
-# CFLAGS=-mno-cygwin ./configure --disable-shared && make
+P=x86_64-w64-mingw32.static
+PKG=$(P)-pkg-config
 
 
-
-
-#----------------USER SETTINGS-----------------------------
-
-# No trailing slash!
-#INSTALLPATH=/usr/local
-INSTALLPATH=/hom/kjetism/site
-#INSTALLPATH=/user/k/kjetil/site
-#INSTALLPATH=/tmp
-
-
-
-# Where to put temporary files. (No appending slash!)
-# (Variable only used on linux)
-#TEMPDIR=/tmp
-
-
-# Where juce is.
-#JUCE=/hom/kjetism/juce
-#JUCE=/home/kjetil/juce
-JUCE=../../juce_1_40/juce
-
-
-
-
-#----------------END USER SETTINGS---------------------------
-
-
-
-
-
-
-
-############# Developer settings. #######################
-
-
-###########################################################
-# Note, the default values should work for most systems as
-# long as the necesarry libraries and python are installed.
-# Hopefully, you should only have to change any of the
-# values if you know very well what you are doing.
-###########################################################
-
-
-
-# 1.
-#--------------------
-# GCC must either point to gcc or any other gcc compatible
-# compiler. (Not icc.)
-# If compiling with gcc for an athlon based cpu, you should
-# add "-march=athlon" for a small performance boost.
-
-GCC=gcc -Wall
-CPP=g++ -Wall
-
-#GCC=gcc -Wall -march=athlon
-
-
-
-
-
-# 2.
-#--------------------
-# CC must either point to $(GCC) or icc (The intel c compiler).
-# Icc must be at least V6.0. (Note, icc seems to perform better
-# than gcc, even for athlon based computers)
-
+GCC=$(P)-gcc -Wall -std=gnu99
+CPP=$(P)-g++ -Wall -std=gnu++11
 CC=$(GCC)
 
-#CC=icc
+
+PLATFORM_CFLAGS = -D "NDEBUG=1" `$(PKG) --cflags vorbis vorbisfile sndfile samplerate` -Werror
+
+PLATFORM_CXXFLAGS = -MD -I$(JUCE) -I$(JUCE)/JuceLibraryCode/modules/ -mstackrealign -DWIN32 -D__MINGW__=1 -D__MINGW_EXTENSION= -DDEBUG=0 -D_DEBUG=0 -DJUCER_CODEBLOCKS_20734A5D=1 -DJUCE_APP_VERSION=1.0.0 -DJUCE_APP_VERSION_HEX=0x10000 -D_NATIVE_WCHAR_T_DEFINED -D__wchar_t=wchar_t
 
 
+LIBDIR = /opt/local/lib
+
+OS_JUCE_LDFLAGS = ../mingw/resources.o $(JUCE)/Builds/Windows/intermediate/Release/juce_*.o -lcomdlg32 -limm32 -loleaut32 -lrpcrt4 -lshlwapi -luuid -lversion -lwininet -lws2_32 -lwinmm -lwsock32 -lgdi32 -luser32 -lkernel32 -lcomctl32 -lole32 -ldbghelp -lwbemuuid -mwindows
+
+PLATFORM_LDFLAGS = $(OS_JUCE_LDFLAGS) `$(PKG) --libs vorbis vorbisfile sndfile samplerate`
 
 
-
-# 4.
-#--------------------
-#TEMPDIR=/lyd/local/tmp
-
-
-
-
-
-# 5.
-#--------------------
-#ADDITIONALCFLAGS will be added to the CFLAGS line.
-#ADDITIONALLDFLAGS will be added to the LDFLAGS line.
-
-OPT=-O2 --fast-math
-DEB=-g -ggdb
-
-ADDITIONALCFLAGS=$(OPT)
-# $(DEB)
-# -D "NDEBUG=1"
-ADDITIONALLDFLAGS= ../mingw/libsamplerate-0.1.2/src/.libs/libsamplerate.a
-# -L$(SOUNDLIBNAME)
-
-
-
-
-
-
-######### Should not be necesarry to edit below here. ########
-
-T=transform/
-
-
-CFLAGS= $(ADDITIONALCFLAGS) $(USEJACK)
-# -DNOBACKGROUNDSOUND
-
-LDFLAGS= $(ADDITIONALLDFLAGS) 
-# -lvorbisfile 
-
-CPPFLAGS := -I$(JUCE) $(CFLAGS) -I../mingw/libsndfile-1_0_17 -mno-cygwin -D_WIN32  -Wno-multichar   -fexceptions -I../mingw/libogg-1.1.3/include -I../mingw/libvorbis-1.1.2/include -I../mingw/libvorbis-1.1.2/include/vorbis -I../mingw/libsamplerate-0.1.2/src
-
-CFLAGS	 += $(CPPFLAGS)
-CXXFLAGS := $(CFLAGS)
-LDFLAGS +=  -L$(BINDIR) -L$(LIBDIR) -mwindows $(JUCE)/bin/libjuce.a ../mingw/resources.o ../mingw/bin/libvorbisfile.dll ../mingw/bin/libsndfile-1.dll -lwininet -lole32 -lwinmm -lgdi32 -luuid -lshell32 -lvfw32 -lrpcrt4 -lopengl32 -lglu32 -lwsock32  
-
-#
-#_debug
-
-ALLDEP=
-
-ALL=../mingw/bin/mammut
-
-all: $(ALL) 
+all: ../mingw/Mammut.exe
 	@echo
 	@echo "Compilation OK."
 
-run:
-	$(ALL)
+../mingw/Mammut.exe: ../mingw/resources.o mammut
+	cp mammut ../mingw/Mammut.exe
+	x86_64-w64-mingw32.static-strip ../mingw/Mammut.exe
 
--include Makefile.files
-
-
-
-clean:
-	rm -f *.o transform/*.o core core.* makesource.sh check mammut w
-	rm -f */*~ ../*~  ../*/*~ ../*/*.bak ../*/*.pyc *.d */*.d
+../mingw/resources.o: ../icons/icon.ico ../icons/resfile.rc
+	mkdir -p ../mingw
+	$(P)-windres -i ../icons/resfile.rc -o ../mingw/resources.o
 
 
-../mingw/bin/mammut: $(OBJS) ../mingw/resources.o Makefile.mingw
-	g++ -o ../mingw/bin/mammut -I$(JUCE) -L$(JUCE)/bin $(CPPFLAGS)  $(OBJS)  $(LDFLAGS) 
+-include Makefile.common
 
-../mingw/resources.o: ../mingw/mamm04.ico ../mingw/resfile.rc
-	windres.exe -i ../mingw/resfile.rc -o ../mingw/resources.o
 
+clean: common_clean
+
+install: all
+	rm -fr ../mingw/Mammut-$(MAMMUT_VERSION)*
+	mkdir ../mingw/Mammut-$(MAMMUT_VERSION)
+	cp ../mingw/Mammut.exe ../mingw/Mammut-$(MAMMUT_VERSION)/
+	cp ../doc/mammuthelp.html ../mingw/Mammut-$(MAMMUT_VERSION)
+	cp ../NEW ../mingw/Mammut-$(MAMMUT_VERSION)/NEW.txt
+	cd ../mingw/ && zip -r Mammut-$(MAMMUT_VERSION)-windows64.zip Mammut-$(MAMMUT_VERSION) && mv Mammut-$(MAMMUT_VERSION)-windows64.zip ../

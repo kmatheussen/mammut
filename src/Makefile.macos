@@ -1,5 +1,3 @@
-DASVERSION=0.61
-
 
 # Makefile for Mammut
 #
@@ -8,139 +6,40 @@ P=x86_64-apple-darwin17
 PKG=$(P)-pkg-config
 
 
-#----------------USER SETTINGS-----------------------------
-
-# No trailing slash!
-INSTALLPATH=/usr/local
-#INSTALLPATH=/hom/kjetism/site
-#INSTALLPATH=/user/k/kjetil/site
-#INSTALLPATH=/tmp
-
-
-
-# Where juce is.
-JUCE=../juce_5_3_2
-
-
-
-
-#----------------END USER SETTINGS---------------------------
-
-
-
-############# Developer settings. #######################
-
-# Set in Interface.h
-#VERSION=0.53
-
-
-###########################################################
-# Note, the default values should work for most systems as
-# long as the necesarry libraries and python are installed.
-# Hopefully, you should only have to change any of the
-# values if you know very well what you are doing.
-###########################################################
-
-
-
-# 1.
-#--------------------
-# GCC must either point to gcc or any other gcc compatible
-# compiler. (Not icc.)
-# If compiling with gcc for an athlon based cpu, you should
-# add "-march=athlon" for a small performance boost.
-
 GCC=$(P)-clang -Wall -std=gnu99
 CPP=$(P)-clang++ -Wall -std=gnu++11
-
-#GCC=gcc -Wall -march=athlon
-
-
-
-
-
-# 2.
-#--------------------
-# CC must either point to $(GCC) or icc (The intel c compiler).
-# Icc must be at least V6.0. (Note, icc seems to perform better
-# than gcc, even for athlon based computers)
-
 CC=$(GCC)
 
-#CC=icc
+
+PLATFORM_CFLAGS = -D "NDEBUG=1" `$(PKG) --cflags vorbis vorbisfile sndfile samplerate`
+
+PLATFORM_CXXFLAGS = -MD -I$(JUCE) -I$(JUCE)/JuceLibraryCode/modules/ -D "_DEBUG=1" -D "JUCE_CHECK_MEMORY_LEAKS=0" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" $(CFLAGS) -DFOR_MACOSX
 
 
+LIBDIR = /opt/local/lib
+
+OS_JUCE_LDFLAGS = -Wl,-headerpad_max_install_names -lpthread -framework Cocoa -framework Carbon -framework QuartzCore -framework WebKit -framework IOKit -framework Accelerate -framework CoreAudio -framework AudioUnit -framework CoreMIDI -framework CoreAudioKit -framework AudioToolbox
+
+PLATFORM_LDFLAGS = $(OS_JUCE_LDFLAGS) $(LIBDIR)/libsndfile.a $(LIBDIR)/libvorbisfile.a $(LIBDIR)/libogg.a $(LIBDIR)/libvorbis.a $(LIBDIR)/libvorbisenc.a $(LIBDIR)/libsamplerate.a ../macosx/flac-1.3.2/src/libFLAC/.libs/libFLAC.a $(JUCE)/Builds/MacOSX/intermediate/Release/juce_*.o
 
 
-
-
-# 5.
-#--------------------
-#ADDITIONALCFLAGS will be added to the CFLAGS line.
-#ADDITIONALLDFLAGS will be added to the LDFLAGS line.
-
-OPTIMIZE=-mfpmath=sse -msse2 -O3 -mtune=generic
-
-ADDITIONALCFLAGS=-D "NDEBUG=1" $(OPTIMIZE)
-
-LIBDIR=/opt/local/lib
-#ADDITIONALLDFLAGS=-static `$(PKG) --static --libs vorbis vorbisfile sndfile samplerate` -shared #-Wl,-Bdynamic
-ADDITIONALLDFLAGS=$(LIBDIR)/libsndfile.a $(LIBDIR)/libvorbisfile.a $(LIBDIR)/libogg.a $(LIBDIR)/libvorbis.a $(LIBDIR)/libvorbisenc.a $(LIBDIR)/libsamplerate.a ../macosx/flac-1.3.2/src/libFLAC/.libs/libFLAC.a
-
-
-#-lsndfile -lm -lpthread -ldl -L. -ljack -lsamplerate
-# -L$(SOUNDLIBNAME)
-
-
-
-
-
-
-######### Should not be necesarry to edit below here. ########
-
-OS_JUCE_LDFLAGS=-Wl,-headerpad_max_install_names -lpthread -framework Cocoa -framework Carbon -framework QuartzCore -framework WebKit -framework IOKit -framework Accelerate -framework CoreAudio -framework AudioUnit -framework CoreMIDI -framework CoreAudioKit -framework AudioToolbox
-
-CFLAGS= $(ADDITIONALCFLAGS) $(USEJACK) `$(PKG) --cflags vorbis vorbisfile sndfile samplerate` -Wno-deprecated-declarations -Werror -Wextra -Wall -Wno-unused-parameter
-#-I/usr/include/vorbis
-# -DNOBACKGROUNDSOUND
-
-LDFLAGS= $(OS_JUCE_LDFLAGS) $(ADDITIONALLDFLAGS)
-# -lvorbisfile 
-
-CPPFLAGS := -MD -I$(JUCE) -I$(JUCE)/JuceLibraryCode/modules/ -D "_DEBUG=1" -D "JUCE_CHECK_MEMORY_LEAKS=0" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" $(CFLAGS) -DFOR_MACOSX
-# -D "LINUX=1"  -D "LINUX=1" 
-CFLAGS	 += $(CPPFLAGS)
-CXXFLAGS := $(CFLAGS)
-LDFLAGS += $(JUCE)/Builds/MacOSX/intermediate/Release/juce_*.o
-#-lfreetype -ldl -lpthread -lX11 -lXext -lGL  -lXinerama -lasound -lrt
-#-ljuce 
-#_debug
-
-
-ALLDEP=
-
-ALL=mammut
-
-all: $(ALL) 
+all: mammut
+	$P-otool -L mammut
 	@echo
 	@echo "Compilation OK."
 
--include Makefile.files
 
-clean:
-	rm -f *.o transform/*.o core core.* makesource.sh check mammut w
-	rm -f */*~ ../*~  ../*/*~ ../*/*.bak ../*/*.pyc *.d */*.d
+-include Makefile.common
+
+
+clean: common_clean
 	rm -f ../macosx/Mammut/mammut.app/Contents/MacOS/*
 	rm -f ../macosx/Mammut/mammuthelp.html
 	rm -f ../macosx/Mammut/NEW.txt
 
 
-mammut: $(OBJS)
-	$(CPP) $(OBJS) $(LDFLAGS) -o mammut 
-	$P-otool -L mammut
-
 install: all
 	cp mammut ../macosx/Mammut/mammut.app/Contents/MacOS/
 	cp ../doc/mammuthelp.html ../macosx/Mammut/
 	cp ../NEW ../macosx/Mammut/NEW.txt
-	cd ../macosx/ && zip -r Mammut-$(DASVERSION)-macosx.zip Mammut && mv Mammut-$(DASVERSION)-macosx.zip ../
+	cd ../macosx/ && zip -r Mammut-$(MAMMUT_VERSION)-macosx.zip Mammut && mv Mammut-$(MAMMUT_VERSION)-macosx.zip ../

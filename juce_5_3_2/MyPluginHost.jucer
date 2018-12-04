@@ -56,7 +56,7 @@
     <CODEBLOCKS targetFolder="Builds/CodeBlocks" vstFolder="" extraCompilerFlags="-mfpmath=sse -msse2 -mtune=generic">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="MyPluginHost"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="MyPluginHost"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="MyPluginHost"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_basics" path="../../juce"/>
@@ -91,7 +91,9 @@
                JUCE_WEB_BROWSER="disabled" JUCE_USE_FLAC="disabled" JUCE_USE_OGGVORBIS="disabled"
                JUCE_USE_MP3AUDIOFORMAT="disabled" JUCE_USE_LAME_AUDIO_FORMAT="disabled"
                JUCE_USE_WINDOWS_MEDIA_FORMAT="disabled" JUCE_USE_CDREADER="disabled"
-               JUCE_USE_CDBURNER="disabled" JUCE_CHECK_MEMORY_LEAKS="disabled"/>
+               JUCE_USE_CDBURNER="disabled" JUCE_CHECK_MEMORY_LEAKS="disabled"
+               JUCE_ASIO="disabled" JUCE_WASAPI="enabled" JUCE_DIRECTSOUND="enabled"
+               JUCE_ALSA="enabled" JUCE_BELA="disabled" JUCE_JACK="disabled"/>
   <LIVE_SETTINGS>
     <LINUX/>
   </LIVE_SETTINGS>

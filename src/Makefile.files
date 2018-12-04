@@ -19,7 +19,8 @@ MainAppWindow.o: MainAppWindow.cpp MainAppWindow.h MainHeader.h  GraphComponent.
 	$(CPP) -c $(CXXFLAGS) MainAppWindow.cpp
 
 Interface.o: Interface.cpp $(ALLDEP) GraphComponent.h PictureHolder.h Prefs.h Stretch.h Interface.h
-	$(CPP) -c $(CXXFLAGS) Interface.cpp
+	$(CPP) -c $(CXXFLAGS) Interface.cpp -DMAMMUT_VERSION=\"$(MAMMUT_VERSION)\"
+
 PictureHolder.o: PictureHolder.cpp $(ALLDEP) PictureHolder.h
 	$(CPP) -c $(CXXFLAGS) PictureHolder.cpp
 
