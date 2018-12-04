@@ -1,3 +1,15 @@
+0.60 -> 0.61
+-Play: Fix changing play position in realtime not always working.
+-GUI: Fix printing Ø in the about box.
+-GUI: Turn off startup sound by default.
+-GUI: Save prefs immediately, not when exiting program.
+-GUI: Make main window resizable.
+-DSP: Avoid denormals. (Just in case. Don't know if it was a problem).
+-Build: Build with -mfpmath=sse -msse2 -Wextra -Werror -Wall, and fix various potential bugs found by newer compilers and -Wextra.
+-GUI: Set moving camera to true by default
+-Build: Fix install instructions
+-Build: Upgraded Juce to 5.3.2
+-Build: Varoius build fixes from GeorgeNs.
 
 
 0.59 -> 0.60
