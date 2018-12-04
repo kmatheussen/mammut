@@ -886,9 +886,9 @@ void Interface::sliderValueChanged (Slider* sliderThatWasMoved)
     }
     else if (sliderThatWasMoved == playposslider)
     {
-        //[UserSliderCode_playposslider] -- add your slider handling code here..
-      jp_playpos=(int)((playposslider->getValue()/256.0f)*N);
-        //[/UserSliderCode_playposslider]
+      //[UserSliderCode_playposslider] -- add your slider handling code here..
+      jp_playpos = (playposslider->getValue()/256.0f)*N;
+      //[/UserSliderCode_playposslider]
     }
 }
 
