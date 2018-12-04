@@ -796,29 +796,31 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == aboutbutton)
     {
         //[UserButtonCode_aboutbutton] -- add your button handler code here..
-      const char *message[]={"V", MAMMUT_VERSION, ", Notam 1995-2018.\n",
-			     "\n",
-			     "Mammut is a program for experimental\n",
-			     "audio processing, using mammut FFT.\n",
-			     "\n",
-			     "Signal processing programming by Oyvind Hammer.\n",
-			     "User interface programming by Kjetil Matheussen.\n",
-			     "\n",
-			     "Background picture painted by Zdenek Burian.\n",
-			     "Animation by Kjetil Matheussen.\n",
-			     "\n",
-			     "The slightly crushed Mammoth Skull in the program's icon\n",
-			     "can be observed in real life at the Palaeontological\n",
-			     "Museum, University of Oslo. (and the incident causing this\n",
-			     "injury, is realistically animated in the background of the\n",
-			     "program)\n",
-			     "\n",
-			     "Mammut uses these libraries: libjack, libjuce, libsamplerate,\n",
-			     "libsndfile and libvorbisfile.\n",
-			     "\n",
-			     "Send your comments to k.s.matheussen@notam02.no.\n"};
+      String message=String("V") + MAMMUT_VERSION + ", Notam 1995-2018.\n"+
+			     "\n"+
+			     "Mammut is a program for experimental\n"+
+			     "audio processing, using mammut FFT.\n"+
+			     "\n"+
+			     "Signal processing programming by Øyvind Hammer.\n"+
+                             "\n"+
+			     "User interface programming by Kjetil Matheussen,\n"+
+                             "based on the original GUI by Øyvind Hammer.\n"+
+			     "\n"+
+			     "Background picture painted by Zdenek Burian.\n"+
+			     "Animation by Kjetil Matheussen.\n"+
+			     "\n"+
+			     "The slightly crushed Mammoth Skull in the program's icon\n"+
+			     "can be observed in real life at the Palaeontological\n"+
+			     "Museum, University of Oslo. (and the incident causing this\n"+
+			     "injury, is realistically animated in the background of the\n"+
+			     "program)\n"+
+			     "\n"+
+			     "Mammut uses these libraries: libjack, libjuce, libsamplerate,\n"+
+			     "libsndfile and libvorbisfile.\n"+
+			     "\n"+
+			     "Send your comments to k.s.matheussen@notam02.no.\n";
 
-      AlertWindow::showMessageBox(AlertWindow::InfoIcon,("Mammut"),StringArray(message,sizeof(message)/sizeof(const char*)).joinIntoString(String::empty));
+      AlertWindow::showMessageBox(AlertWindow::InfoIcon,"Mammut",message); //StringArray(message,sizeof(message)/sizeof(const char*)).joinIntoString(String::empty));
 
         //[/UserButtonCode_aboutbutton]
     }
