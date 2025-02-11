@@ -45,6 +45,15 @@ CC=$(GCC)
 
 # 5.
 #--------------------
+# Pipewire serves as a modern alternative to jack on some
+# systems. As a result, the standard -ljack may lead to
+# compilation failures on these systems. You can mitigate
+# this by figuring out where your distro keeps its header
+# files for pipewire's implementation of jack. For
+# example, a user of Fedora 40 would modify
+# PLATFORM_LDFLAGS to contain:
+# 	-L/usr/lib64/pipewire-0.3/jack
+# thus allowing the linker to find the appropriate headers.
 
 PLATFORM_CFLAGS = -DTEMPDIR=\"$(TEMPDIR)\" -D "NDEBUG=1" -DHAVE_JACK -MD -D "LINUX=1" -D "JUCE_CHECK_MEMORY_LEAKS=0" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"
 
